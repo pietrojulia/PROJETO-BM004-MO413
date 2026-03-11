@@ -1,82 +1,79 @@
-# Projeto de Curso – Primeira Entrega
+# P1 - Template da Primeira Entrega
+*2026.1 Ciência e Visualização de Dados em Saúde*
 
-* Ciência e Visualização de Dados em Saúde 2026
-* UNICAMP
+# Estrutura de sua pasta de projeto
 
-# Resumo
+A fim de uniformizar os repositórios de projetos da disciplina, os diretórios de seu repositório deverão ser nomeados conforme segue.
 
-O objetivo geral do projeto de curso é realizar a análise de dados relacionados à saúde, aliada às seguintes possíveis tarefas: recomendação, estudo de associações, validação de hipóteses, análise exploratória, análise visual, análise comparativa e predição.
+~~~
+...
+│
+└── project1
+    |
+    ├── README.md   <- texto da Entrega 1 do projeto
+    |
+    └── assets      <- mídias usadas no projeto
+        ├── images  <- imagens usadas no texto do README.md
+        └── slides  <- slides da prévia (em PDF)
+~~~
 
-O problema escolhido deve ser no contexto das “ômicas” e a análise de dados deve usar estratégias de Ciência de Redes. Esta primeira entrega tem a função de apresentar as propostas iniciais para debate. Tudo o que for apresentado nesta versão pode ser modificado e melhorado em entregas subsequentes.
+Na raiz da pasta `project1` deve haver um arquivo de nome `README.md` contendo a apresentação do projeto, como detalhado a seguir.
 
-# Fontes de Dados
+Segue abaixo o modelo de como deve ser apresentado e documentado o projeto. Há partes do modelo a seguir que têm uma marcação específica indicando que **não devem ser literalmente transcritas**:
 
-O trabalho poderá usar fontes de dados públicas ou provenientes de pesquisa de um ou mais componentes da equipe. No segundo caso, a equipe deverá apresentar o número do CAAE referente à aprovação do comitê de ética, quando couber. A equipe de docentes pode vetar algum projeto caso configure alguma impertinência ética.
+Trecho entre `<...>` representa algo que deve ser substituído pelo indicado. Nesse caso, você não deve manter os símbolos `<...>`.
+> Parágrafo que aparece neste modo de citação representa algo que deve ser substituído pelo explicado.
 
-As fontes de dados não precisam ser originalmente em formato de rede, pois as redes podem ser construídas a partir dos dados dessas fontes. Também é possível e positivo integrar dados de “ômicas” com dados de outras naturezas. Por exemplo, dados de sintomas de uma doença com dados genéticos associados à mesma.
+No modelo a seguir são colocados exemplos ilustrativos, que serão substituídos pelos do seu projeto.
 
-É importante considerar cenários que contenham um número significativo de dados na base que será criada, que justifiquem um banco de dados.
+> # Modelo para Apresentação da Entrega 1 do Projeto (Arquivo README.md)
 
-# Diferenciais do Projeto
+# Projeto `<Título em Português>`
+# Project `<Title in English>`
 
-O projeto pode escolher um mais dos seguintes diferenciais:
+# Descrição Resumida do Projeto
 
-* criatividade;
-* originalidade;
-* audácia em propostas desafiadoras;
-* integração de mais de uma fonte de dados;
-* recursos de visualização de dados;
-* integração entre os papéis da equipe.
+> Descrição do tema do projeto, incluindo motivação e contexto gerador.
 
-É muito importante considerar que serão valorizadas equipes que arrisquem em análises ousadas, às quais não se saiba se se alcançará o resultado esperado. Equipes podem obter nota máxima, mesmo que não alcancem o resultado esperado, considerando que apresentem um trabalho bem fundamentado, audacioso, que demonstre integração entre os componentes.
+# Slides
 
-# Primeira Entrega
+> Coloque aqui o link para o PDF da apresentação da parte 1.
 
-Nesta primeira entrega a equipe deve definir o problema de pesquisa que será abordado. A partir do problema, deverá elaborar uma primeira versão da proposta. Nesta primeira versão, são apresentadas versões iniciais para debate de:
+# Fundamentação Teórica
 
-* slides de apresentação da primeira entrega;
-* resumo da proposta;
-* perguntas de pesquisa a serem respondidas;
-* metodologia;
-* ferramentas;
-* fundamentação teórica do problema em saúde/biologia;
-* bases de dados de fonte escolhidas;
-* modelo lógico da base de grafos que será construída.
+> Fundamentação teórica resumida do problema em saúde/biologia. Apenas cite artigos que tomará como base e, em uma frase, em que problema.
 
-# Equipes
+# Perguntas de Pesquisa
 
-As equipes deverão ter 6 componentes (no mínimo 5) se possível divididos cerca de 2 biologia/saúde e 4 exatas/computação.
+> Perguntas de pesquisa que o projeto pretende responder ou hipóteses a serem avaliadas, enunciadas de maneira objetiva e verificável.
 
-# Papéis
+# Bases de Dados
 
-O desenvolvimento do trabalho prevê papéis distintos para alunos de biologia e saúde e aqueles de computação e exatas. Cada aluno da equipe será avaliado conforme o seu papel dentro do trabalho, portanto as notas serão individuais dentro da equipe e poderão sofrer variações.
+> Elencar bases de dados candidatas a serem utilizadas no projeto na forma de tabela:
 
-## Papel de Biologia e Saúde
+> Base de Dados | Endereço na Web | Resumo descritivo
+> ----- | ----- | -----
+> Título da Base 1 | http://base1.org/ | Breve resumo (duas ou três linhas) sobre a base.
+> Título da Base 2 | http://base2.org/ | Breve resumo (duas ou três linhas) sobre a base.
 
-São os responsáveis pela fundamentação do ponto de vista da saúde/biologia em partes do trabalho como: aspectos relacionados à biologia/saúde para a escolha do problema e solução, fundamentação teórica em biologia/saúde, textos apresentados relacionados à biologia saúde. Estes aspectos e os respectivos alunos serão avaliados pelos professores da biologia. 
+# Modelo Lógico
 
-## Papel de Computação e Exatas
+> Modelo lógico da base de grafos que será construída. Para o modelo de grafos de propriedades, utilize este
+> [modelo de base](https://docs.google.com/presentation/d/10RN7bDKUka_Ro2_41WyEE76Wxm4AioiJOrsh6BRY3Kk/edit?usp=sharing) para construir o seu.
+> Coloque a imagem do PNG do seu modelo lógico como ilustrado abaixo (a imagem estará na pasta `image`):
+>
+> ![Modelo Lógico de Grafos](images/modelo-logico-grafos.png)
 
-São responsáveis por aspectos computacionais como: escolha das soluções computacionais, implementação dos algoritmos e textos relacionados a aspectos computacionais.
+# Metodologia
+> Esta seção evoluirá ao longo do projeto. Nesta primeira entrega, informe técnicas de Ciência de Redes que pretende explorar,
+> tais como: detecção de comunidades, análise de centralidade, predição de links, ou a combinação de uma ou mais técnicas. Descreva o que perguntas pretende endereçar cm a técnica escolhida.
 
-## Atribuições Compartilhadas
+# Ferramentas
 
-Algumas atribuições são compartilhadas por se entender que é fruto da interação entre os papéis, como: modelo lógico do grafo,  debates e conclusões de resultados de análises.
+> Ferramentas a serem utilizadas (com base na visão atual do grupo sobre o projeto).
 
-# Entrega e Apresentação
+# Referências Bibliográficas
 
-A entrega do projeto deve ser feita via GitHub. Para isso a equipe deve:
-
-* criar uma organização no GitHub que represente a equipe;
-* criar um projeto dentro desta organização para todas as entregas da disciplina;
-* cadastrar o projeto no GitHub da equipe em formulário indicado no Classroom;
-* no mínimo todos os membros da equipe de computação deverão ter uma conta no GitHub e devem ser membros da organização;
-* idealmente, os alunos da biologia também devem ter uma conta no GitHub e participarem da organização;
-* crie um arquivo README.md na raiz do projeto com os dados da equipe conforme o [Modelo de README](/resources/templates/2026/);
-* crie uma pasta `project1` na raiz do projeto e coloque a primeira entrega dentro desta pasta conforme [Modelo da Primeira Entrega](/resources/templates/2026/project1/).
-
-A submissão da entrega 1 deve ser até o dia **23/03 às 13:59 am**.
-
-A apresentação será neste mesmo dia **23/03** no horário da aula. Cada equipe terá 10 minutos para se apresentar e haverá mais 5 minutos para perguntas/respostas. Todos os membros da equipe devem participar apresentando.
-
-É muito importante que a equipe organize o tempo de forma a detalhar mais o que for mais relevante de modo que possa receber feedback.
+> Lista de artigos, links e referências bibliográficas.
+>
+> Fiquem à vontade para escolher o padrão de referenciamento preferido pelo grupo.
