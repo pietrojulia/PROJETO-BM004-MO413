@@ -1,8 +1,8 @@
-# Projeto Dinâmica Temporal e Redes de Coexpressão Gênica da Diferenciação de Células-Tronco Embrionárias
+# Projeto: 'Dinâmica Temporal e Redes de Coexpressão Gênica da Diferenciação de Células-Tronco Embrionárias'
 
-# Project Temporal Dynamics and Gene Co-expression Networks of Embryonic Stem Cell Differentiation
+# Project: 'Temporal Dynamics and Gene Co-expression Networks of Embryonic Stem Cell Differentiation'
 
-#Integrantes
+# Integrantes
 
 > |Nome  | RA | Especialização|
 > |--|--|--|
