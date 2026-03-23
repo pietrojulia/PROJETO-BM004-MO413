@@ -19,11 +19,11 @@ Sendo assim, utilizando dados públicos de RNA-seq com resolução temporal, o p
 
 # Fundamentação Teórica
 
-Keskin et al. (2025, 2026): Textos base para o entendimento completo dos dados que serão utilizados nas análises;
+- Keskin et al. (2025, 2026): Textos base para o entendimento completo dos dados que serão utilizados nas análises;
 
-Trapnell et al. (2014): Exemplo prático de análises possíveis para dados transcriptômicos obtidos ao longo do processo de diferenciação celular;
+- Trapnell et al. (2014): Exemplo prático de análises possíveis para dados transcriptômicos obtidos ao longo do processo de diferenciação celular;
 
-Zakrzewski et al. (2019), Campbell et al. (2019), Mao and Mooney (2015): Revisões gerais detalhando conceitos como medicina regenerativa e diferenciação celular.
+- Zakrzewski et al. (2019), Campbell et al. (2019), Mao and Mooney (2015): Revisões gerais detalhando conceitos como medicina regenerativa e diferenciação celular.
 
 De maneira geral, o conceito de célula-tronco estende-se ao conjunto de células com alto grau de potencialidade e baixo estado de diferenciação, as quais estão aptas à originar tipos celulares específicos, a partir do processo de diferenciação celular (Campbell et al., 2019). No que diz respeito à sua potencialidade, uma célula-tronco pode ser classificada sob grupos distintos, estes representativos de seu poder de diferenciação, a saber: células totipotentes, capazes de originar todos os tipos celulares de um organismo (zigoto, por exemplo); células pluripotentes (PSCs - do inglês, Pluripotent Stem Cells), incapazes de diferenciar-se em estruturas extraembrionárias, como a placenta, porém aptas a originar linhagens pertencentes aos três folhetos embrionários (endoderme, mesoderme e ectoderme); células multipotentes, cujo alcance de diferenciação mostra-se menor do que aquele identificado em PSCs, mas ainda capazes de diferenciar-se em linhagens celulares específicas; células unipotentes, limitadas a diferenciação em um único tipo celular específico (Campbell et al., 2019, Zakrzewski et al., 2019). 
 
@@ -34,16 +34,15 @@ Nesse sentido, como evidenciado por Trapnell et al. (2014), a diferenciação ce
 
 # Perguntas de Pesquisa
 
-Existe diferença entre as dinâmicas de expressão gênica encontradas ao longo do processo de diferenciação de células-tronco pluripotentes em cardiomiócitos e células polihormonais?
+- Existe diferença entre as dinâmicas de expressão gênica encontradas ao longo do processo de diferenciação de células-tronco pluripotentes em cardiomiócitos e células polihormonais?
 
-Como a dinâmica temporal das redes de coexpressão gênica influencia o processo de diferenciação de células-tronco embrionárias humanas em cardiomiócitos e células pancreáticas?
+- Como a dinâmica temporal das redes de coexpressão gênica influencia o processo de diferenciação de células-tronco embrionárias humanas em cardiomiócitos e células pancreáticas?
 
 ## Hipóteses a serem testadas
 
-H0: A dinâmica da expressão gênica ao longo do processo de diferenciação de células-tronco pluripotentes em cardiomiócitos é idêntica àquela observada na diferenciação de células polihormonais. 
+- H0: A dinâmica da expressão gênica ao longo do processo de diferenciação de células-tronco pluripotentes em cardiomiócitos é idêntica àquela observada na diferenciação de células polihormonais. 
 
-H1: A dinâmica da expressão gênica ao longo do processo de diferenciação de células-tronco pluripotentes em cardiomiócitos é distinta àquela observada na diferenciação de células polihormonais.
-
+- H1: A dinâmica da expressão gênica ao longo do processo de diferenciação de células-tronco pluripotentes em cardiomiócitos é distinta àquela observada na diferenciação de células polihormonais.
 
 
 # Bases de Dados
