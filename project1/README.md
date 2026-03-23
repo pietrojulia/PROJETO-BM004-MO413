@@ -34,8 +34,6 @@ Nesse sentido, como evidenciado por Trapnell et al. (2014), a diferenciação ce
 
 # Perguntas de Pesquisa
 
-- Existe diferença entre as dinâmicas de expressão gênica encontradas ao longo do processo de diferenciação de células-tronco pluripotentes em cardiomiócitos e células polihormonais?
-
 - Como a dinâmica temporal das redes de coexpressão gênica influencia o processo de diferenciação de células-tronco embrionárias humanas em cardiomiócitos e células pancreáticas?
 
 ## Hipóteses a serem testadas
