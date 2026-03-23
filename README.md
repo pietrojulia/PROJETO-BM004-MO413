@@ -1,50 +1,26 @@
-# Modelo de Apresentação do Projeto
+# Projeto Dinâmica Temporal e Redes de Coexpressão Gênica da Diferenciação de Células-Tronco Embrionárias
 
-No repositório do projeto, deve haver um arquivo com dados básicos do projeto e da equipe na raiz, uma pasta para cada etapa de entrega, conforme templates a seguir:
+# Project Temporal Dynamics and Gene Co-expression Networks of Embryonic Stem Cell Differentiation
 
-A seguir é apresentada a estrutura de pastas esperada no repositório do projeto:
+#Integrantes
 
-~~~
-├── README.md        <- apresentação do projeto
-│
-├── project1         <- primeira entrega
-│
-├── project2         <- segunda entrega parcial
-│
-└── project3-final   <- entrega final
-~~~
-
-* [Entrega 1](project1/)
-* [Entrega 2](project2/)
-* [Entrega 3 - Final](project3-final/)
-
-Na raiz do projeto do GitHub deve haver um arquivo de nome `README.md` contendo a apresentação da equipe e projeto, como detalhado na seção seguinte. Este arquivo é escrito em Markdown. Para conhecer Markdown, veja [Editando o Arquivo README.md](markdown.md). 
-
-Segue abaixo o modelo de como deve ser apresentado e documentado o projeto. Há partes do modelo a seguir que têm uma marcação específica indicando que **não devem ser literalmente transcritas**:
-
-Trecho entre `<...>` representa algo que deve ser substituído pelo indicado. Nesse caso, você não deve manter os símbolos `<...>`.
-> Parágrafo que aparece neste modo de citação representa algo que deve ser substituído pelo explicado.
-
-No modelo a seguir são colocados exemplos ilustrativos, que serão substituídos pelos do seu projeto.
-
-# Modelo para Apresentação do Grupo e Projeto
-
-> *arquivo `README.md` que fica na raiz*
-
-# Projeto `<Título do Projeto>`
-# Project `<Title in English>`
-
-> Incluir nome RA e foco de especialização de cada membro do grupo.
 > |Nome  | RA | Especialização|
 > |--|--|--|
-> | Nome1  | 123456  | Biologia |
-> | Nome2  | 123456  | Saúde |
-> | Nome3  | 123456  | Computação |
-> | Nome4  | 123456  | XXX|
+> | Luana Lima Rocha  | 300615  | Biologia |
+> | Cristian Leonardo Ferraz Ferreira | 204676 | Biologia |
+> | Julia de Pietro Bigi | 238163 | Biologia/Computação | 
+> | Diogo Cesar Donadon | 324086 | Computação |
+> | Pedro Arruda de Oliveira | 300636 | Computação | 
 
 # Apresentação
 
 O presente projeto foi originado no contexto das atividades da disciplina de pós-graduação [*Ciência e Visualização de Dados em Saúde*](https://github.com/datasci4health), oferecida no segundo semestre de 2025, na Unicamp.
 
 # Descrição Resumida do Projeto
-> Descrição do tema do projeto, incluindo motivação e contexto gerador.
+> Este projeto tem como principal objetivo analisar e comparar a dinâmica temporal da expressão gênica durante a diferenciação de células-tronco embrionárias humanas (hESCs) em duas linhagens distintas: cardiomiócitos (mesoderme) e células polihormonais pancreáticas (endoderme).
+
+> Apesar de compartilharem o mesmo genoma, tais células adquirem identidades distintas ao longo de seu processo de diferenciação, resultado de mudanças coordenadas na regulação gênica, da ativação de vias biológicas específicas e do desenvolvimento de interações moleculares únicas. Dessa forma, a compreensão das dinâmicas que regem o processo de diferenciação celular mostra-se essencial para a elucidação dos mecanismos subjacentes ao desenvolvimento embrionário e, consequentemente, para a identificação de potenciais alvos moleculares em aplicações de medicina regenerativa.
+
+> Sendo assim, utilizando dados públicos de RNA-seq com resolução temporal, o projeto propõe integrar análise de expressão diferencial, enriquecimento funcional e ciência de redes para a identificação de padrões comuns e específicos entre as duas linhagens celulares estudadas. Nesse sentido, espera-se que redes de coexpressão gênica sejam construídas e analisadas quanto a suas propriedades topológicas ao longo do intervalo analisado, permitindo a identificação de genes centrais, módulos funcionais e eventos críticos no processo de diferenciação celular.
+
+
