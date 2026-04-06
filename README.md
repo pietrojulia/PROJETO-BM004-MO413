@@ -13,7 +13,7 @@
 > | Pedro Arruda de Oliveira | 300636 | Computação | 
 
 # Como Rodar
-Estrutura do diretório:
+## Estrutura do diretório:
 
 000_input/fastq: local onde colocar os arquivos do SRA. Já faz o download das amostra desejadas. 
 
@@ -30,6 +30,7 @@ Estrutura do diretório:
 > [bash terminal]
 
 > git clone https://github.com/pietrojulia/PROJETO-BM004-MO413.git
+
 > cd PROJETO-BM004-MO413
 
 Coloque os nomes das amostras, como SRR30214232, no arquivo 000_input/fastq/samples_names.txt. 
