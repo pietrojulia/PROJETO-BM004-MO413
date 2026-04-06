@@ -5,6 +5,7 @@ SAMPLE=$(find $path_input -type f -printf "%f\n" | sed 's/\.fastq.gz//;s/[_].*$/
 echo $SAMPLE
 
 #000_input
+make -C 000_input/fastq download
 
 #005_preqc
 for s in $SAMPLE; do

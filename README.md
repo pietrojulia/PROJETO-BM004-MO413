@@ -15,23 +15,35 @@
 # Como Rodar
 Estrutura do diretório:
 
-000_input/fastq: local onde colocar os arquivos do SRA. 
+000_input/fastq: local onde colocar os arquivos do SRA. Já faz o download das amostra desejadas. 
+
 000_input/: local onde colocar o genoma de referência e genoma indexado. 
+
 005_preqc: onde será realizado controle de qualidade.
+
 010_trim: diretório para limpeza dos dados
+
 015_posqc: controle de qualidade pós limpeza de dados.
 
 
 
-[bash terminal]
-git clone https://github.com/pietrojulia/PROJETO-BM004-MO413.git
-cd PROJETO-BM004-MO413
+> [bash terminal]
 
-Put your sample names, such as SRR30214232, in the 000_input/fastq/samples_names.txt file. In the formato:
->SRR30214232
->SRR30214233
+> git clone https://github.com/pietrojulia/PROJETO-BM004-MO413.git
+> cd PROJETO-BM004-MO413
 
-nohup ./pre-proc.sh & > nohup_proc.out
+Coloque os nomes das amostras, como SRR30214232, no arquivo 000_input/fastq/samples_names.txt. 
+
+Precisa estar no formato:
+
+> SRR30214232
+
+> SRR30214233
+
+
+Para rodar as etapas de 000_input até limpeza dos dados, rode o seguinte arquivo:
+
+> nohup ./pre-proc.sh & > nohup_proc.out
 
 
 # Apresentação
