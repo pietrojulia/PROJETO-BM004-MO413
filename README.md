@@ -12,6 +12,28 @@
 > | Diogo Cesar Donadon | 324086 | Computação |
 > | Pedro Arruda de Oliveira | 300636 | Computação | 
 
+# Como Rodar
+Estrutura do diretório:
+
+000_input/fastq: local onde colocar os arquivos do SRA. 
+000_input/: local onde colocar o genoma de referência e genoma indexado. 
+005_preqc: onde será realizado controle de qualidade.
+010_trim: diretório para limpeza dos dados
+015_posqc: controle de qualidade pós limpeza de dados.
+
+
+
+[bash terminal]
+git clone https://github.com/pietrojulia/PROJETO-BM004-MO413.git
+cd PROJETO-BM004-MO413
+
+Put your sample names, such as SRR30214232, in the 000_input/fastq/samples_names.txt file. In the formato:
+>SRR30214232
+>SRR30214233
+
+nohup ./pre-proc.sh & > nohup_proc.out
+
+
 # Apresentação
 
 O presente projeto foi originado no contexto das atividades da disciplina de pós-graduação [*Ciência e Visualização de Dados em Saúde*](https://github.com/datasci4health), oferecida no segundo semestre de 2025, na Unicamp.
