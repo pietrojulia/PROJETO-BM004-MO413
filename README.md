@@ -26,7 +26,7 @@
 015_posqc: controle de qualidade pós limpeza de dados.
 
 
-
+## Como rodar
 > [bash terminal]
 
 > git clone https://github.com/pietrojulia/PROJETO-BM004-MO413.git
