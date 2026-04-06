@@ -1,8 +1,8 @@
 # Primeira Entrega
 *2026.1 Ciência e Visualização de Dados em Saúde*
 
-# Projeto `<Dinâmica Temporal e Redes de Coexpressão Gênica da Diferenciação de Células-Tronco Embrionárias>`
-# Project `<Temporal Dynamics and Gene Co-expression Networks of Embryonic Stem Cell Differentiation>`
+# Projeto `Dinâmica Temporal e Redes de Coexpressão Gênica da Diferenciação de Células-Tronco Embrionárias`
+# Project `Temporal Dynamics and Gene Co-expression Networks of Embryonic Stem Cell Differentiation`
 
 # Descrição Resumida do Projeto
 
