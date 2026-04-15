@@ -6,6 +6,8 @@ echo $SAMPLE
 
 #000_input
 make -C 000_input/fastq download
+make -C 000_input/gen.index genome
+make -C 000_input/ref.genome Homo_sapiens.GRCh38.84.gtf
 
 #005_preqc
 for s in $SAMPLE; do
@@ -25,6 +27,6 @@ for s in $SAMPLE; do
 done
 
 #020_map
-#for s in $SAMPLE; do
-#    make -C 020_map ${s}.paired.sam
-#done
+for s in $SAMPLE; do
+    make -C 020_map ${s}.paired.sam
+done
