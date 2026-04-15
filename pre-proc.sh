@@ -1,11 +1,13 @@
 #!/bin/bash
 
+#000_input
+make -C 000_input/fastq download
+make -C 000_input/gen.index genome
+make -C 000_input/ref.genome Homo_sapiens.GRCh38.84.gtf
+
 path_input=000_input/fastq/*.fastq.gz
 SAMPLE=$(find $path_input -type f -printf "%f\n" | sed 's/\.fastq.gz//;s/[_].*$//' | sort -u)
 echo $SAMPLE
-
-#000_input
-make -C 000_input/fastq download
 
 #005_preqc
 for s in $SAMPLE; do
@@ -25,6 +27,16 @@ for s in $SAMPLE; do
 done
 
 #020_map
-#for s in $SAMPLE; do
-#    make -C 020_map ${s}.paired.sam
-#done
+for s in $SAMPLE; do
+    make -C 020_map ${s}.paired.sam
+done
+
+#025_sam
+for s in $SAMPLE; do
+    make -C 025_sam ${s}.paired.bam
+done
+
+#030_assemble
+for s in $SAMPLE; do
+    make -C 030_assemble ${s}.paired.gtf
+done
