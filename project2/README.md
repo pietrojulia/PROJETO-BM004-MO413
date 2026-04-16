@@ -19,20 +19,22 @@ Sendo assim, utilizando dados públicos de RNA-seq com resolução temporal, o p
 
 
 # Fundamentação Teórica
-- Campbell et al. (2019): Definição de células-tronco como células com alta potencialidade e baixo grau de diferenciação. Classificação das células-tronco quanto à potencialidade (totipotentes, pluripotentes, multipotentes e unipotentes);
+- **Campbell et al. (2019)**: Definição de células-tronco como células com alta potencialidade e baixo grau de diferenciação. Classificação das células-tronco quanto à potencialidade (totipotentes, pluripotentes, multipotentes e unipotentes);
 
-- Zakrzewski et al. (2019): Complementação da classificação funcional das células-tronco e seus diferentes níveis de diferenciação;
+- **Zakrzewski et al. (2019)**: Complementação da classificação funcional das células-tronco e seus diferentes níveis de diferenciação;
 
-- Campbell et al. (2019): Classificação das células-tronco quanto à origem (adultas, iPSCs e embrionárias);
+- **Campbell et al. (2019)**: Classificação das células-tronco quanto à origem (adultas, iPSCs e embrionárias);
 
-- Mao and Mooney (2015): Aplicação de células-tronco na medicina regenerativa como alternativa ao transplante de órgãos;
+- **Mao and Mooney (2015)**: Aplicação de células-tronco na medicina regenerativa como alternativa ao transplante de órgãos;
 
-- Trapnell et al. (2014): Diferenciação celular como processo dinâmico e contínuo, analisável por expressão gênica ao longo do tempo;
+- **Trapnell et al. (2014)**: Diferenciação celular como processo dinâmico e contínuo, analisável por expressão gênica ao longo do tempo;
 
-- Keskin et al. (2025, 2026): Análise da diferenciação de hESCs em diferentes linhagens com base em mudanças temporais na expressão gênica. Base experimental para construção de modelos computacionais aplicados ao estudo da diferenciação celular.
+- **Keskin et al. (2025, 2026)**: Análise da diferenciação de hESCs em diferentes linhagens com base em mudanças temporais na expressão gênica. Base experimental para construção de modelos computacionais aplicados ao estudo da diferenciação celular.
 
 
 # Perguntas de Pesquisa
+
+- Existe diferença entre as dinâmicas de expressão gênica encontradas ao longo do processo de diferenciação de células-tronco pluripotentes em cardiomiócitos e células polihormonais?
 
 - Como a dinâmica temporal das redes de coexpressão gênica influencia o processo de diferenciação de células-tronco embrionárias humanas em cardiomiócitos e células pancreáticas?
 
@@ -42,9 +44,6 @@ Sendo assim, utilizando dados públicos de RNA-seq com resolução temporal, o p
 
 - H1: A dinâmica da expressão gênica ao longo do processo de diferenciação de células-tronco pluripotentes em cardiomiócitos é distinta àquela observada na diferenciação de células polihormonais.
 
-# Modelo Lógico
-
-> ![Modelo Lógico de Grafos](assets/images/Project1_logic_model_COMBI.png)
 
 # Metodologia
 
@@ -66,11 +65,11 @@ Assim, para a análise da dinâmica temporal das redes de coexpressão gênica, 
 A base de dados está disponível no Gene Expression Omnibus pelos n estudo anterior para avaúmeros de acesso: GSE274620 (Keskin et al., 2025a) e GSE305933 (Keskin et al., 2025b). Ambos foram utilizados emliar o perfil multi-ômico de células-tronco embrionárias. Para a autenticação e controle de qualidade, os autores compararam os conjuntos de dados com a linhagem RUES2 hESC (HPSCREG, 2026), disponibilizada pela The Rockefeller University. 
 
 
-> Base de Dados | Endereço na Web | Resumo descritivo | Tamanho
+> Base de Dados | Endereço na Web | Resumo descritivo | Tamanho | 
 > ----- | ----- | -----
-> GSE274620 | [URL NCBI](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE274620) | Proveniente do Gene Expression Omnibus. Amostras de RNA-seq da linhagem mesoderme de células tronco. Diferenciação em cardiomiócitos com série temporal. | 29.55GB 
-> GSE305933 | [URL NCBI](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE305933) | Proveniente do Gene Expression Omnibus. Amostras de RNA-seq da linhagem endoderme de células tronco. Diferenciação em células pancreáticas polihormonais com série temporal. | 27.27 GB
-> SAMEA104387770 | [URL hPSCreg](https://hpscreg.eu/cell-line/RUESe002-A) | Proveninete do hPSCreg. Amostras de RNA-seq de células tronco embrionárias. Diferenciação de blastocistos em endoderme, ectoderme e mesoderme. | 2.8 GB
+> GSE274620 | [URL NCBI](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE274620) | Proveniente do Gene Expression Omnibus. Amostras de RNA-seq da linhagem mesoderme de células tronco. Diferenciação em cardiomiócitos com série temporal. | 29.55GB | 
+> GSE305933 | [URL NCBI](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE305933) | Proveniente do Gene Expression Omnibus. Amostras de RNA-seq da linhagem endoderme de células tronco. Diferenciação em células pancreáticas polihormonais com série temporal. | 27.27 GB |
+> SAMEA104387770 | [URL hPSCreg](https://hpscreg.eu/cell-line/RUESe002-A) | Proveninete do hPSCreg. Amostras de RNA-seq de células tronco embrionárias. Diferenciação de blastocistos em endoderme, ectoderme e mesoderme. | 2.8 GB | 
 
 O dataset GSE274620 foi gerado a partir da diferenciação de hESCs em cardiomiócitos, representando a linhagem mesodérmica. Esse conjunto contém 10 amostras coletadas em diferentes pontos temporais ao longo do processo de diferenciação, com medições de expressão gênica obtidas por RNA-seq, realizadas em duplicata. De forma análoga, o dataset GSE305933 descreve a diferenciação de hESCs em células pancreáticas polihormonais, representando a linhagem endodérmica, seguindo o mesmo desenho experimental e estratégia de quantificação. Para este estudo, foram selecionadas apenas as amostras correspondentes aos dias 0, 3 e 17, que representam, respectivamente, o estado pluripotente inicial, o estágio intermediário de especificação de linhagem e o estado final diferenciado. Considerando as duplicatas e ambas as linhagens, o conjunto analisado totaliza aproximadamente 20 GB de dados brutos.
 
@@ -78,6 +77,7 @@ Os dados brutos foram baixados diretamente do NBCI via SRA Toolkit. Primeirament
 
 A partir dos dados limpos, mapeamos as amostras por HISAT2 com o genoma de referência Hg38 (do inglês, human genome build 38), disponibilizado pelo próprio programa, para identificar a posição precisa dos transcritos. Com os transcritos indexados e ordenados, contabilizamos os transcritos pelo StringTie, responsável pela reconstrução dos transcritos e estima suas respectivas abundâncias. Os resultados individuais foram integrados em um modelo unificado, utilizado como base para a quantificação comparativa entre as amostras. Ao final, duas matrizes foram geradas, uma com as quantificações de transcritos (ENSEMBL) e outra de genes (RefSeq) para cada amostra. A matriz de transcritos foi usada para apresentação das próximas etapas.
 
+> ![Fluxograma pre-proc](assets/images/Fluxograma.png)
 
 # Modelo Lógico
 
