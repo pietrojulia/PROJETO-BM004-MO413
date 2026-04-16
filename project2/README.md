@@ -19,12 +19,17 @@ Sendo assim, utilizando dados públicos de RNA-seq com resolução temporal, o p
 
 
 # Fundamentação Teórica
+- Campbell et al. (2019): Definição de células-tronco como células com alta potencialidade e baixo grau de diferenciação. Classificação das células-tronco quanto à potencialidade (totipotentes, pluripotentes, multipotentes e unipotentes);
 
-- Keskin et al. (2025, 2026): Textos base para o entendimento completo dos dados que serão utilizados nas análises;
+- Zakrzewski et al. (2019): Complementação da classificação funcional das células-tronco e seus diferentes níveis de diferenciação;
 
-- Trapnell et al. (2014): Exemplo prático de análises possíveis para dados transcriptômicos obtidos ao longo do processo de diferenciação celular;
+- Campbell et al. (2019): Classificação das células-tronco quanto à origem (adultas, iPSCs e embrionárias);
 
-- Zakrzewski et al. (2019), Campbell et al. (2019), Mao and Mooney (2015): Revisões gerais detalhando conceitos como medicina regenerativa e diferenciação celular.
+- Mao and Mooney (2015): Aplicação de células-tronco na medicina regenerativa como alternativa ao transplante de órgãos;
+
+- Trapnell et al. (2014): Diferenciação celular como processo dinâmico e contínuo, analisável por expressão gênica ao longo do tempo;
+
+- Keskin et al. (2025, 2026): Análise da diferenciação de hESCs em diferentes linhagens com base em mudanças temporais na expressão gênica. Base experimental para construção de modelos computacionais aplicados ao estudo da diferenciação celular.
 
 
 # Perguntas de Pesquisa
@@ -58,22 +63,59 @@ Assim, para a análise da dinâmica temporal das redes de coexpressão gênica, 
 
 # Bases de Dados e Evolução
 
-A base de dados está disponível no Gene Expression Omnibus pelos números de acesso: GSE274620 (Keskin et al., 2025a) e GSE305933 (Ke>
+A base de dados está disponível no Gene Expression Omnibus pelos n estudo anterior para avaúmeros de acesso: GSE274620 (Keskin et al., 2025a) e GSE305933 (Keskin et al., 2025b). Ambos foram utilizados emliar o perfil multi-ômico de células-tronco embrionárias. Para a autenticação e controle de qualidade, os autores compararam os conjuntos de dados com a linhagem RUES2 hESC (HPSCREG, 2026), disponibilizada pela The Rockefeller University. 
 
-> Base de Dados | Endereço na Web | Resumo descritivo
+
+> Base de Dados | Endereço na Web | Resumo descritivo | Tamanho
 > ----- | ----- | -----
-> GSE274620 | [URL NCBI](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE274620) | Proveniente do Gene Expression Omnibus. Amo>
-> GSE305933 | [URL NCBI](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE305933) | Proveniente do Gene Expression Omnibus. Amo>
-> SAMEA104387770 | [URL hPSCreg](https://hpscreg.eu/cell-line/RUESe002-A) | Proveninete do hPSCreg. Amostras de RNA-seq de células t>
+> GSE274620 | [URL NCBI](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE274620) | Proveniente do Gene Expression Omnibus. Amostras de RNA-seq da linhagem mesoderme de células tronco. Diferenciação em cardiomiócitos com série temporal. | 29.55GB 
+> GSE305933 | [URL NCBI](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE305933) | Proveniente do Gene Expression Omnibus. Amostras de RNA-seq da linhagem endoderme de células tronco. Diferenciação em células pancreáticas polihormonais com série temporal. | 27.27 GB
+> SAMEA104387770 | [URL hPSCreg](https://hpscreg.eu/cell-line/RUESe002-A) | Proveninete do hPSCreg. Amostras de RNA-seq de células tronco embrionárias. Diferenciação de blastocistos em endoderme, ectoderme e mesoderme. | 2.8 GB
+
+O dataset GSE274620 foi gerado a partir da diferenciação de hESCs em cardiomiócitos, representando a linhagem mesodérmica. Esse conjunto contém 10 amostras coletadas em diferentes pontos temporais ao longo do processo de diferenciação, com medições de expressão gênica obtidas por RNA-seq, realizadas em duplicata. De forma análoga, o dataset GSE305933 descreve a diferenciação de hESCs em células pancreáticas polihormonais, representando a linhagem endodérmica, seguindo o mesmo desenho experimental e estratégia de quantificação. Para este estudo, foram selecionadas apenas as amostras correspondentes aos dias 0, 3 e 17, que representam, respectivamente, o estado pluripotente inicial, o estágio intermediário de especificação de linhagem e o estado final diferenciado. Considerando as duplicatas e ambas as linhagens, o conjunto analisado totaliza aproximadamente 20 GB de dados brutos.
+
+Os dados brutos foram baixados diretamente do NBCI via SRA Toolkit. Primeiramente, a qualidade das amostras foi testada por FastQC, que forneceu um relatório sobre as características das sequências, como qualidade por posição da base; conteúdo GC; sequências repetidas e contaminação por adaptadores. Em seguida, foi realizada a etapa de limpeza com o Trimmomatic, que removeu adaptadores, regiões de baixa qualidade (Phred < 20 nas extremidades), leituras com comprimento inferior a 36 pares de bases e trechos com média de qualidade inferior a 15 em janelas deslizantes. Após essa etapa, as amostras foram novamente avaliadas com o FastQC para garantir a efetividade do pré-processamento.
+
+A partir dos dados limpos, mapeamos as amostras por HISAT2 com o genoma de referência Hg38 (do inglês, human genome build 38), disponibilizado pelo próprio programa, para identificar a posição precisa dos transcritos. Com os transcritos indexados e ordenados, contabilizamos os transcritos pelo StringTie, responsável pela reconstrução dos transcritos e estima suas respectivas abundâncias. Os resultados individuais foram integrados em um modelo unificado, utilizado como base para a quantificação comparativa entre as amostras. Ao final, duas matrizes foram geradas, uma com as quantificações de transcritos (ENSEMBL) e outra de genes (RefSeq) para cada amostra. A matriz de transcritos foi usada para apresentação das próximas etapas.
 
 
 # Modelo Lógico
 
 > ![Modelo Lógico de Grafos](assets/images/Project1_logic_model_COMBI.png)
-> Integração entre as bases 
+
+
+# Integração entre Bases
+
+Embora os datasets GSE274620 e GSE305933 tenham sido produzidos com protocolos experimentais semelhantes, foi necessário garantir a comparabilidade direta entre eles. Para isso, foram selecionados pontos temporais equivalentes (dias 0, 3 e 17) e mantidas apenas as amostras em duplicata, assegurando consistência no desenho experimental entre as duas linhagens. Outro ponto importante foi a padronização das etapas de pré-processamento. Todas as amostras, independentemente da origem, foram submetidas ao mesmo pipeline (FastQC, Trimmomatic, HISAT2 e StringTie), evitando a introdução de vieses técnicos decorrentes de diferenças metodológicas.
+
+Além dos desafios metodológicos, a principal limitação encontrada foi o alto custo computacional das análises. O processamento completo das amostras requer um ambiente com XXX memória RAM e XXXX armazenamento, além de XXXXX tempo de execução por amostra. Estima-se que cada etapa de alinhamento e quantificação possa levar XXXXX horas por amostra, tornando o processamento total com XXXXX horas e dependente de infraestrutura adequada.
+
+Apesar dessas limitações, a padronização do pipeline e a seleção criteriosa das amostras permitiram a construção de um conjunto de dados integrado, consistente e adequado para as análises comparativas propostas neste projeto.
+
+
+# Análise Preliminar
+Este item não é obrigatório neste estágio. Apresenta aqui uma análise preliminar dos dados se houver. Utilize gráficos que descrevem os aspectos principais da base que são relevantes para as perguntas de pesquisa consideradas.
+
+Mostrar uma tabela com os principais transcritos de cada amostra. 
+
+Análise de PCA.
+
+# Evolução do Projeto
+Ao longo do desenvolvimento deste projeto, foram realizadas adaptações pontuais na abordagem metodológica, mantendo, no entanto, a estrutura central proposta na Entrega 01.
+
+Desde a concepção inicial, o projeto já previa a análise da dinâmica temporal da expressão gênica em três pontos específicos (dias 0, 3 e 17), definidos com base em sua relevância biológica no processo de diferenciação celular. Esses pontos representam, respectivamente, o estado pluripotente, a fase inicial de especificação de linhagem e o estado diferenciado. Dessa forma, não houve alteração nessa escolha ao longo do desenvolvimento, mas sim um aprofundamento na justificativa biológica e na forma de operacionalizar essa análise.
+
+Um dos principais avanços em relação à proposta inicial foi a consolidação do pipeline de pré-processamento dos dados. Embora diferentes ferramentas tenham sido inicialmente consideradas, foi estabelecido um fluxo padronizado envolvendo FastQC, Trimmomatic, HISAT2 e StringTie. Essa definição permite maior controle sobre a qualidade dos dados e garante consistência entre as amostras analisadas.
+
+Durante a execução, também se tornaram mais evidentes os desafios associados ao processamento de dados de RNA-seq em larga escala, especialmente em termos de custo computacional e tempo de execução. Esses fatores reforçaram a necessidade de um planejamento mais cuidadoso das etapas analíticas e da organização dos dados.
+
+Adicionalmente, houve um refinamento na forma de integração entre as bases de dados, com maior atenção à padronização das amostras, ao uso consistente do genoma de referência e à uniformização das etapas de processamento. Esse cuidado foi fundamental para garantir a comparabilidade entre as linhagens estudadas.
+
+Por fim, o projeto evoluiu no sentido de maior alinhamento entre as perguntas de pesquisa, as hipóteses e as estratégias analíticas adotadas. Esse refinamento contribuiu para uma abordagem mais coesa e estruturada, mantendo a proposta original, mas com maior clareza metodológica e rigor na execução.
+
 
 # Ferramentas
-Como pretendemos avaliar os perfis de expressão gênicas e suas correlações ao longo do tempo para cada linhagem celular, usaremos como base a metodologia descrita pelos artigos de Keskin et al., 2025 e Keskin et al., 2026. Adicionamos etapas descritas em workflows anteriores, como análises de redes, que permitem identificar correlações intrínsecas entre genes. A seguir, serão descritas, de maneira breve, quais as ferramentas e softwares que serão utilizados para cada uma das etapas do trabalho.
+Como pretendemos avaliar os perfis de expressão gênicas e suas correlações ao longo do tempo para cada linhagem celular, usaremos como base a metodologia descrita pelos artigos de Keskin et al., 2025 e Keskin et al., 2026. Adicionamos etapas descritas em workflows anteriores, como análises de redes, que permitem identificar correlações intrínsecas entre genes. Até o presente momento, a coleta e pré-processamento dos dados já realizada da seguinte maneira:
 
 ## Pré-processamento de dados
 
@@ -84,6 +126,8 @@ Como pretendemos avaliar os perfis de expressão gênicas e suas correlações a
 > HISAT2 ou STAR | Mapeamento | HISAT2: [Wen et al., 2017], STAR: [Dobin et al., 2013] 
 > Plastid (pacote Python) ou StringTie | Contagem dos transcritos | Plastid: [Keskin et al., 2026], StringTie: [Pertea et al., 2015]
 
+
+A seguir, serão descritas, de maneira breve, quais as ferramentas e softwares que serão utilizados para cada uma das futuras etapas do trabalho.
 
 ## Análise de Expressão Diferencial
 
