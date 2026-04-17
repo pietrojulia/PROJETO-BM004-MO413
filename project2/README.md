@@ -94,11 +94,9 @@ Apesar dessas limitações, a padronização do pipeline e a seleção criterios
 
 
 # Análise Preliminar
-Este item não é obrigatório neste estágio. Apresenta aqui uma análise preliminar dos dados se houver. Utilize gráficos que descrevem os aspectos principais da base que são relevantes para as perguntas de pesquisa consideradas.
+A análise de componentes principais (PCA) em nível de transcritos revelou uma clara separação entre as condições experimentais, indicando que o perfil de expressão varia substancialmente ao longo do tempo. O primeiro componente principal (PC1), que explica 57,1% da variância total, separa principalmente a condição inicial (CM_D0) das demais, sugerindo uma mudança global expressiva no transcriptoma já nos estágios subsequentes. Por outro lado, o segundo componente (PC2), responsável por 42,9% da variância, distingue fortemente a condição tardia (CM_D18), enquanto CM_D3 se posiciona de forma intermediária, refletindo possivelmente um estado transicional. Esse padrão é consistente com um processo dinâmico de regulação gênica ao longo do tempo, no qual há uma progressiva reorganização da expressão de transcritos. A distância observada entre os grupos sugere boa reprodutibilidade e diferenças biológicas relevantes, embora análises adicionais, como normalização mais robusta e testes de expressão diferencial, sejam necessárias para confirmar esses achados e identificar os principais transcritos responsáveis pela separação observada.
 
-Mostrar uma tabela com os principais transcritos de cada amostra. 
-
-Análise de PCA.
+> ![Análise PCA - matriz de contadores de transcritos cardiomiócitos](assets/images/pca_cardio.png)
 
 # Evolução do Projeto
 Ao longo do desenvolvimento deste projeto, foram realizadas adaptações pontuais na abordagem metodológica, mantendo, no entanto, a estrutura central proposta na Entrega 01.
@@ -123,8 +121,8 @@ Como pretendemos avaliar os perfis de expressão gênicas e suas correlações a
 > ----- | ----- | -----
 > FastQC | Controle de qualidade | [Wingett et al., 2018] 
 > Trimmomatic | Limpeza dos dados | [Bolger et al., 2014] 
-> HISAT2 ou STAR | Mapeamento | HISAT2: [Wen et al., 2017], STAR: [Dobin et al., 2013] 
-> Plastid (pacote Python) ou StringTie | Contagem dos transcritos | Plastid: [Keskin et al., 2026], StringTie: [Pertea et al., 2015]
+> HISAT2 | Mapeamento | HISAT2: [Wen et al., 2017], STAR: [Dobin et al., 2013] 
+> StringTie | Contagem dos transcritos | Plastid: [Keskin et al., 2026], StringTie: [Pertea et al., 2015]
 
 
 A seguir, serão descritas, de maneira breve, quais as ferramentas e softwares que serão utilizados para cada uma das futuras etapas do trabalho.
