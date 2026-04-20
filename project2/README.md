@@ -99,7 +99,7 @@ A análise de PCA para a linhagem de cardiomiócitos revela uma separação bem 
 > ![Análise PCA - matriz de contadores de transcritos cardiomiócitos](assets/images/pca_cardio.png)
 
 
-> ![Análise PCA - matriz de contadores de transcritos polihormonais](assets/imagem/pca_polih.png)
+> ![Análise PCA - matriz de contadores de transcritos polihormonais](assets/images/pca_polih.png)
 
 # Evolução do Projeto
 Ao longo do desenvolvimento deste projeto, foram realizadas adaptações pontuais na abordagem metodológica, mantendo, no entanto, a estrutura central proposta na Entrega 01.
