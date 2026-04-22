@@ -62,7 +62,7 @@ Assim, para a análise da dinâmica temporal das redes de coexpressão gênica, 
 
 # Bases de Dados e Evolução
 
-A base de dados está disponível no Gene Expression Omnibus pelos n estudo anterior para avaúmeros de acesso: GSE274620 (Keskin et al., 2025a) e GSE305933 (Keskin et al., 2025b). Ambos foram utilizados emliar o perfil multi-ômico de células-tronco embrionárias. Para a autenticação e controle de qualidade, os autores compararam os conjuntos de dados com a linhagem RUES2 hESC (HPSCREG, 2026), disponibilizada pela The Rockefeller University. 
+A base de dados está disponível no Gene Expression Omnibus, a partir  dos estudos de Keskin et al. (2025, 2026) e referenciada pelos números de acesso: GSE274620 (Keskin et al., 2025a) e GSE305933 (Keskin et al., 2025b). Ambos datasets foram utilizados para avaliar o perfil multi-ômico de células-tronco embrionárias. Para a autenticação e controle de qualidade, os autores compararam os conjuntos de dados com a linhagem RUES2 hESC (HPSCREG, 2026), disponibilizada pela The Rockefeller University. 
 
 
 > Base de Dados | Endereço na Web | Resumo descritivo | Tamanho | 
@@ -75,7 +75,8 @@ O dataset GSE274620 foi gerado a partir da diferenciação de hESCs em cardiomi�
 
 Os dados brutos foram baixados diretamente do NBCI via SRA Toolkit. Primeiramente, a qualidade das amostras foi testada por FastQC, que forneceu um relatório sobre as características das sequências, como qualidade por posição da base; conteúdo GC; sequências repetidas e contaminação por adaptadores. Em seguida, foi realizada a etapa de limpeza com o Trimmomatic, que removeu adaptadores, regiões de baixa qualidade (Phred < 20 nas extremidades), leituras com comprimento inferior a 36 pares de bases e trechos com média de qualidade inferior a 15 em janelas deslizantes. Após essa etapa, as amostras foram novamente avaliadas com o FastQC para garantir a efetividade do pré-processamento.
 
-A partir dos dados limpos, mapeamos as amostras por HISAT2 com o genoma de referência Hg38 (do inglês, human genome build 38), disponibilizado pelo próprio programa, para identificar a posição precisa dos transcritos. Com os transcritos indexados e ordenados, contabilizamos os transcritos pelo StringTie, responsável pela reconstrução dos transcritos e estima suas respectivas abundâncias. Os resultados individuais foram integrados em um modelo unificado, utilizado como base para a quantificação comparativa entre as amostras. Ao final, duas matrizes foram geradas, uma com as quantificações de transcritos (ENSEMBL) e outra de genes (RefSeq) para cada amostra. A matriz de transcritos foi usada para apresentação das próximas etapas.
+A partir dos dados limpos, mapeamos as amostras por HISAT2 com o genoma de referência Hg38 (do inglês, human genome build 38), disponibilizado pelo próprio programa, para identificar a posição precisa dos transcritos. Com os transcritos indexados e ordenados, contabilizamos os transcritos pelo StringTie, responsável pela reconstrução dos transcritos e estimativa de suas respectivas abundâncias. Os resultados individuais foram integrados em um modelo unificado, utilizado como base para a quantificação comparativa entre as amostras. Ao final, duas matrizes foram geradas, uma com as quantificações de transcritos (ENSEMBL) e outra de genes (RefSeq) para cada amostra. A matriz de transcritos foi usada para apresentação das próximas etapas.
+
 
 > ![Fluxograma pre-proc](assets/images/Fluxograma.png)
 
@@ -88,7 +89,7 @@ A partir dos dados limpos, mapeamos as amostras por HISAT2 com o genoma de refer
 
 Embora os datasets GSE274620 e GSE305933 tenham sido produzidos com protocolos experimentais semelhantes, foi necessário garantir a comparabilidade direta entre eles. Para isso, foram selecionados pontos temporais equivalentes (dias 0, 3 e 17) e mantidas apenas as amostras em duplicata, assegurando consistência no desenho experimental entre as duas linhagens. Outro ponto importante foi a padronização das etapas de pré-processamento. Todas as amostras, independentemente da origem, foram submetidas ao mesmo pipeline (FastQC, Trimmomatic, HISAT2 e StringTie), evitando a introdução de vieses técnicos decorrentes de diferenças metodológicas.
 
-Além dos desafios metodológicos, a principal limitação encontrada foi o alto custo computacional das análises. O processamento completo das amostras requer um ambiente com XXX memória RAM e XXXX armazenamento, além de XXXXX tempo de execução por amostra. Estima-se que cada etapa de alinhamento e quantificação possa levar XXXXX horas por amostra, tornando o processamento total com XXXXX horas e dependente de infraestrutura adequada.
+Além dos desafios metodológicos, a principal limitação encontrada foi o alto custo computacional das análises. O processamento completo das amostras foi realizado em um ambiente com 16 GB DDR4 de memória RAM e 512GB  de armazenamento em SSD NVMe M.2 em sistema operacional Ubuntu Linux e Processador AMD Ryzen 7 5825U (8 núcleos, 16 threads, até 4.5 GHz). Uma amostra demorou cerca de 30 minutos na máquina descrita. 
 
 Apesar dessas limitações, a padronização do pipeline e a seleção criteriosa das amostras permitiram a construção de um conjunto de dados integrado, consistente e adequado para as análises comparativas propostas neste projeto.
 
@@ -116,7 +117,7 @@ Por fim, o projeto evoluiu no sentido de maior alinhamento entre as perguntas de
 
 
 # Ferramentas
-Como pretendemos avaliar os perfis de expressão gênicas e suas correlações ao longo do tempo para cada linhagem celular, usaremos como base a metodologia descrita pelos artigos de Keskin et al., 2025 e Keskin et al., 2026. Adicionamos etapas descritas em workflows anteriores, como análises de redes, que permitem identificar correlações intrínsecas entre genes. Até o presente momento, a coleta e pré-processamento dos dados já realizada da seguinte maneira:
+Como pretendemos avaliar os perfis de expressão gênicas e suas correlações ao longo do tempo para cada linhagem celular, usaremos como base a metodologia descrita pelos artigos de Keskin et al., 2025 e Keskin et al., 2026. Adicionamos etapas descritas em workflows anteriores, como análises de redes, que permitem identificar correlações intrínsecas entre genes. Até o presente momento, a coleta e pré-processamento dos dados foi realizada da seguinte maneira:
 
 ## Pré-processamento de dados
 
