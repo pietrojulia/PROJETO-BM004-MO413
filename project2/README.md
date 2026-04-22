@@ -15,7 +15,7 @@ Sendo assim, utilizando dados públicos de RNA-seq com resolução temporal, o p
 
 # 2. Slides
 
-[Apresentação da Entrega 01 do Projeto da Disciplina]('assets/slides/Entrega 2 - BM004.pdf')
+[Apresentação da Entrega 01 do Projeto da Disciplina](assets/slides/Entrega 2 - BM004.pdf)
 
 
 # 3. Fundamentação Teórica
