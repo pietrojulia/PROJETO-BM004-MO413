@@ -133,3 +133,73 @@ stringtie sample_sorted.bam \
 ~~~
 
 Saídas: GTF com transcritos reconstruídos + Tabela de abundância por gene
+
+## 5. Merge Global de Transcritos
+Todos os GTFs são combinados:
+
+```
+stringtie --merge \
+ -G annotation.gtf \
+ -o merged.gtf \
+ mergelist.txt
+```
+
+📌 Importante: O pipeline automaticamente coleta todos os .gtf pelo padrão: SR_\*/stringtie/\*.gtf
+
+## 6. Re-estimation (Quantificação Final)
+Cada amostra é reprocessada com o modelo global:
+
+```
+stringtie sample.bam \
+ -e -B \
+ -G merged.gtf \
+ -o output.gtf
+```
+
+Parâmetros importantes:
+> -e → restringe à anotação conhecida
+> -B → prepara saída para Ballgown
+
+## 7. Geração da Matriz de Contagem
+Script: prepDE.py3
+
+```
+prepDE.py3 \
+ -i sample_lst.txt \
+ -g gene_count_matrix.csv \
+ -t transcript_count_matrix.csv
+```
+
+Saídas: gene\_count_matrix.csv e transcript\_count\_matrix.csv
+
+## 8. Limpeza de Arquivos
+Remoção automática de arquivos pesados:
+
+```
+rm *.sam
+
+rm *.bam (não ordenado)
+```
+
+Mantido: BAM ordenado, GTF final e matrizes.
+
+## 9. Validações do Pipeline
+Antes de rodar, o script valida automaticamente:
+
+* Ferramentas instaladas:
+	- prefetch
+	- fasterq-dump
+	- fastqc
+	- hisat2
+	- samtools
+	- stringtie
+	- python3
+	- java
+* Arquivos obrigatórios:
+	- índice do genoma (HISAT2)
+	- annotation GTF
+	- prepDE.py
+	- Trimmomatic
+
+
+
