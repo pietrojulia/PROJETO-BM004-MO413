@@ -4,7 +4,7 @@
 # Projeto `Dinâmica Temporal e Redes de Coexpressão Gênica da Diferenciação de Células-Tronco Embrionárias`
 # Project `Temporal Dynamics and Gene Co-expression Networks of Embryonic Stem Cell Differentiation`
 
-# Descrição Resumida do Projeto
+# 1. Descrição Resumida do Projeto
 
 Este projeto tem como principal objetivo analisar e comparar a dinâmica temporal da expressão gênica durante a diferenciação de células-tronco embrionárias humanas (hESCs) em duas linhagens distintas: cardiomiócitos (mesoderme) e células polihormonais pancreáticas (endoderme).
 
@@ -13,12 +13,12 @@ Apesar de compartilharem o mesmo genoma, tais células adquirem identidades dist
 Sendo assim, utilizando dados públicos de RNA-seq com resolução temporal, o projeto propõe integrar análise de expressão diferencial, enriquecimento funcional e ciência de redes para a identificação de padrões comuns e específicos entre as duas linhagens celulares estudadas. Nesse sentido, espera-se que redes de coexpressão gênica sejam construídas e analisadas quanto a suas propriedades topológicas ao longo do intervalo analisado, permitindo a identificação de genes centrais, módulos funcionais e eventos críticos no processo de diferenciação celular.
 
 
-# Slides
+# 2. Slides
 
 [Apresentação da Entrega 01 do Projeto da Disciplina](assets/slides/Project2_presentation_COMBI.pdf)
 
 
-# Fundamentação Teórica
+# 3. Fundamentação Teórica
 - **Campbell et al. (2019)**: Definição de células-tronco como células com alta potencialidade e baixo grau de diferenciação. Classificação das células-tronco quanto à potencialidade (totipotentes, pluripotentes, multipotentes e unipotentes);
 
 - **Zakrzewski et al. (2019)**: Complementação da classificação funcional das células-tronco e seus diferentes níveis de diferenciação;
@@ -32,20 +32,20 @@ Sendo assim, utilizando dados públicos de RNA-seq com resolução temporal, o p
 - **Keskin et al. (2025, 2026)**: Análise da diferenciação de hESCs em diferentes linhagens com base em mudanças temporais na expressão gênica. Base experimental para construção de modelos computacionais aplicados ao estudo da diferenciação celular.
 
 
-# Perguntas de Pesquisa
+# 4. Perguntas de Pesquisa
 
 - Existe diferença entre as dinâmicas de expressão gênica encontradas ao longo do processo de diferenciação de células-tronco pluripotentes em cardiomiócitos e células polihormonais?
 
 - Como a dinâmica temporal das redes de coexpressão gênica influencia o processo de diferenciação de células-tronco embrionárias humanas em cardiomiócitos e células pancreáticas?
 
-## Hipóteses a serem testadas
+## 4.1. Hipóteses a serem testadas
 
 - H0: A dinâmica da expressão gênica ao longo do processo de diferenciação de células-tronco pluripotentes em cardiomiócitos é idêntica àquela observada na diferenciação de células polihormonais. 
 
 - H1: A dinâmica da expressão gênica ao longo do processo de diferenciação de células-tronco pluripotentes em cardiomiócitos é distinta àquela observada na diferenciação de células polihormonais.
 
 
-# Metodologia
+# 5. Metodologia
 
 Com o objetivo de comparar a dinâmica da expressão gênica entre as linhagens mesodérmica (cardiomiócitos) e endodérmica (células polihormonais), será realizada uma análise temporal de expressão gênica diferencial a partir de dados de RNA-seq. Inicialmente, cada linhagem será comparada a um grupo controle correspondente a células-tronco embrionárias pluripotentes (RUES2), em três pontos temporais definidos com base nos estudos de Keskin et al., 2025 e Keskin et al., 2026:
 
@@ -60,9 +60,9 @@ As redes serão construídas com base em medidas de correlação (como correlaç
 Assim, para a análise da dinâmica temporal das redes de coexpressão gênica, cada rede será construída de maneira independente para cada ponto temporal analisado. Serão comparadas as propriedades topológicas das redes ao longo do tempo, como densidade, centralidade e estrutura de comunidades. O objetivo é identificar mudanças estruturais associadas ao processo de diferenciação celular, de modo que estas alterações possam ser interpretadas como pontos críticos de transição, nos quais ocorrem reorganizações significativas nas interações gênicas, que refletem alterações no estado celular. A identificação desses pontos permitirá inferir momentos-chave do processo de diferenciação em que há ativação de programas regulatórios específicos para cada linhagem.
 
 
-# Bases de Dados e Evolução
+## 5.1 Bases de Dados e Evolução
 
-A base de dados está disponível no Gene Expression Omnibus pelos n estudo anterior para avaúmeros de acesso: GSE274620 (Keskin et al., 2025a) e GSE305933 (Keskin et al., 2025b). Ambos foram utilizados emliar o perfil multi-ômico de células-tronco embrionárias. Para a autenticação e controle de qualidade, os autores compararam os conjuntos de dados com a linhagem RUES2 hESC (HPSCREG, 2026), disponibilizada pela The Rockefeller University. 
+A base de dados está disponível no Gene Expression Omnibus, a partir  dos estudos de Keskin et al. (2025, 2026) e referenciada pelos números de acesso: GSE274620 (Keskin et al., 2025a) e GSE305933 (Keskin et al., 2025b). Ambos datasets foram utilizados para avaliar o perfil multi-ômico de células-tronco embrionárias. Para a autenticação e controle de qualidade, os autores compararam os conjuntos de dados com a linhagem RUES2 hESC (HPSCREG, 2026), disponibilizada pela The Rockefeller University. 
 
 
 > Base de Dados | Endereço na Web | Resumo descritivo | Tamanho | 
@@ -75,25 +75,26 @@ O dataset GSE274620 foi gerado a partir da diferenciação de hESCs em cardiomi�
 
 Os dados brutos foram baixados diretamente do NBCI via SRA Toolkit. Primeiramente, a qualidade das amostras foi testada por FastQC, que forneceu um relatório sobre as características das sequências, como qualidade por posição da base; conteúdo GC; sequências repetidas e contaminação por adaptadores. Em seguida, foi realizada a etapa de limpeza com o Trimmomatic, que removeu adaptadores, regiões de baixa qualidade (Phred < 20 nas extremidades), leituras com comprimento inferior a 36 pares de bases e trechos com média de qualidade inferior a 15 em janelas deslizantes. Após essa etapa, as amostras foram novamente avaliadas com o FastQC para garantir a efetividade do pré-processamento.
 
-A partir dos dados limpos, mapeamos as amostras por HISAT2 com o genoma de referência Hg38 (do inglês, human genome build 38), disponibilizado pelo próprio programa, para identificar a posição precisa dos transcritos. Com os transcritos indexados e ordenados, contabilizamos os transcritos pelo StringTie, responsável pela reconstrução dos transcritos e estima suas respectivas abundâncias. Os resultados individuais foram integrados em um modelo unificado, utilizado como base para a quantificação comparativa entre as amostras. Ao final, duas matrizes foram geradas, uma com as quantificações de transcritos (ENSEMBL) e outra de genes (RefSeq) para cada amostra. A matriz de transcritos foi usada para apresentação das próximas etapas.
+A partir dos dados limpos, mapeamos as amostras por HISAT2 com o genoma de referência Hg38 (do inglês, human genome build 38), disponibilizado pelo próprio programa, para identificar a posição precisa dos transcritos. Com os transcritos indexados e ordenados, contabilizamos os transcritos pelo StringTie, responsável pela reconstrução dos transcritos e estimativa de suas respectivas abundâncias. Os resultados individuais foram integrados em um modelo unificado, utilizado como base para a quantificação comparativa entre as amostras. Ao final, duas matrizes foram geradas, uma com as quantificações de transcritos (ENSEMBL) e outra de genes (RefSeq) para cada amostra. A matriz de transcritos foi usada para apresentação das próximas etapas.
+
 
 > ![Fluxograma pre-proc](assets/images/Fluxograma.png)
 
-# Modelo Lógico
+## 5.2 Modelo Lógico
 
 > ![Modelo Lógico de Grafos](assets/images/Project1_logic_model_COMBI.png)
 
 
-# Integração entre Bases
+## 5.3 Integração entre Bases
 
 Embora os datasets GSE274620 e GSE305933 tenham sido produzidos com protocolos experimentais semelhantes, foi necessário garantir a comparabilidade direta entre eles. Para isso, foram selecionados pontos temporais equivalentes (dias 0, 3 e 17) e mantidas apenas as amostras em duplicata, assegurando consistência no desenho experimental entre as duas linhagens. Outro ponto importante foi a padronização das etapas de pré-processamento. Todas as amostras, independentemente da origem, foram submetidas ao mesmo pipeline (FastQC, Trimmomatic, HISAT2 e StringTie), evitando a introdução de vieses técnicos decorrentes de diferenças metodológicas.
 
-Além dos desafios metodológicos, a principal limitação encontrada foi o alto custo computacional das análises. O processamento completo das amostras requer um ambiente com XXX memória RAM e XXXX armazenamento, além de XXXXX tempo de execução por amostra. Estima-se que cada etapa de alinhamento e quantificação possa levar XXXXX horas por amostra, tornando o processamento total com XXXXX horas e dependente de infraestrutura adequada.
+Além dos desafios metodológicos, a principal limitação encontrada foi o alto custo computacional das análises. O processamento completo das amostras foi realizado em um ambiente com 16 GB DDR4 de memória RAM e 512GB  de armazenamento em SSD NVMe M.2 em sistema operacional Ubuntu Linux e Processador AMD Ryzen 7 5825U (8 núcleos, 16 threads, até 4.5 GHz). Uma amostra demorou cerca de 30 minutos na máquina descrita. 
 
 Apesar dessas limitações, a padronização do pipeline e a seleção criteriosa das amostras permitiram a construção de um conjunto de dados integrado, consistente e adequado para as análises comparativas propostas neste projeto.
 
 
-# Análise Preliminar
+# 6. Análise Preliminar
 A análise de PCA para a linhagem de cardiomiócitos revela uma separação bem definida entre os três tempos, com PC1 explicando 57,1% da variância e PC2 42,9%, indicando que a maior parte da variação nos dados está associada à progressão temporal da diferenciação. Observa-se que o ponto intermediário (D3) ocupa uma posição bastante distinta dos estados inicial e final, sugerindo uma reorganização transcricional mais acentuada durante essa fase. Já na linhagem de células polihormonais, a variância também se distribui de forma equilibrada entre os dois primeiros componentes (PC1 = 52,5% e PC2 = 47,5%), porém com uma disposição espacial das amostras que indica uma transição mais contínua entre os estados, na qual D3 atua como intermediário mais alinhado entre D0 e D18. Em conjunto, esses resultados mostram que, embora ambas as linhagens apresentem forte influência da dinâmica temporal na variação da expressão gênica, a diferenciação em cardiomiócitos parece ocorrer de maneira mais abrupta, enquanto a linhagem polihormonal apresenta uma progressão mais gradual, reforçando diferenças nos programas regulatórios envolvidos em cada processo.
 
 > ![Análise PCA - matriz de contadores de transcritos cardiomiócitos](assets/images/pca_cardio.png)
@@ -101,7 +102,7 @@ A análise de PCA para a linhagem de cardiomiócitos revela uma separação bem 
 
 > ![Análise PCA - matriz de contadores de transcritos polihormonais](assets/images/pca_polih.png)
 
-# Evolução do Projeto
+# 7. Evolução do Projeto
 Ao longo do desenvolvimento deste projeto, foram realizadas adaptações pontuais na abordagem metodológica, mantendo, no entanto, a estrutura central proposta na Entrega 01.
 
 Desde a concepção inicial, o projeto já previa a análise da dinâmica temporal da expressão gênica em três pontos específicos (dias 0, 3 e 17), definidos com base em sua relevância biológica no processo de diferenciação celular. Esses pontos representam, respectivamente, o estado pluripotente, a fase inicial de especificação de linhagem e o estado diferenciado. Dessa forma, não houve alteração nessa escolha ao longo do desenvolvimento, mas sim um aprofundamento na justificativa biológica e na forma de operacionalizar essa análise.
@@ -115,10 +116,10 @@ Adicionalmente, houve um refinamento na forma de integração entre as bases de 
 Por fim, o projeto evoluiu no sentido de maior alinhamento entre as perguntas de pesquisa, as hipóteses e as estratégias analíticas adotadas. Esse refinamento contribuiu para uma abordagem mais coesa e estruturada, mantendo a proposta original, mas com maior clareza metodológica e rigor na execução.
 
 
-# Ferramentas
-Como pretendemos avaliar os perfis de expressão gênicas e suas correlações ao longo do tempo para cada linhagem celular, usaremos como base a metodologia descrita pelos artigos de Keskin et al., 2025 e Keskin et al., 2026. Adicionamos etapas descritas em workflows anteriores, como análises de redes, que permitem identificar correlações intrínsecas entre genes. Até o presente momento, a coleta e pré-processamento dos dados já realizada da seguinte maneira:
+# 8. Ferramentas
+Como pretendemos avaliar os perfis de expressão gênicas e suas correlações ao longo do tempo para cada linhagem celular, usaremos como base a metodologia descrita pelos artigos de Keskin et al., 2025 e Keskin et al., 2026. Adicionamos etapas descritas em workflows anteriores, como análises de redes, que permitem identificar correlações intrínsecas entre genes. Até o presente momento, a coleta e pré-processamento dos dados foi realizada da seguinte maneira:
 
-## Pré-processamento de dados
+## 8.1. Pré-processamento de dados
 
 > Software/Ferramenta | Função | Citação
 > ----- | ----- | -----
@@ -130,14 +131,14 @@ Como pretendemos avaliar os perfis de expressão gênicas e suas correlações a
 
 A seguir, serão descritas, de maneira breve, quais as ferramentas e softwares que serão utilizados para cada uma das futuras etapas do trabalho.
 
-## Análise de Expressão Diferencial
+## 8.2. Análise de Expressão Diferencial
 
 > Software/Ferramenta | Função | Citação
 > ----- | ----- | -----
 > DESeq2 | Análise de expressão diferencial | [Love et al., 2014]
 
 
-## Anotação e Análise de Enriquecimento de Vias
+## 8.3. Anotação e Análise de Enriquecimento de Vias
 
 > Software/Ferramenta | Função | Citação
 > ----- | ----- | -----
@@ -145,7 +146,7 @@ A seguir, serão descritas, de maneira breve, quais as ferramentas e softwares q
 > Bibliotecas R: enrichplot | Enriquecimento de vias | [Yu et al., 2026]
 
 
-## Análise de Redes
+## 8.4. Análise de Redes
 
 > Software/Ferramenta | Função | Citação
 > ----- | ----- | -----
@@ -153,7 +154,7 @@ A seguir, serão descritas, de maneira breve, quais as ferramentas e softwares q
 > GEPHI ou Cytoscape | Construção e análise das redes de correlação | GEPHI: [Bastian et al., 2009], Cytoscape: [Shannon et al., 2003]
 
 
-# Referências Bibliográficas
+# 9. Referências Bibliográficas
 
 [Bastian et al., 2009] Bastian, M.; Heymann, S.; Jacomy, M. Gephi: an open source software for exploring and manipulating networks. In: Proceedings of the 3rd International AAAI Conference on Web and Social Media. Burnaby, Canada, 2009. p. 361–362.
 
