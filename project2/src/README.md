@@ -11,7 +11,7 @@ Além disso, o pipeline foi estruturado para:
 - Permitir comparação com featureCounts
 - Medir tempo de execução por etapa
 
-##2. Estrutura Geral do Pipeline
+## 2. Estrutura Geral do Pipeline
 
 O pipeline segue a seguinte sequência:
 
@@ -28,7 +28,7 @@ O pipeline segue a seguinte sequência:
 - Limpeza de arquivos intermediários
 - Log de tempo por etapa
 
-##3. Organização de Diretórios
+## 3. Organização de Diretórios
 
 Para cada amostra, é criada a seguinte estrutura:
 
@@ -50,27 +50,33 @@ merge/
 matrices/
 ```
 
-##4. Pipeline — Etapas Detalhadas
+## 4. Pipeline — Etapas Detalhadas
 
 - 4.1 Download dos dados
-> Ferramenta: SRA Toolkit
+Ferramenta: SRA Toolkit
 
-> prefetch SRRXXXX
+~~~
+prefetch SRRXXXX
+~~~
 
 - 4.2 Conversão para FASTQ
-> fasterq-dump --split-files SRRXXXX
+~~~
+fasterq-dump --split-files SRRXXXX
+~~~
 
-> Saída: SRR_1.fastq + SRR_2.fastq
+Saída: SRR_1.fastq e SRR_2.fastq
 
 - 4.3. Controle de Qualidade (pré-trim)
-> Ferramenta: FastQC
+Ferramenta: FastQC
 
-> fastqc *.fastq
+~~~
+fastqc *.fastq
+~~~
 
 - 4.4 Trimming
-> Ferramenta: Trimmomatic
+Ferramenta: Trimmomatic
 
-> Parâmetros utilizados:
+Parâmetros utilizados:
 
 ```
 LEADING:20
@@ -86,16 +92,18 @@ MINLEN:50
 trimmomatic PE ...
 ```
 
-> Saída: reads paired + reads unpaired
+Saída: reads paired + reads unpaired
 
 
 - 4.5. Controle de Qualidade (pós-trim)
-> fastqc *_paired.fastq
+~~~
+fastqc *_paired.fastq
+~~~
 
 - 4.6. Alinhamento
-> Ferramenta: HISAT2
+Ferramenta: HISAT2
 
-> Parâmetro crítico:
+Parâmetro crítico:
 
 ~~~
 --dta → otimiza para montagem de transcritos
@@ -103,9 +111,10 @@ trimmomatic PE ...
 hisat2 --dta -x genome -1 R1 -2 R2 -S output.sam
 ~~~
 
-4.7. Processamento BAM
-> Ferramenta: Samtools
-> Etapas:
+- 4.7. Processamento BAM
+Ferramenta: Samtools
+
+Etapas:
 
 ```
 samtools view -bS → BAM
@@ -123,4 +132,4 @@ stringtie sample_sorted.bam \
  -A gene_abund.tab
 ~~~
 
-> Saídas: GTF com transcritos reconstruídos + Tabela de abundância por gene
+Saídas: GTF com transcritos reconstruídos + Tabela de abundância por gene
