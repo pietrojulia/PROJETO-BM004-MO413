@@ -52,28 +52,30 @@ matrices/
 
 ## 4. Pipeline — Etapas Detalhadas
 
-- 4.1 Download dos dados
+- **4.1 Download dos dados**
 Ferramenta: SRA Toolkit
 
 ~~~
 prefetch SRRXXXX
 ~~~
 
-- 4.2 Conversão para FASTQ
+- **4.2 Conversão para FASTQ**
 ~~~
 fasterq-dump --split-files SRRXXXX
 ~~~
 
-Saída: SRR_1.fastq e SRR_2.fastq
+* Saída: 
+	- SRR_1.fastq 
+	- SRR_2.fastq
 
-- 4.3. Controle de Qualidade (pré-trim)
+- **4.3. Controle de Qualidade (pré-trim)**
 Ferramenta: FastQC
 
 ~~~
 fastqc *.fastq
 ~~~
 
-- 4.4 Trimming
+- **4.4 Trimming**
 Ferramenta: Trimmomatic
 
 Parâmetros utilizados:
@@ -92,15 +94,17 @@ MINLEN:50
 trimmomatic PE ...
 ```
 
-Saída: reads paired + reads unpaired
+* Saída: 
+	- reads paired
+	- reads unpaired
 
 
-- 4.5. Controle de Qualidade (pós-trim)
+- **4.5. Controle de Qualidade (pós-trim)**
 ~~~
 fastqc *_paired.fastq
 ~~~
 
-- 4.6. Alinhamento
+- **4.6. Alinhamento**
 Ferramenta: HISAT2
 
 Parâmetro crítico:
@@ -111,7 +115,7 @@ Parâmetro crítico:
 hisat2 --dta -x genome -1 R1 -2 R2 -S output.sam
 ~~~
 
-- 4.7. Processamento BAM
+- **4.7. Processamento BAM**
 Ferramenta: Samtools
 
 Etapas:
@@ -124,7 +128,7 @@ samtools sort → BAM ordenado
 samtools index → índice
 ```
 
-- 4.8. Montagem de transcritos (StringTie)
+- **4.8. Montagem de transcritos (StringTie)**
 ~~~
 stringtie sample_sorted.bam \
  -G annotation.gtf \
@@ -132,7 +136,9 @@ stringtie sample_sorted.bam \
  -A gene_abund.tab
 ~~~
 
-Saídas: GTF com transcritos reconstruídos + Tabela de abundância por gene
+* Saídas: 
+	- GTF com transcritos reconstruídos 
+	- Tabela de abundância por gene
 
 ## 5. Merge Global de Transcritos
 Todos os GTFs são combinados:
@@ -156,9 +162,9 @@ stringtie sample.bam \
  -o output.gtf
 ```
 
-Parâmetros importantes:
-> -e → restringe à anotação conhecida
-> -B → prepara saída para Ballgown
+* Parâmetros importantes:
+	- -e → restringe à anotação conhecida
+	- -B → prepara saída para Ballgown
 
 ## 7. Geração da Matriz de Contagem
 Script: prepDE.py3
@@ -170,7 +176,9 @@ prepDE.py3 \
  -t transcript_count_matrix.csv
 ```
 
-Saídas: gene\_count_matrix.csv e transcript\_count\_matrix.csv
+* Saídas: 
+	- gene\_count_matrix.csv
+	- transcript\_count\_matrix.csv
 
 ## 8. Limpeza de Arquivos
 Remoção automática de arquivos pesados:
