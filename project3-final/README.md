@@ -65,7 +65,6 @@ A base de dados está disponível no Gene Expression Omnibus, a partir  dos estu
 > ----- | ----- | ----- | ----- 
 > GSE274620 | [URL NCBI](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE274620) | Proveniente do Gene Expression Omnibus. Amostras de RNA-seq da linhagem mesoderme de células tronco. Diferenciação em cardiomiócitos com série temporal. | 29.55GB | 
 > GSE305933 | [URL NCBI](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE305933) | Proveniente do Gene Expression Omnibus. Amostras de RNA-seq da linhagem endoderme de células tronco. Diferenciação em células pancreáticas polihormonais com série temporal. | 27.27 GB |
-> SAMEA104387770 | [URL hPSCreg](https://hpscreg.eu/cell-line/RUESe002-A) | Proveninete do hPSCreg. Amostras de RNA-seq de células tronco embrionárias. Diferenciação de blastocistos em endoderme, ectoderme e mesoderme. | 2.8 GB | 
 
 O dataset GSE274620 foi gerado a partir da diferenciação de hESCs em cardiomiócitos, representando a linhagem mesodérmica. Esse conjunto contém 10 amostras coletadas em diferentes pontos temporais ao longo do processo de diferenciação, com medições de expressão gênica obtidas por RNA-seq, realizadas em duplicata (Tabela 1).
 
@@ -163,10 +162,14 @@ Com os transcritos indexados e ordenados, contabilizamos os transcritos pelo Str
 
 ###  5.5.5  MFuzz:
 O Mfuzz é um método que utiliza a técnica de agrupamento suave (soft clustering), que permite identificar conjuntos de genes com perfis de expressão semelhantes ao longo do tempo. O Mfuzz possibilita que um mesmo gene pertença simultaneamente a diferentes clusters, com distintos graus de pertinência. Essa abordagem é particularmente relevante em sistemas biológicos complexos, uma vez que muitos genes participam de múltiplos processos celulares e podem apresentar padrões de expressão compartilhados entre diferentes grupos funcionais.
-    A aplicação do Mfuzz segue uma série de etapas metodológicas. Inicialmente, realiza-se a normalização dos dados, com o objetivo de reduzir vieses técnicos e garantir a comparabilidade entre as amostras. Em dados de RNA-seq, por exemplo, esse processo pode incluir correções relacionadas ao tamanho da biblioteca e ao comprimento dos genes, enquanto em experimentos de microarranjo são aplicados métodos específicos de padronização.
-    A primeira etapa consistiu na identificação de padrões temporais de expressão gênica utilizando o algoritmo de agrupamento fuzzy implementado no pacote Mfuzz. Inicialmente, os dados de expressão foram transformados para escala logarítmica a fim de reduzir a influência de genes altamente expressos e minimizar diferenças extremas entre as amostras.
-	Em seguida, é realizada uma filtragem para remoção de transcritos com baixa expressão média, mantendo-se apenas aqueles com média de expressão superior a 1. Posteriormente, os genes foram classificados de acordo com sua variabilidade ao longo do experimento e somente os 10% mais variáveis foram selecionados para as análises subsequentes. Essa estratégia permitiu concentrar a análise nos genes com maior potencial de participação nos eventos biológicos associados à diferenciação celular.
-	Após a padronização dos dados, o parâmetro de fuzzificação foi estimado automaticamente e os genes foram distribuídos em 12 clusters de expressão temporal. Os perfis obtidos permitiram identificar diferentes tendências de regulação ao longo dos dias analisados, incluindo genes progressivamente ativados, reprimidos ou transitoriamente expressos durante a diferenciação.
+
+A aplicação do Mfuzz segue uma série de etapas metodológicas. Inicialmente, realiza-se a normalização dos dados, com o objetivo de reduzir vieses técnicos e garantir a comparabilidade entre as amostras. Em dados de RNA-seq, por exemplo, esse processo pode incluir correções relacionadas ao tamanho da biblioteca e ao comprimento dos genes, enquanto em experimentos de microarranjo são aplicados métodos específicos de padronização.
+
+A primeira etapa consistiu na identificação de padrões temporais de expressão gênica utilizando o algoritmo de agrupamento fuzzy implementado no pacote Mfuzz. Inicialmente, os dados de expressão foram transformados para escala logarítmica a fim de reduzir a influência de genes altamente expressos e minimizar diferenças extremas entre as amostras.
+
+Em seguida, é realizada uma filtragem para remoção de transcritos com baixa expressão média, mantendo-se apenas aqueles com média de expressão superior a 1. Posteriormente, os genes foram classificados de acordo com sua variabilidade ao longo do experimento e somente os 10% mais variáveis foram selecionados para as análises subsequentes. Essa estratégia permitiu concentrar a análise nos genes com maior potencial de participação nos eventos biológicos associados à diferenciação celular.
+
+Após a padronização dos dados, o parâmetro de fuzzificação foi estimado automaticamente e os genes foram distribuídos em 12 clusters de expressão temporal. Os perfis obtidos permitiram identificar diferentes tendências de regulação ao longo dos dias analisados, incluindo genes progressivamente ativados, reprimidos ou transitoriamente expressos durante a diferenciação.
 	
 ###  5.5.6  DESeq2:
 Para a análise de expressão diferencial foi utilizado o programa DESeq2. Ele necessita da matriz de contadores e metadados para realizar os testes estatísticos e definir os genes diferencialmente expressos. Ele normaliza os contadores com base no tamanho das bibliotecas, utilizando distribuição binomial negativa dos dados como abordagem estatística e ajustando o p-valor pelo método de Benjamini-Hochberg. Para identificação dos genes diferencialmente expressos, o algoritmo utiliza um modelo linear generalizado, calculando a dispersão e fold change. O DESeq2 precisa de uma fórmula de design, que fórmula usa uma coluna dos metadados, de modo que os fatores que a compõem serão comparados entre si. Foram feitas comparações para cada dia que o experimento foi realizado em relação ao controle. Por exemplo, comparou-se a expressão do dia em relação ao controle. Dessa forma, foi possível obter informações do quanto os genes foram mais ou menos expressos naquele dia em relação ao controle, que foi o primeiro dia do experimento. Este período foi escolhido como controle pois espera-se que neste momento a expressão de todos os genes sejam idênticas. 
@@ -180,15 +183,12 @@ Anotamos apenas os genes presentes nos módulos mais significativos identificado
 
 #### 5.5.8.1 WGCNA
 Com o intuito de identificar a correlação entre os transcritos, pacotes que avaliam a relação da expressão gênica em uma amostra ou grupos de amostras foram utilizados. Essas análises permitem caracterizar o comportamento da expressão de grupos de genes, sendo possível supor que tais genes têm expressão correlacionada, passando pelo mesmo processo de regulação e, possivelmente, são pertencentes à mesma via metabólica. Para esta etapa, utilizamos o programa WGCNA. 
-	WGCNA (Weighted Correlation Network Analysis) é um pacote em R que permite identificar módulos de genes, que são conjuntos de genes com comportamento de expressão semelhante dentro de grupos de amostras ou de forma seriada (ao longo do tempo, por exemplo). A partir destes módulos, o WGCNA os relaciona com os metadados, fornecendo estimativas quantitativas da força desta relação. 
-    
+
+WGCNA (Weighted Correlation Network Analysis) é um pacote em R que permite identificar módulos de genes, que são conjuntos de genes com comportamento de expressão semelhante dentro de grupos de amostras ou de forma seriada (ao longo do tempo, por exemplo). A partir destes módulos, o WGCNA os relaciona com os metadados, fornecendo estimativas quantitativas da força desta relação. 
+
 Primeiramente, é necessário submeter os dados de expressão (matrizes de contadores de transcritos) à filtragem e normalização. É recomendado normalizar os dados por variance stabilizing transformation, uma função do DESeq2 que estabiliza a variância. Dessa forma, construímos o DataSet a partir do metadado de dias. Filtramos os genes cujas leituras somadas para todas as amostras apresentavam total maior que 1000. Assim, normalizamos os contadores filtrados de acordo com sua variância. Essa abordagem se mostra necessária pois minimiza a quantidade de dados a serem trabalhados, agilizando o tempo de processamento.
 
 Para a construção das redes, precisamos converter os contadores normalizados e filtrados à uma matriz de similaridade. Ela mede o nível de concordância entre os perfis de expressão dos genes através do coeficiente de correlação de Pearson. Assim, essa matriz de similaridade é convertida à uma matriz de adjacência. Neste ponto, o peso da rede é determinado por um parâmetro chamado soft thresholding power β. Ele corresponde ao valor pelo qual as correlações são elevadas para calcular a matriz de adjacência com topologia de escala livre aproximada. Nós escolhemos o soft thresholding power β de 18 para os cardiomiócitos e 20 para as polihormonais, pois são os valores em que os dados apresentam alta escala de independência e baixa conectividade média (Figuras 1 e 2). 
-
-
- Falta colocar as figuras(1 e 2)
-
 
 A matriz de adjacência construída a partir destes parâmetros permite categorizar a força da relação entre os genes (nós) da rede.
 
@@ -196,24 +196,18 @@ O WGCNA usa a sobreposição topológica dos valores de dissimilaridade para det
 
 Os módulos detectados podem ser relacionados com os metadados através de cálculos de correlação de Pearson e p-valor entre o eigengene de cada módulo e os metadados (Figuras 3 e 4).
 
+Eigengene é um vetor que representa um padrão agregado de expressão gênica para os genes dos módulos, calculado por meio da técnica de análise de componentes principais. Ele captura a variabilidade geral dos genes dentro do módulo e fornece uma representação resumida do perfil de expressão desse módulo. Assim, o coeficiente de correlação e o p-valor entre os eigengenes e os metadados foram calculados. 
 
-Falta as figuras 3 e 4
-
-
- Eigengene é um vetor que representa um padrão agregado de expressão gênica para os genes dos módulos, calculado por meio da técnica de análise de componentes principais. Ele captura a variabilidade geral dos genes dentro do módulo e fornece uma representação resumida do perfil de expressão desse módulo. Assim, o coeficiente de correlação e o p-valor entre os eigengenes e os metadados foram calculados. 
-
- Dessa forma, como o WGCNA posiciona os genes que não se encaixaram em nenhum perfil de expressão no módulo grey, os módulos turquoise foram selecionados para a construção das redes de co-expressão (Figuras 5 e 6). 
-
-
-Falta as figuras 5 e 6
+Dessa forma, como o WGCNA posiciona os genes que não se encaixaram em nenhum perfil de expressão no módulo grey, os módulos turquoise foram selecionados para a construção das redes de co-expressão (Figuras 5 e 6). 
 
 Dessa forma, filtramos os genes de cada módulo, mantendo somente aqueles que correspondem aos genes diferencialmente expressos para amostras presentes em cada dia. 
+
 #### 5.5.8.2 Cytoscape
- Utilizamos o programa Cytoscape para construção da visualização das redes. Por questões de visualização, selecionamos as arestas que apresentavam peso de ligação maior que 0.1. Utilizamos estratégias de análise de rede para identificar medidas de grau, centralidade, coeficiente de clusterização e valores de eigen gene. Essas métricas foram expressas como cores de nós, que representam o grau de conectividade do gene correspondente, sendo que, quanto mais escura a cor, maior o número de conexões do gene. Este é o princípio para caracterizar os hubs da rede, com parâmetros (número mínimo de conexões) a serem definidos conforme o estudo. Além disso, as cores dos nós também foram utilizadas para demonstrar a expressão dos genes. Quanto mais vermelho, maior o valor de LFC e mais up-regulated aquele gene é em relação a comparação feita do dia em análise com o controle. Quanto mais azul, menor o valor de LFC e mais down-regulated aquele gene é em relação aos dias comparados com o controle. Em relação às medidas de coeficiente de clusterização, é possível identificar a probabilidade de dois vizinhos de um mesmo nó também estarem conectados entre si. Fundamental para identificar módulos funcionais em redes biológicas, já que nós densamente conectados costumam realizar tarefas celulares semelhantes. Por fim, os autovalores (eigenvalues) e autovetores (eigenvectors) são grandezas matemáticas fundamentais usadas para quantificar a influência dos nós, a sincronização e a estabilidade estrutural. Todas essas métricas foram expressas em termos de coloração, das quais as mais escuras representam os maiores valores e as mais claras os menores valores. 
+Utilizamos o programa Cytoscape para construção da visualização das redes. Por questões de visualização, selecionamos as arestas que apresentavam peso de ligação maior que 0.1. Utilizamos estratégias de análise de rede para identificar medidas de grau, centralidade, coeficiente de clusterização e valores de eigen gene. Essas métricas foram expressas como cores de nós, que representam o grau de conectividade do gene correspondente, sendo que, quanto mais escura a cor, maior o número de conexões do gene. Este é o princípio para caracterizar os hubs da rede, com parâmetros (número mínimo de conexões) a serem definidos conforme o estudo. Além disso, as cores dos nós também foram utilizadas para demonstrar a expressão dos genes. Quanto mais vermelho, maior o valor de LFC e mais up-regulated aquele gene é em relação a comparação feita do dia em análise com o controle. Quanto mais azul, menor o valor de LFC e mais down-regulated aquele gene é em relação aos dias comparados com o controle. Em relação às medidas de coeficiente de clusterização, é possível identificar a probabilidade de dois vizinhos de um mesmo nó também estarem conectados entre si. Fundamental para identificar módulos funcionais em redes biológicas, já que nós densamente conectados costumam realizar tarefas celulares semelhantes. Por fim, os autovalores (eigenvalues) e autovetores (eigenvectors) são grandezas matemáticas fundamentais usadas para quantificar a influência dos nós, a sincronização e a estabilidade estrutural. Todas essas métricas foram expressas em termos de coloração, das quais as mais escuras representam os maiores valores e as mais claras os menores valores. 
 
 # 6. Análises realizadas + Resultados  :
 
- A análise dos dados foi conduzida por meio de uma abordagem integrada que combinou agrupamento temporal, análise de expressão diferencial, anotação funcional e construção de redes de coexpressão gênica. O objetivo foi identificar padrões de expressão associados ao processo de diferenciação de células tronco embrionárias humanas em cardiomiócitos e células polihormonais, bem como caracterizar os mecanismos biológicos relacionados às alterações observadas ao longo do tempo. 
+A análise dos dados foi conduzida por meio de uma abordagem integrada que combinou agrupamento temporal, análise de expressão diferencial, anotação funcional e construção de redes de coexpressão gênica. O objetivo foi identificar padrões de expressão associados ao processo de diferenciação de células tronco embrionárias humanas em cardiomiócitos e células polihormonais, bem como caracterizar os mecanismos biológicos relacionados às alterações observadas ao longo do tempo. 
 
 ## 6.1  Análise de componentes principais:
 A análise de componentes principais foi utilizada como etapa exploratória para verificar a distribuição global das amostras e a separação entre fases/linhagens. Essa redução de dimensionalidade ajuda a identificar se as amostras se organizam de acordo com a trajetória temporal esperada e se há separação entre o estado controle, fases intermediárias e fases finais (Figuras 7 e 8).
@@ -226,7 +220,8 @@ Figura 8: Análise de componentes principais realizada para os dias de diferenci
 
 ## 6.2 Análise de séries temporais
 A identificação de padrões temporais de expressão gênica foi realizada utilizando o algoritmo MFuzz. Após normalização e filtragem dos dados, os genes mais variáveis ao longo do experimento foram selecionados e agrupados conforme seus perfis de expressão temporal. Ao todo, 12 clusters foram previamente definidos para cada análise, uma vez que tal valor demonstrou-se o mais adequado para os dados utilizados.
-	Para as etapas posteriores, foram selecionados os genes pertencentes aos clusters que apresentavam perfis de expressão que descrevem tendências claras, como aumento ou diminuição de expressão em conjunto ao longo do tempo. Diferentes clusters foram selecionados para cada grupo celular.  Para os cardiomiócitos, foram selecionados os clusters 1, 2 e 4 (Figura 9). 
+
+Para as etapas posteriores, foram selecionados os genes pertencentes aos clusters que apresentavam perfis de expressão que descrevem tendências claras, como aumento ou diminuição de expressão em conjunto ao longo do tempo. Diferentes clusters foram selecionados para cada grupo celular.  Para os cardiomiócitos, foram selecionados os clusters 1, 2 e 4 (Figura 9). 
 
 
 Figura 9: Clusters identificados pelo algoritmo Mfuzz para o processo de diferenciação de células tronco embrionárias humanas em cardiomiócitos. Para cada cluster, observa-se no eixo das abscissas o tempo adotado pelo experimento. Neste caso, os mesmos indicam os dias transcorridos ao longo do experimento. Complementarmente, observa-se no eixo das ordenadas a métrica utilizada pelo algoritmo para a representação da mudança de expressão de cada transcrito ao longo do tempo.
@@ -239,10 +234,13 @@ Figura 10: Clusters identificados pelo algoritmo Mfuzz para o processo de difere
 Por fim, para cada cluster selecionado, apenas transcritos com grau de pertinência superior a 0.7 foram selecionados. Desse modo, restringimos as análises aos genes que melhor representavam os padrões temporais observados.
 
 ## 6.3 Análise de expressão diferencial:
- Os genes selecionados a partir da análise temporal foram submetidos à análise de expressão diferencial utilizando o pacote DESeq2. A matriz de contagens foi integrada aos metadados experimentais, considerando as diferentes fases da diferenciação como variável de interesse.
-    Após a normalização e estimação dos parâmetros do modelo estatístico, foram realizadas comparações entre cada ponto temporal (D1, D2, D3, D4, D6, D8, D10, D12 e D18) para os cardiomiócitos e (D1, D2, D3, D4, D5, D6, D10, D13 e D17) para as células polihormonais à respectiva condição de controle de cada experimento (D0). Para cada comparação foram estimados os valores de log₂ fold change, expressão média e significância estatística ajustada para múltiplos testes.
-    Foram considerados diferencialmente expressos os genes que apresentaram valor ajustado de p inferior a 0.05, valor absoluto de log₂ fold change superior a 2 e expressão média superior a 50. Os genes que atenderam a esses critérios foram classificados com expressão diferencial superior ou inferior em relação ao controle, permitindo acompanhar a dinâmica da expressão gênica ao longo do processo de diferenciação.
-    Além da identificação dos genes diferencialmente expressos, foi construído um mapa de calor utilizando os valores normalizados por Variance Stabilizing Transformation (VST). Os genes foram organizados de acordo com os agrupamentos previamente identificados pelo Mfuzz, possibilitando a visualização integrada dos padrões temporais e das alterações de expressão observadas em cada fase experimental (Figuras 11 e 12).
+Os genes selecionados a partir da análise temporal foram submetidos à análise de expressão diferencial utilizando o pacote DESeq2. A matriz de contagens foi integrada aos metadados experimentais, considerando as diferentes fases da diferenciação como variável de interesse.
+
+Após a normalização e estimação dos parâmetros do modelo estatístico, foram realizadas comparações entre cada ponto temporal (D1, D2, D3, D4, D6, D8, D10, D12 e D18) para os cardiomiócitos e (D1, D2, D3, D4, D5, D6, D10, D13 e D17) para as células polihormonais à respectiva condição de controle de cada experimento (D0). Para cada comparação foram estimados os valores de log₂ fold change, expressão média e significância estatística ajustada para múltiplos testes.
+
+Foram considerados diferencialmente expressos os genes que apresentaram valor ajustado de p inferior a 0.05, valor absoluto de log₂ fold change superior a 2 e expressão média superior a 50. Os genes que atenderam a esses critérios foram classificados com expressão diferencial superior ou inferior em relação ao controle, permitindo acompanhar a dinâmica da expressão gênica ao longo do processo de diferenciação.
+
+Além da identificação dos genes diferencialmente expressos, foi construído um mapa de calor utilizando os valores normalizados por Variance Stabilizing Transformation (VST). Os genes foram organizados de acordo com os agrupamentos previamente identificados pelo Mfuzz, possibilitando a visualização integrada dos padrões temporais e das alterações de expressão observadas em cada fase experimental (Figuras 11 e 12).
 
 Figura 11: Mapa de calor obtido para os transcritos cuja expressão varia significativamente ao longo do processo de diferenciação de células tronco embrionárias humanas em cardiomiócitos. Neste caso, observa-se o agrupamento dos transcritos a partir dos clusters identificados pelo algoritmo Mfuzz (dendograma horizontal) e o agrupamento a partir dos grupos previamente criados (Control, Early, Mid e Late - dendograma vertical). A cor da célula indica o valor de log2FC para o transcrito em questão em relação ao grupo controle.
 
@@ -250,12 +248,12 @@ Figura 11: Mapa de calor obtido para os transcritos cuja expressão varia signif
 Figura 12: Mapa de calor obtido para os transcritos cuja expressão varia significativamente ao longo do processo de diferenciação de células tronco embrionárias humanas em células polihormonais. Neste caso, observa-se o agrupamento dos transcritos a partir dos clusters identificados pelo algoritmo Mfuzz (dendograma horizontal) e o agrupamento a partir dos grupos previamente criados (Control, Early, Mid e Late - dendograma vertical). A cor da célula indica o valor de log2FC para o transcrito em questão em relação ao grupo controle.
 
 ## 6.4 Anotação funcional e Análise de Enriquecimento de Vias:
- A interpretação biológica dos genes selecionados foi realizada por meio de análises de anotação funcional e enriquecimento. Foram considerados apenas os genes pertencentes aos clusters de interesse identificados pelo Mfuzz e que também apresentaram expressão diferencial significativa nas comparações realizadas pelo DESeq2.
+A interpretação biológica dos genes selecionados foi realizada por meio de análises de anotação funcional e enriquecimento. Foram considerados apenas os genes pertencentes aos clusters de interesse identificados pelo Mfuzz e que também apresentaram expressão diferencial significativa nas comparações realizadas pelo DESeq2.
 
 A anotação foi conduzida utilizando os pacotes clusterProfiler, AnnotationDbi e org.Hs.eg.db, permitindo a associação dos genes a termos da Gene Ontology (GO). Foram avaliadas categorias relacionadas aos domínios de Processo Biológico (Biological Process), Função Molecular (Molecular Function) e Componente Celular (Cellular Component), possibilitando a identificação dos principais processos envolvidos na diferenciação dos cardiomiócitos e células polihormonais (Figuras 13, 14 e 15 - Cardiomiócitos; Figuras 16 e 17 - Células Polihormonais) . 
 
 
- Figura 13: Anotação funcional realizada para os transcritos pertencentes ao cluster 4 do algoritmo Mfuzz para cardiomiócitos, tendo como base o banco de dados Gene Ontology. O tamanho dos pontos indica a quantidade de genes pertencentes ao processo identificado, enquanto a posição em relação a abscissa indica a confiança na predição da via e a coloração a significância estatística do enriquecimento.
+Figura 13: Anotação funcional realizada para os transcritos pertencentes ao cluster 4 do algoritmo Mfuzz para cardiomiócitos, tendo como base o banco de dados Gene Ontology. O tamanho dos pontos indica a quantidade de genes pertencentes ao processo identificado, enquanto a posição em relação a abscissa indica a confiança na predição da via e a coloração a significância estatística do enriquecimento.
 
 
 Figura 14: Anotação funcional realizada para os transcritos pertencentes ao cluster 1 do algoritmo Mfuzz para cardiomiócitos, tendo como base o banco de dados Gene Ontology. O tamanho dos pontos indica a quantidade de genes pertencentes ao processo identificado, enquanto a posição em relação a abscissa indica a confiança na predição da via e a coloração a significância estatística do enriquecimento.
@@ -272,40 +270,42 @@ Figura 17: Anotação funcional realizada para os transcritos pertencentes ao cl
 Adicionalmente, foram realizadas análises de enriquecimento de vias metabólicas utilizando as bases de dados KEGG e Reactome. Os resultados permitiram identificar rotas biológicas significativamente representadas entre os genes selecionados, fornecendo evidências sobre os mecanismos moleculares associados às alterações observadas nos diferentes estágios da diferenciação (Figura 18 - Cardiomiócitos; Figura 19 - Células Polihormonais).
 
 
- Figura 18: Anotação funcional realizada para os transcritos pertencentes ao cluster 4 do algoritmo Mfuzz para cardiomiócitos, tendo como base o banco de dados KEGG. O tamanho dos pontos indica a quantidade de genes pertencentes ao processo identificado, enquanto a posição em relação a abscissa indica a confiança na predição da via e a coloração a significância estatística do enriquecimento.
+Figura 18: Anotação funcional realizada para os transcritos pertencentes ao cluster 4 do algoritmo Mfuzz para cardiomiócitos, tendo como base o banco de dados KEGG. O tamanho dos pontos indica a quantidade de genes pertencentes ao processo identificado, enquanto a posição em relação a abscissa indica a confiança na predição da via e a coloração a significância estatística do enriquecimento.
 
 
- Figura 19: Anotação funcional realizada para os transcritos pertencentes ao cluster 1 do algoritmo Mfuzz para células polihormonais, tendo como base o banco de dados Reactome. O tamanho dos pontos indica a quantidade de genes pertencentes ao processo identificado, enquanto a posição em relação a abscissa indica a confiança na predição da via e a coloração a significância estatística do enriquecimento.
+Figura 19: Anotação funcional realizada para os transcritos pertencentes ao cluster 1 do algoritmo Mfuzz para células polihormonais, tendo como base o banco de dados Reactome. O tamanho dos pontos indica a quantidade de genes pertencentes ao processo identificado, enquanto a posição em relação a abscissa indica a confiança na predição da via e a coloração a significância estatística do enriquecimento.
 
- A visualização dos enriquecimentos foi realizada com auxílio do pacote enrichplot, permitindo comparar a relevância dos processos biológicos e das vias enriquecidas entre os conjuntos gênicos analisados.
+A visualização dos enriquecimentos foi realizada com auxílio do pacote enrichplot, permitindo comparar a relevância dos processos biológicos e das vias enriquecidas entre os conjuntos gênicos analisados.
 
 ## 6.5 Análise de redes:
 Com o objetivo de investigar relações de coexpressão entre os genes diferencialmente expressos, foi realizada uma análise de redes utilizando o pacote WGCNA. Para essa etapa foram empregados os genes previamente identificados como diferencialmente expressos, cujos valores de expressão foram normalizados por Variance Stabilizing Transformation. 
-    Os genes foram agrupados em módulos de coexpressão utilizando critérios de similaridade topológica, com tamanho mínimo de 150 genes por módulo. Posteriormente, os módulos identificados pelo WGCNA foram correlacionados com as diferentes fases da diferenciação celular. Essa abordagem permitiu identificar conjuntos de genes cuja expressão apresentou associação significativa com etapas específicas do desenvolvimento celular.
-    A correlação entre módulos e fenótipos foi avaliada por meio dos eigengenes dos módulos, gerando uma matriz de correlação acompanhada dos respectivos valores de significância estatística. Entre os módulos identificados, os módulos turquoise para ambas as linhagens foram selecionados para análises mais detalhadas, devido à associação com as condições experimentais.
-    Para caracterização das interações gênicas, a rede correspondente ao módulo selecionado foi exportada para o Cytoscape. Foram mantidas apenas interações com peso superior a 0.1, permitindo destacar conexões biologicamente mais relevantes e facilitar a identificação de genes centrais potencialmente envolvidos na regulação dos processos observados (Vídeos 1 e 2).
+
+Os genes foram agrupados em módulos de coexpressão utilizando critérios de similaridade topológica, com tamanho mínimo de 150 genes por módulo. Posteriormente, os módulos identificados pelo WGCNA foram correlacionados com as diferentes fases da diferenciação celular. Essa abordagem permitiu identificar conjuntos de genes cuja expressão apresentou associação significativa com etapas específicas do desenvolvimento celular.
+
+A correlação entre módulos e fenótipos foi avaliada por meio dos eigengenes dos módulos, gerando uma matriz de correlação acompanhada dos respectivos valores de significância estatística. Entre os módulos identificados, os módulos turquoise para ambas as linhagens foram selecionados para análises mais detalhadas, devido à associação com as condições experimentais.
+
+Para caracterização das interações gênicas, a rede correspondente ao módulo selecionado foi exportada para o Cytoscape. Foram mantidas apenas interações com peso superior a 0.1, permitindo destacar conexões biologicamente mais relevantes e facilitar a identificação de genes centrais potencialmente envolvidos na regulação dos processos observados (Vídeos 1 e 2).
 
 https://drive.google.com/file/d/1N09YEjhDVRsfbJDilamfAv2h_d2F7ilN/view?usp=sharing
 
 Vídeo 1: Rede de coexpressão construída a partir de dados de expressão gênica de células tronco embrionárias humanas quando submetidas ao processo de diferenciação para cardiomiócitos. Os nós indicam genes cuja expressão varia significativamente ao longo do período experimental. A mudança de cor dos nós explicita a dinâmica de expressão dos genes ao passar dos dias. Cores avermelhadas indicam aumento da métrica log2FC, enquanto cores azuis denotam diminuição da métrica.  
 
- https://drive.google.com/file/d/1zXvSmzExBpdjgjw8QveS-sU9sw-EpjkC/view?usp=sharing
+https://drive.google.com/file/d/1zXvSmzExBpdjgjw8QveS-sU9sw-EpjkC/view?usp=sharing
 
 Vídeo 2: Rede de coexpressão construída a partir de dados de expressão gênica de células tronco embrionárias humanas quando submetidas ao processo de diferenciação para células polihormonais. Os nós indicam genes cuja expressão varia significativamente ao longo do período experimental. A mudança de cor dos nós explicita a dinâmica de expressão dos genes ao passar dos dias. Cores avermelhadas indicam aumento da métrica log2FC, enquanto cores azuis denotam diminuição da métrica.
 
-    As redes foram exportadas para o Cytoscape, onde foram avaliadas métricas como grau, centralidade, coeficiente de clusterização e modularidade.
+As redes foram exportadas para o Cytoscape, onde foram avaliadas métricas como grau, centralidade, coeficiente de clusterização e modularidade.
 
 # 7. Discussão:
 
 ## 7.1 Cardiomiocitos:
-### 7.1.1 Etapas de Diferenciação:
 
+### 7.1.1 Etapas de Diferenciação:
 De modo geral, a capacidade de divisão de uma célula está diretamente relacionada ao seu grau de diferenciação, de modo que, células altamente indiferenciadas apresentam grande capacidade de divisão. Por outro lado, células cujo estágio de diferenciação se aproxima do estágio terminal muitas vezes são incapazes de se dividir (Júnior; Wada; Carvalho, 2013). Nesse sentido, a partir da análise de enriquecimento estabelecida para o cluster 4 (Figura 13), destaca-se a ativação de vias essenciais para a proliferação celular nos estágios iniciais do processo de diferenciação: a replicação do DNA, a organização do fuso mitótico e o reparo do material genético. Adicionalmente, de acordo com o comportamento temporal do cluster analisado (Figura 9) e seu respectivo mapa de calor (Figura 11), observa-se a gradual diminuição de expressão de tais genes a partir do quarto dia de diferenciação, os quais se mantêm reprimidos durante as etapas finais da especiação. Dessa forma, torna-se evidente a relativa perda na capacidade de divisão por parte das células indiferenciadas ao longo do processo de diferenciação, sendo os cardiomiócitos incapazes de se dividir quando terminalmente diferenciados (Júnior; Wada; Carvalho, 2013). 
+
 Em contrapartida, tratando-se de genes cuja expressão aumenta com o decorrer do processo de diferenciação, evidencia-se a ativação de processos diretamente relacionados à determinação do mesoderma cardíaco (Figura 14) por volta do sexto dia de experimentação (Figuras 9 e 11). Nesse sentido, entende-se como determinação o conjunto de modificações autoperpetuáveis de caráter interno que distinguem uma célula, assim como suas descendentes, das demais células do embrião (Júnior; Wada; Carvalho, 2013). Finalmente, transcorrida a determinação, observa-se a ativação de vias gênicas diretamente responsáveis pela diferenciação e manutenção do fenótipo cardíaco (Figura 15), as quais ativam-se tardiamente quando comparadas à determinação do mesoderma cardíaco (Figuras 9 e 11).
 
 ### 7.1.2 Rede e Graus:
- 
-
 Tendo como intuito a identificação de genes centrais para a diferenciação de células tronco embrionárias humanas em cardiomiócitos, diferentes métricas foram aplicadas à rede construída, sendo o grau dos nós escolhido para avaliação (Figura 20).
 
 
@@ -318,11 +318,14 @@ https://drive.google.com/file/d/13MqhUL1D5DebEIFYol0VGXsO-orqfOui/view?usp=shari
 Vídeo 3: Análise da variação da expressão gênica dos componentes da sub-rede destacada. A mudança de cor dos nós explicita a dinâmica de expressão dos genes ao passar dos dias. Cores avermelhadas indicam aumento da métrica log2FC, enquanto cores azuis denotam diminuição da métrica. 
 
 De acordo com a análise da rede em questão, ressaltam-se três genes de alto grau e cuja expressão aumenta significativamente a partir do sexto dia: ACTN2, MYH6 e TBX5. No que diz respeito aos genes ACTN2 e MYH6, estes caracterizam-se por codificar proteínas estruturais que compõem os sarcômeros. Em contrapartida, o gene TBX5 caracteriza-se por codificar um fator de transcrição da família T-box, sendo conhecido por sua função no desenvolvimento dos membros superiores e do coração. 
-Tratando-se do ACTN2, ressalta-se sua importância na estruturação correta dos discos Z dos sarcômeros, uma vez que o mesmo é responsável por codificar a alpha-actinina-2, crucial para a ligação dos filamentos de actina e pela estabilização do aparato de contração cardíaca ​​(Good et al., 2020)​. De maneira complementar, o gene MYH6 mostra-se essencial para a correta formação da miosina presente nos sarcômeros, estando relacionado à codificação da subunidade de cadeia pesada alfa pesada α da miosina cardíaca no sarcômero ​​(Daire et al., 2025)​. 
-Quanto ao TBX5, evidencia-se sua relevância para a correta septação cardíaca, estando o fator de transcrição associado à ativação de genes responsáveis pela maturação dos cardiomiócitos durante a embriogênese ​​(Steimle; Moskowitz, 2017)​. Efetivamente, em virtude de sua importância para o correto desenvolvimento embrionário, mutações no gene TBX5 relacionam-se à distintas malformações no sistema cardíaco, assim como nos membros superiores (Møller Nielsen et al., 2024).   
-Dessa forma, tendo em vista a importância de tais genes na correta formação da estrutura cardíaca, destaca-se a necessidade da correta ativação dos mesmos após a determinação do mesoderma cardíaco (dia 6), os quais mantém expressão considerável até o último dia avaliado. 
-Módulos
 
+Tratando-se do ACTN2, ressalta-se sua importância na estruturação correta dos discos Z dos sarcômeros, uma vez que o mesmo é responsável por codificar a alpha-actinina-2, crucial para a ligação dos filamentos de actina e pela estabilização do aparato de contração cardíaca ​​(Good et al., 2020)​. De maneira complementar, o gene MYH6 mostra-se essencial para a correta formação da miosina presente nos sarcômeros, estando relacionado à codificação da subunidade de cadeia pesada alfa pesada α da miosina cardíaca no sarcômero ​​(Daire et al., 2025)​. 
+
+Quanto ao TBX5, evidencia-se sua relevância para a correta septação cardíaca, estando o fator de transcrição associado à ativação de genes responsáveis pela maturação dos cardiomiócitos durante a embriogênese ​​(Steimle; Moskowitz, 2017)​. Efetivamente, em virtude de sua importância para o correto desenvolvimento embrionário, mutações no gene TBX5 relacionam-se à distintas malformações no sistema cardíaco, assim como nos membros superiores (Møller Nielsen et al., 2024).   
+
+Dessa forma, tendo em vista a importância de tais genes na correta formação da estrutura cardíaca, destaca-se a necessidade da correta ativação dos mesmos após a determinação do mesoderma cardíaco (dia 6), os quais mantém expressão considerável até o último dia avaliado. 
+
+### 7.1.3 Módulos:
 Tendo como base a sub-rede previamente analisada (Vídeo 3), foi realizada a aplicação do algoritmo de Leiden para a determinação de comunidades, no intuito de aprofundar o entendimento acerca dos principais genes envolvidos na diferenciação de células tronco embrionárias em cardiomiócitos (Figura 21).
  	
 Figura 21: Comunidades obtidas a partir da aplicação do algoritmo de Leiden à sub-rede destacada. Ao todo, 3 comunidades foram encontradas, aqui diferenciadas pela coloração dos nós.
@@ -335,13 +338,12 @@ Vídeo 4: Análise da variação da expressão gênica dos componentes constitui
 
 Em vista disso, evidencia-se o comportamento do gene NR6A1, pertencente à comunidade rosa (Figura 21), cuja expressão se mantém alta durante os primeiros dias de desenvolvimento embrionário mas que, a partir do terceiro dia, apresenta redução na expressão (Figura 22).
 
-  
 Figura 22: Expressão dos genes constituintes da comunidade rosa ao terceiro dia de experimentação.
 
 O gene em questão caracteriza-se pela codificação de um receptor nuclear órfão, ou seja, que não possuí ligante conhecido. Sua atividade no núcleo baseia-se, principalmente, na repressão da transcrição de genes específicos, dentre os quais destaca-se o gene Oct4, responsável pela codificação de um fator de transcrição ativamente envolvido na promoção de pluripotência (REFs). Por conseguinte, torna-se evidente a atividade de repressor por parte do receptor NR6A1 para a regulação fina do fator de transcrição Oct4, garantindo que a célula restrinja sua capacidade de pluripotência apenas aos primeiros estágios da diferenciação celular.
 
 ## 7.2 Polihormonais:
-### 7.2.2 Etapas de Diferenciação:
+### 7.2.1 Etapas de Diferenciação:
 As células polihormonais caracterizam-se principalmente por sua capacidade de produção, armazenamento e secreção dos hormônios insulina e glucagon (Peterson et al., 2020).  Notavelmente, terminadas as etapas subsequentes do processo de diferenciação de células polihormonais em células β e α, a capacidade de produção dos hormônios insulina e glucagon se manterá restrita, respectivamente, aos tipos celulares citados. Além disso, observa-se que a própria organização das células β e α se mantém restrita a localidades específicas no pâncreas, uma vez que tais tipos celulares agrupam-se em regiões conhecidas, as chamadas ilhotas de Langerhans ​​(Nostro; Keller, 2012)​.  
 
 No tocante ao processo de diferenciação de células tronco embrionárias humanas em células polihormonais, ressalta-se, inicialmente (Cluster 12 - Figura 10), a ativação de genes diretamente envolvidos pelo comprometimento à linhagem endodermal, folheto embrionário responsável por originar as células endócrinas (Figura 16). Como indicado pelos resultados, tais genes apresentam expressão relativamente constante durante os seis primeiros dias do processo de diferenciação (Figuras 10 e 12), tempo este maior do que aquele observado para os fatores inicialmente envolvidos na determinação do mesoderma cardíaco (Figuras 9 e 11).
@@ -350,8 +352,7 @@ Relativamente aos clusters cujos genes apresentam aumento de expressão com o de
 
 Finalmente, apenas após seis dias do processo de diferenciação, fatores explicitamente responsáveis pela formação de células endócrina se expressam, como o marcador Ngn3, um fator de transcrição responsável pela geração de precursores endócrinos ​​(Bakhti et al., 2022a)​. Por conseguinte, estes comportamentos reforçam as descobertas de Keskin et al. (2025, 2026), demonstrando a diferença de ativação temporal entre os fatores gênicos responsáveis pela maturação de cardiomiócitos e células polihormonais.
 
-### 7.2.3 Rede e Graus:
-
+### 7.2.2 Rede e Graus:
 De maneira análoga à abordagem adotada para a interpretação da rede de diferenciação de cardiomiócitos, diferentes métricas foram aplicadas à rede de diferenciação de células polihormonais construída, sendo o grau dos nós novamente escolhido para avaliação (Figura 23).
 
 
@@ -360,13 +361,14 @@ Figura 23: Rede de coexpressão construída a partir de dados de expressão gên
 Com base na rede obtida, destaca-se a prevalência de nós com alto grau na maior sub-rede em questão, esta selecionada para a análise de expressão diferencial ao longo do tempo (Vídeo 5).
 
 https://drive.google.com/file/d/1esxFGVM774VA2xvuK3FhfHCIlWwNIxlg/view?usp=sharing
+
 Vídeo 5: Análise da variação da expressão gênica dos componentes da sub-rede destacada. A mudança de cor dos nós explicita a dinâmica de expressão dos genes ao passar dos dias. Cores avermelhadas indicam aumento da métrica log2FC, enquanto cores azuis denotam diminuição da métrica. 
 
 Tendo em vista a rede gerada, destacam-se os comportamentos de dois genes específicos, estes com alto grau e relativo aumento de expressão após o décimo dia: CRB2 e ADGRG6. Neste caso, ambos os genes codificam proteínas transmembranas, as quais são essenciais para o processo de mecanosinalização. Por meio da ativação de vias específicas, tais proteínas transduzem o sinal proveniente da matriz extracelular em respostas bioquímicas específicas, coordenando a liberação da célula de sua matriz e a migração para regiões específicas (Geusz et al., 2021; Li et al., 2025)​. 
+
 Dessa forma, em virtude da importância da migração celular para a formação das ilhotas de Langerhans, ressalta-se a importância da ativação de fatores migratórios a momentos específicos do processo de diferenciação celular, uma vez que estes mesmos fatores, quando superativados, podem levar à excessiva migração celular e formação de metástases. 
 
-### 7.2.4  Módulos
-
+### 7.2.3  Módulos
 Fundamentando-se na sub-rede previamente analisada (Vídeo 5), foi realizada a aplicação do algoritmo de Leiden para a determinação de comunidades, no intuito de aprofundar o entendimento acerca dos principais genes envolvidos na diferenciação de células tronco embrionárias em células polihormonais (Figura 24).
 
 
@@ -389,6 +391,7 @@ https://drive.google.com/file/d/1ZGi0DBOVIKfXi7uV_HSGFmZX2xWty1xS/view?usp=shari
 Vídeo 7: Rede resultante da intersecção das redes de coexpressão gênica para o processo de diferenciação de células tronco embrionárias humanas em cardiomiócitos e células polihormonais. Neste caso, visualizam-se apenas nós e arestas comuns entre as redes estudadas. O tamanho dos nós reflete o grau dos mesmos. No que diz respeito à coloração dos nós, esta indica a diferença entre a expressão do gene para os dias específicos, comparando-se o processo de diferenciação de cardiomiócitos e células polihormonais. Quanto mais escura a cor do nó, maior a diferença relativa na expressão do gene entre os processos de diferenciação no dia específico.
 
 A análise da rede construída possibilitou a identificação de componentes essenciais aos dois processos de diferenciação, dentre os quais destaca-se o gene GFRA1, presente no maior componente da rede analisada e codificante para um receptor de membrana da família GDNF (Vídeo 7). Sua expressão mostra-se relativamente tardia nos processos analisados, sendo ativado a partir do oitavo dia para os cardiomiócitos e apenas após o décimo dia para as células polihormonais, mas em maior magnitude de expressão.
+
 No que concerne à atividade do receptor na formação das células cardíacas, este caracteriza-se pela participação no amadurecimento das válvulas e da aorta, sendo expresso no mesênquima do coxim endocárdico por volta do décimo segundo dia do desenvolvimento embrionário (Hiltunen et al., 2000). Por outro lado, a expressão do receptor no desenvolvimento de células endócrinas relaciona-se diretamente com a inervação parassimpática do pâncreas, de modo a coordenar a migração de células da crista neural para o epitélio pancreático ​​(Ishida et al., 2016)​. Em suma, por meio da avaliação dos componentes comuns aos processos de diferenciação, mecanismos essenciais ao desenvolvimento embrionário podem ser elucidados, bem como suas dinâmicas temporais de expressão. 
 
 # 8. Conclusão:
@@ -405,76 +408,97 @@ Como desdobramento do projeto, o protótipo de visualização poderia ser transf
 
 # 10. Referências Bibliográficas
 
-[Bastian et al., 2009] Bastian, M.; Heymann, S.; Jacomy, M. Gephi: an open source software for exploring and manipulating networks. In: Proceedings of the 3rd International AAAI Conference on Web and Social Media. Burnaby, Canada, 2009. p. 361–362.
+[Bakhti et al., 2022] BAKHTI, Mostafa et al. Synaptotagmin-13 orchestrates pancreatic endocrine cell egression and islet morphogenesis. Nature Communications, v. 13, n. 1, p. 4540, 2022.
 
+[Bastian et al., 2009] BASTIAN, Mathieu; HEYMANN, Sebastien; JACOMY, Mathieu. Gephi: an open source software for exploring and manipulating networks. In: INTERNATIONAL AAAI CONFERENCE ON WEB AND SOCIAL MEDIA, 3., 2009, Burnaby. Proceedings [...]. Burnaby: AAAI Press, 2009. p. 361–362.
 
-[Bolger et al., 2014] Bolger, A. M.; Lohse, M.; Usadel, B. Trimmomatic: a flexible trimmer for Illumina sequence data. Bioinformatics, v. 30, n. 15, p. 2114–2120, 2014.
+[Bolger et al., 2014] BOLGER, Anthony M.; LOHSE, Marc; USADEL, Bjoern. Trimmomatic: a flexible trimmer for Illumina sequence data. Bioinformatics, v. 30, n. 15, p. 2114–2120, 2014.
 
+[Campbell et al., 2019] CAMPBELL, Madeline et al. Stem cell spheroids. 2019.
 
-[Campbell et al., 2019] Campbell, Madeline et al. Stem cell spheroids. 2019.
+[Carlson, 2017] CARLSON, Marc. org.Hs.eg.db: Genome wide annotation for Human. R package version 3.5.0, 2017.
 
+[Daire et al., 2025] DAIRE, Elise et al. MYH6 in congenital heart defects: a genotype–phenotype characterization in a French cohort. Pediatric Cardiology, 2025.
 
-[Carlson, 2017] Carlson, M. org.Hs.eg.db: Genome wide annotation for Human. R package version 3.5.0, 2017.
+[Dobin et al., 2013] DOBIN, Alexander et al. STAR: ultrafast universal RNA-seq aligner. Bioinformatics, v. 29, n. 1, p. 15–21, 2013. DOI: 10.1093/bioinformatics/bts635.
 
+[Dvash et al., 2006] DVASH, Tomer; BEN-YOSEF, Dafna; EIGES, Rachel. Human embryonic stem cells as a powerful tool for studying human embryogenesis. Pediatric Research, v. 60, p. 111–117, 2006. DOI: 10.1203/01.pdr.0000228349.24676.17.
 
-[Dobin et al., 2013] Dobin, A. et al. STAR: ultrafast universal RNA-seq aligner. Bioinformatics, v. 29, n. 1, p. 15–21, 2013. doi:10.1093/bioinformatics/bts635.
+[Geusz et al., 2021] GEUSZ, Ryan J. et al. Pancreatic progenitor epigenome maps prioritize type 2 diabetes risk genes with roles in development. eLife, v. 10, 2021.
 
+[Good et al., 2020] GOOD, Jean-Marc et al. ACTN2 variant associated with a cardiac phenotype suggestive of left-dominant arrhythmogenic cardiomyopathy. HeartRhythm Case Reports, v. 6, n. 1, p. 15–19, 2020.
 
-[Dvash et al., 2006] Dvash, T.; Ben-Yosef, D.; Eiges, R. Human embryonic stem cells as a powerful tool for studying human embryogenesis. Pediatric Research, v. 60, p. 111–117, 2006. doi:10.1203/01.pdr.0000228349.24676.17.
+[Hammachi et al., 2012] HAMMACHI, Fella et al. Transcriptional activation by Oct4 is sufficient for the maintenance and induction of pluripotency. Cell Reports, v. 1, n. 2, p. 99–109, 2012.
 
+[PetaGene, 2026] HISAT2 benchmarked with PetaGene’s compression and transparent readback tools. PetaGene. Disponível em: https://www.petagene.com/a-practical-example-of-hisat2-smaller-files-same-tools-faster-analysis/. Acesso em: 20 abr. 2026.
 
-[HPSCREG, 2026] HPSCREG. Human Pluripotent Stem Cell Registry. Disponível em: hpscreg.eu. Acesso em: 19 mar. 2026.
+[Hiltunen et al., 2000] HILTUNEN, Jukka O. et al. GDNF family receptors in the embryonic and postnatal rat heart and reduced cholinergic innervation in mice hearts lacking Ret or GFRα2. Developmental Dynamics, v. 219, n. 1, p. 28–39, 2000.
 
+[Huang et al., 2022] HUANG, Xiaoling et al. Evolution of gene expression signature in mammary gland stem cells from neonatal to old mice. Cell Death & Disease, v. 13, n. 4, p. 335, 2022.
 
-[Keskin et al., 2025] Keskin, A.; Shayya, H. J.; Sirabella, D. et al. Temporal multiomics gene expression data of human embryonic stem cell-derived cardiomyocyte differentiation. Scientific Data, v. 12, p. 1308, 2025. doi:10.1038/s41597-025-05655-9.
+[HPSCREG, 2026] HPSCREG. Human Pluripotent Stem Cell Registry. Disponível em: https://hpscreg.eu. Acesso em: 19 mar. 2026.
 
+[Júnior; Wada; Carvalho, 2013] JÚNIOR, Arnaldo; WADA, Maria; CARVALHO, Hernandes. Diferenciação celular. In: A célula. 3. ed. Barueri: Manole, 2013. p. 553–570.
 
-[Keskin et al., 2025a] Keskin, A. et al. Temporal multiomics gene expression data of human embryonic stem cell-derived cardiomyocyte differentiation. NCBI Gene Expression Omnibus (GEO), 2025. Disponível em: https://identifiers.org/geo/GSE274620.
+[Keskin et al., 2025] KESKIN, A.; SHAYYA, H. J.; SIRABELLA, D. et al. Temporal multiomics gene expression data of human embryonic stem cell-derived cardiomyocyte differentiation. Scientific Data, v. 12, p. 1308, 2025. DOI: 10.1038/s41597-025-05655-9.
 
+[Keskin et al., 2025a] KESKIN, A. et al. Temporal multiomics gene expression data of human embryonic stem cell-derived cardiomyocyte differentiation. NCBI Gene Expression Omnibus (GEO), 2025. Disponível em: https://identifiers.org/geo/GSE274620.
 
-[Keskin et al., 2025b] Keskin, A. et al. Temporal multiomics gene expression data across human embryonic stem cell-derived polyhormonal cell differentiation. NCBI Gene Expression Omnibus (GEO), 2025. Disponível em: https://identifiers.org/geo/GSE305933.
+[Keskin et al., 2025b] KESKIN, A. et al. Temporal multiomics gene expression data across human embryonic stem cell-derived polyhormonal cell differentiation. NCBI Gene Expression Omnibus (GEO), 2025. Disponível em: https://identifiers.org/geo/GSE305933.
 
+[Keskin et al., 2026] KESKIN, A.; SHAYYA, H. J.; PATEL, A. et al. Temporal multiomics gene expression data across human embryonic stem cell-derived polyhormonal cell differentiation. Scientific Data, v. 13, p. 278, 2026. DOI: 10.1038/s41597-026-06606-8.
 
-[Keskin et al., 2026] Keskin, A.; Shayya, H. J.; Patel, A. et al. Temporal multiomics gene expression data across human embryonic stem cell-derived polyhormonal cell differentiation. Scientific Data, v. 13, p. 278, 2026. doi:10.1038/s41597-026-06606-8.
+[Langfelder; Horvath, 2008] LANGFELDER, Peter; HORVATH, Steve. WGCNA: an R package for weighted correlation network analysis. BMC Bioinformatics, v. 9, p. 559, 2008.
 
+[Lee; Lee, 2011] LEE, Jung Eun; LEE, Dae Ryong. Human embryonic stem cells: derivation, maintenance and cryopreservation. International Journal of Stem Cells, v. 4, n. 1, p. 9–17, 2011. DOI: 10.15283/ijsc.2011.4.1.9.
 
-[Langfelder; Horvath, 2008] Langfelder, P.; Horvath, S. WGCNA: an R package for weighted correlation network analysis. BMC Bioinformatics, v. 9, p. 559, 2008.
+[Li et al., 2025] LI, Lisha et al. ADGRG6 promotes pancreatic adenocarcinoma progression through the NF-κB/STAT6 axis and modulation of the tumor immune microenvironment. Current Issues in Molecular Biology, v. 47, n. 12, p. 991, 2025.
 
+[Love et al., 2014] LOVE, Michael I.; HUBER, Wolfgang; ANDERS, Simon. Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2. Genome Biology, v. 15, p. 550, 2014.
 
-[Lee; Lee, 2011] Lee, J. E.; Lee, D. R. Human embryonic stem cells: derivation, maintenance and cryopreservation. International Journal of Stem Cells, v. 4, n. 1, p. 9–17, 2011. doi:10.15283/ijsc.2011.4.1.9.
+[Mao; Mooney, 2015] MAO, Angelo S.; MOONEY, David J. Regenerative medicine: current therapies and future directions. Proceedings of the National Academy of Sciences, v. 112, n. 47, p. 14452–14459, 2015.
 
+[Møller Nielsen et al., 2024] MØLLER NIELSEN, Anne Kathrine et al. TBX5 variants and cardiac phenotype: a systematic review of the literature and a novel variant. European Journal of Medical Genetics, v. 68, p. 104920, 2024.
 
-[Love et al., 2014] Love, M. I.; Huber, W.; Anders, S. Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2. Genome Biology, v. 15, p. 550, 2014.
+[Muñoz-Bravo et al., 2013] MUÑOZ-BRAVO, José Luis et al. GDNF is required for neural colonization of the pancreas. Development, v. 140, n. 17, p. 3669–3679, 2013.
 
+[Nostro; Keller, 2012] NOSTRO, Maria Cristina; KELLER, Gordon. Generation of beta cells from human pluripotent stem cells: potential for regenerative medicine. Seminars in Cell & Developmental Biology, v. 23, n. 6, p. 701–710, 2012.
 
-[Mao and Mooney, 2015] Mao, Angelo S.; Mooney, David J. Regenerative medicine: Current therapies and future directions. Proceedings of the National Academy of Sciences, v. 112, n. 47, p. 14452-14459, 2015.
+[Osipovich et al., 2021] OSIPOVICH, Anna B. et al. A developmental lineage-based gene co-expression network for mouse pancreatic β-cells reveals a role for Zfp800 in pancreas development. Development, v. 148, n. 6, 2021.
 
+[Pagès et al., 2025] PAGÈS, Hervé et al. AnnotationDbi: manipulation of SQLite-based annotations in Bioconductor. R package version 1.72.0, 2025. Disponível em: https://bioconductor.org/packages/AnnotationDbi.
 
-[Pagès et al., 2025] Pagès, H. et al. AnnotationDbi: manipulation of SQLite-based annotations in Bioconductor. R package version 1.72.0, 2025. Disponível em: https://bioconductor.org/packages/AnnotationDbi.
+[Pertea et al., 2015] PERTEA, Mihaela et al. StringTie enables improved reconstruction of a transcriptome from RNA-seq reads. Nature Biotechnology, v. 33, n. 3, p. 290–295, 2015. DOI: 10.1038/nbt.3122.
 
+[Peterson et al., 2020] PETERSON, Quinn P. et al. A method for the generation of human stem cell-derived alpha cells. Nature Communications, v. 11, n. 1, p. 2241, 2020.
 
-[Pertea et al., 2015] Pertea, M. et al. StringTie enables improved reconstruction of a transcriptome from RNA-seq reads. Nature Biotechnology, v. 33, n. 3, p. 290–295, 2015. doi:10.1038/nbt.3122.
+[BioCore CRG, 2026] READ QC and trimming. Disponível em: https://biocorecrg.github.io/PHINDaccess_RNAseq_2020/qc_trimming.html. Acesso em: 17 abr. 2026.
 
+[Shannon et al., 2003] SHANNON, Paul et al. Cytoscape: a software environment for integrated models of biomolecular interaction networks. Genome Research, v. 13, n. 11, p. 2498–2504, 2003.
 
-[Shannon et al., 2003] Shannon, P. et al. Cytoscape: a software environment for integrated models of biomolecular interaction networks. Genome Research, v. 13, n. 11, p. 2498–2504, 2003.
+[Steimle; Moskowitz, 2017] STEIMLE, Julia D.; MOSKOWITZ, Ivan P. TBX5: a key regulator of heart development. Current Topics in Developmental Biology, v. 122, p. 195–221, 2017. DOI: 10.1016/bs.ctdb.2016.08.008.
 
+[Takei et al., 2020] TAKEI, Shoko et al. β-Cell–specific deletion of HMG-CoA reductase causes overt diabetes due to reduction of β-cell mass and impaired insulin secretion. Diabetes, v. 69, n. 11, p. 2352–2363, 2020.
 
-[Thomson et al., 1998] Thomson, J. A. et al. Embryonic stem cell lines derived from human blastocysts. Science, v. 282, n. 5391, p. 1145–1147, 1998. doi:10.1126/science.282.5391.1145.
+[Thomson et al., 1998] THOMSON, James A. et al. Embryonic stem cell lines derived from human blastocysts. Science, v. 282, n. 5391, p. 1145–1147, 1998. DOI: 10.1126/science.282.5391.1145.
 
+[Trapnell et al., 2014] TRAPNELL, Cole et al. The dynamics and regulators of cell fate decisions are revealed by pseudotemporal ordering of single cells. Nature Biotechnology, v. 32, n. 4, p. 381–386, 2014. DOI: 10.1038/nbt.2859.
 
-[Trapnell et al., 2014] Trapnell, C. et al. The dynamics and regulators of cell fate decisions are revealed by pseudotemporal ordering of single cells. Nature Biotechnology, v. 32, n. 4, p. 381–386, 2014. doi:10.1038/nbt.2859.
+[Wang; Cooney, 2013] WANG, Qin; COONEY, Austin J. Revisiting the role of GCNF in embryonic development. Seminars in Cell & Developmental Biology, v. 24, n. 10–12, p. 679–686, 2013.
 
+[Wen, 2017] WEN, Guangyu. A simple process of RNA-sequence analyses by Hisat2, Htseq and DESeq2. In: INTERNATIONAL CONFERENCE ON BIOMEDICAL ENGINEERING AND BIOINFORMATICS, 2017. Proceedings [...]. 2017. p. 11–15.
 
-[Wen, 2017] Wen, G. A simple process of RNA-sequence analyses by Hisat2, Htseq and DESeq2. In: Proceedings of the International Conference on Biomedical Engineering and Bioinformatics. 2017. p. 11–15.
+[Wingett; Andrews, 2018] WINGETT, Steven W.; ANDREWS, Simon. FastQ Screen: a tool for multi-genome mapping and quality control. F1000Research, v. 7, p. 1338, 2018. DOI: 10.12688/f1000research.15931.2.
 
+[Xu et al., 2023] XU, Rui et al. Abordagem de bioinformática e biologia de sistemas para identificar a ligação patogenética entre insuficiência cardíaca e sarcopenia. Arquivos Brasileiros de Cardiologia, v. 120, n. 10, 2023.
 
-[Wingett; Andrews, 2018] Wingett, S. W.; Andrews, S. FastQ Screen: a tool for multi-genome mapping and quality control. F1000Research, v. 7, p. 1338, 2018. doi:10.12688/f1000research.15931.2.
+[Yang et al., 2025] YANG, Yisong et al. HMGCR: a malignancy hub – frontiers in cancer diagnosis and therapy. Frontiers in Oncology, v. 15, 2025.
 
+[Yu, 2024] YU, Guangchuang. Thirteen years of clusterProfiler. The Innovation, v. 5, n. 6, p. 100722, 2024. DOI: 10.1016/j.xinn.2024.100722.
 
-[Yu, 2024] Yu, G. Thirteen years of clusterProfiler. The Innovation, v. 5, n. 6, p. 100722, 2024. doi:10.1016/j.xinn.2024.100722.
+[Yu, 2026] YU, Guangchuang. enrichplot: visualization of functional enrichment result. R package version 1.30.5, 2026. Disponível em: https://bioconductor.org/packages/enrichplot.
 
+[Zakrzewski et al., 2019] ZAKRZEWSKI, Wojciech et al. Stem cells: past, present, and future. Stem Cell Research & Therapy, v. 10, n. 1, p. 68, 2019.
 
-[Yu, 2026] Yu, G. enrichplot: visualization of functional enrichment result. R package version 1.30.5, 2026. Disponível em: https://bioconductor.org/packages/enrichplot.
+[Zeineddine et al., 2014] ZEINEDDINE, Dana et al. The Oct4 protein: more than a magic stemness marker. American Journal of Stem Cells, v. 3, n. 2, p. 74–82, 2014.
 
-
-[Zakrzewski et al., 2019] Zakrzewski, Wojciech et al. Stem cells: past, present, and future. Stem cell research & therapy, v. 10, n. 1, p. 68, 2019.
