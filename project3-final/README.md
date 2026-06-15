@@ -307,6 +307,7 @@ A correlação entre módulos e fenótipos foi avaliada por meio dos eigengenes 
 
 Para caracterização das interações gênicas, a rede correspondente ao módulo selecionado foi exportada para o Cytoscape. Foram mantidas apenas interações com peso superior a 0.1, permitindo destacar conexões biologicamente mais relevantes e facilitar a identificação de genes centrais potencialmente envolvidos na regulação dos processos observados (Vídeos 1 e 2).
 
+![](assets/images/networks/video_cardio.mp4)
 https://drive.google.com/file/d/1N09YEjhDVRsfbJDilamfAv2h_d2F7ilN/view?usp=sharing
 
 Vídeo 1: Rede de coexpressão construída a partir de dados de expressão gênica de células tronco embrionárias humanas quando submetidas ao processo de diferenciação para cardiomiócitos. Os nós indicam genes cuja expressão varia significativamente ao longo do período experimental. A mudança de cor dos nós explicita a dinâmica de expressão dos genes ao passar dos dias. Cores avermelhadas indicam aumento da métrica log2FC, enquanto cores azuis denotam diminuição da métrica.  
@@ -378,7 +379,7 @@ Finalmente, apenas após seis dias do processo de diferenciação, fatores expli
 ### 7.2.2 Rede e Graus:
 De maneira análoga à abordagem adotada para a interpretação da rede de diferenciação de cardiomiócitos, diferentes métricas foram aplicadas à rede de diferenciação de células polihormonais construída, sendo o grau dos nós novamente escolhido para avaliação (Figura 23).
 
-
+> ![Rede poli](assets/images/networks/all_network_poli.png)
 Figura 23: Rede de coexpressão construída a partir de dados de expressão gênica de células tronco embrionárias humanas quando submetidas ao processo de diferenciação para células polihormonais. Neste caso, observa-se a partir da coloração dos nós seus respectivos graus, de modo que, quanto mais escuro a coloração de um nó, maior o seu grau.
 	
 Com base na rede obtida, destaca-se a prevalência de nós com alto grau na maior sub-rede em questão, esta selecionada para a análise de expressão diferencial ao longo do tempo (Vídeo 5).
@@ -394,7 +395,7 @@ Dessa forma, em virtude da importância da migração celular para a formação 
 ### 7.2.3  Módulos
 Fundamentando-se na sub-rede previamente analisada (Vídeo 5), foi realizada a aplicação do algoritmo de Leiden para a determinação de comunidades, no intuito de aprofundar o entendimento acerca dos principais genes envolvidos na diferenciação de células tronco embrionárias em células polihormonais (Figura 24).
 
-
+> ![Rede modulos poli](assets/images/networks/modules_poli.png)
 Figura 24: Comunidades obtidas a partir da aplicação do algoritmo de Leiden à sub-rede destacada. Ao todo, 4 comunidades foram encontradas, aqui diferenciadas pela coloração dos nós.
 
 Mediante a rede gerada, foi avaliado o comportamento de seus genes constituintes frente à métrica log2FC para os dias analisados (Vídeo 6).
