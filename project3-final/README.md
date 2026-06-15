@@ -147,37 +147,38 @@ A decisão de incorporar os dias completamente também afetou a construção das
 
 Os resultados obtidos e fundamentações biológicas serão detalhadas nas seções a seguir. 
 
-## 5.5 Ferramentas
-FastQC
+## 5.5 Ferramentas:
+###  5.5.1 FastQC:
 	Os dados brutos foram baixados diretamente do NBCI via SRA Toolkit. Primeiramente, a qualidade das amostras foi testada por FastQC, que forneceu um relatório sobre as características das sequências, como qualidade por posição da base; conteúdo GC; sequências repetidas e contaminação por adaptadores.
 
-Trimmomatic
+###  5.5.2 Trimmomatic:
 	Em seguida, foi realizada a etapa de limpeza com o Trimmomatic, que removeu adaptadores, regiões de baixa qualidade (Phred < 33 nas extremidades), leituras com comprimento inferior a 50 pares de bases e trechos com média de qualidade inferior a 15 em janelas deslizantes. Após essa etapa, as amostras foram novamente avaliadas com o FastQC para garantir a efetividade do pré-processamento.
 
-HISAT2:
+###  5.5.3 HISAT2:
 	A partir dos dados limpos, mapeamos as amostras por HISAT2 com o genoma de referência Hg38 (do inglês, human genome build 38), disponibilizado pelo próprio programa, para identificar a posição precisa dos transcritos.
 
-StringTie
+###  5.5.4 StringTie:
 	Com os transcritos indexados e ordenados, contabilizamos os transcritos pelo StringTie, responsável pela reconstrução dos transcritos e estimativa de suas respectivas abundâncias. Os resultados individuais foram integrados em um modelo unificado, utilizado como base para a quantificação comparativa entre as amostras. Ao final, duas matrizes foram geradas, uma com as quantificações de transcritos (ENSEMBL) e outra de genes (RefSeq) para cada amostra. A matriz de transcritos foi usada para apresentação das próximas etapas.
 
-MFuzz
+
+###  5.5.5  MFuzz:
     O Mfuzz é um método que utiliza a técnica de agrupamento suave (soft clustering), que permite identificar conjuntos de genes com perfis de expressão semelhantes ao longo do tempo. O Mfuzz possibilita que um mesmo gene pertença simultaneamente a diferentes clusters, com distintos graus de pertinência. Essa abordagem é particularmente relevante em sistemas biológicos complexos, uma vez que muitos genes participam de múltiplos processos celulares e podem apresentar padrões de expressão compartilhados entre diferentes grupos funcionais.
     A aplicação do Mfuzz segue uma série de etapas metodológicas. Inicialmente, realiza-se a normalização dos dados, com o objetivo de reduzir vieses técnicos e garantir a comparabilidade entre as amostras. Em dados de RNA-seq, por exemplo, esse processo pode incluir correções relacionadas ao tamanho da biblioteca e ao comprimento dos genes, enquanto em experimentos de microarranjo são aplicados métodos específicos de padronização.
     A primeira etapa consistiu na identificação de padrões temporais de expressão gênica utilizando o algoritmo de agrupamento fuzzy implementado no pacote Mfuzz. Inicialmente, os dados de expressão foram transformados para escala logarítmica a fim de reduzir a influência de genes altamente expressos e minimizar diferenças extremas entre as amostras.
-Em seguida, é realizada uma filtragem para remoção de transcritos com baixa expressão média, mantendo-se apenas aqueles com média de expressão superior a 1. Posteriormente, os genes foram classificados de acordo com sua variabilidade ao longo do experimento e somente os 10% mais variáveis foram selecionados para as análises subsequentes. Essa estratégia permitiu concentrar a análise nos genes com maior potencial de participação nos eventos biológicos associados à diferenciação celular.
-Após a padronização dos dados, o parâmetro de fuzzificação foi estimado automaticamente e os genes foram distribuídos em 12 clusters de expressão temporal. Os perfis obtidos permitiram identificar diferentes tendências de regulação ao longo dos dias analisados, incluindo genes progressivamente ativados, reprimidos ou transitoriamente expressos durante a diferenciação.
+	Em seguida, é realizada uma filtragem para remoção de transcritos com baixa expressão média, mantendo-se apenas aqueles com média de expressão superior a 1. Posteriormente, os genes foram classificados de acordo com sua variabilidade ao longo do experimento e somente os 10% mais variáveis foram selecionados para as análises subsequentes. Essa estratégia permitiu concentrar a análise nos genes com maior potencial de participação nos eventos biológicos associados à diferenciação celular.
+	Após a padronização dos dados, o parâmetro de fuzzificação foi estimado automaticamente e os genes foram distribuídos em 12 clusters de expressão temporal. Os perfis obtidos permitiram identificar diferentes tendências de regulação ao longo dos dias analisados, incluindo genes progressivamente ativados, reprimidos ou transitoriamente expressos durante a diferenciação.
 	
-DESeq2:
+###  5.5.6  DESeq2:
     Para a análise de expressão diferencial foi utilizado o programa DESeq2. Ele necessita da matriz de contadores e metadados para realizar os testes estatísticos e definir os genes diferencialmente expressos. Ele normaliza os contadores com base no tamanho das bibliotecas, utilizando distribuição binomial negativa dos dados como abordagem estatística e ajustando o p-valor pelo método de Benjamini-Hochberg. Para identificação dos genes diferencialmente expressos, o algoritmo utiliza um modelo linear generalizado, calculando a dispersão e fold change. O DESeq2 precisa de uma fórmula de design, que fórmula usa uma coluna dos metadados, de modo que os fatores que a compõem serão comparados entre si. Foram feitas comparações para cada dia que o experimento foi realizado em relação ao controle. Por exemplo, comparou-se a expressão do dia em relação ao controle. Dessa forma, foi possível obter informações do quanto os genes foram mais ou menos expressos naquele dia em relação ao controle, que foi o primeiro dia do experimento. Este período foi escolhido como controle pois espera-se que neste momento a expressão de todos os genes sejam idênticas. 
 
     Escrevemos scripts em bash e R, que realiza a análise de expressão diferencial usando DESeq2. Seguimos o tutorial disponibilizado na plataforma Bioconductor, testando os parâmetros. DESeq2 constrói primeiramente um DESeqDataSet, que armazena os contadores de transcritos e estimativas intermediárias feitas durante a análise estatística. Então, com base no DESeqDataSet, o DESeq2 realiza a análise de expressão diferencial e estima a dispersão dos genes baseado na variável de interesse (neste exemplo, os dias). Comparamos os níveis de expressão dos genes para as amostras presentes em cada dia (1-18 para cardiomiócitos e 1-17 para polihormonais). Ao final, obtivemos resultados de p-valor, q-valor (p-valor ajustado) e log2 fold change dos transcritos. Consideramos como genes up-regulated aqueles com q-valor menor que 0.05, log2 fold change maior que 2 e base mean maior que 50. Por outro lado, consideramos como genes down-regulated aqueles com q-valor maior que 0.05, log2 fold change menor que -2 e base mean menor que 50. 
 
-Anotação Funcional:
+###  5.5.7   Anotação Funcional:
 	Anotamos apenas os genes presentes nos módulos mais significativos identificados pelo MFuzz, que também estavam presentes na lista de genes diferencialmente expressos para amostras de cada dia. Utilizamos pacotes da plataforma Bioconductor para realizar os processos de anotação. Assim, os pacotes clusterProfiler, org.Hs.eg.db e AnnotationDbi foram empregados para identificar a ontologia dos genes dos módulos. Para a análise de enriquecimento de via (KEGG), empregamos o pacote enrichplot da plataforma Bioconductor para os mesmos conjuntos de genes foram analisados. 
 
-Construção de redes	
+###  5.5.8  Construção de redes:
 
-WGCNA
+#### 5.5.8.1 WGCNA
 	Com o intuito de identificar a correlação entre os transcritos, pacotes que avaliam a relação da expressão gênica em uma amostra ou grupos de amostras foram utilizados. Essas análises permitem caracterizar o comportamento da expressão de grupos de genes, sendo possível supor que tais genes têm expressão correlacionada, passando pelo mesmo processo de regulação e, possivelmente, são pertencentes à mesma via metabólica. Para esta etapa, utilizamos o programa WGCNA. 
 	WGCNA (Weighted Correlation Network Analysis) é um pacote em R que permite identificar módulos de genes, que são conjuntos de genes com comportamento de expressão semelhante dentro de grupos de amostras ou de forma seriada (ao longo do tempo, por exemplo). A partir destes módulos, o WGCNA os relaciona com os metadados, fornecendo estimativas quantitativas da força desta relação. 
     
@@ -207,8 +208,7 @@ WGCNA
     Falta as figuras 5 e 6
 
     Dessa forma, filtramos os genes de cada módulo, mantendo somente aqueles que correspondem aos genes diferencialmente expressos para amostras presentes em cada dia. 
-
-Cytoscape
+#### 5.5.8.2 Cytoscape
     Utilizamos o programa Cytoscape para construção da visualização das redes. Por questões de visualização, selecionamos as arestas que apresentavam peso de ligação maior que 0.1. Utilizamos estratégias de análise de rede para identificar medidas de grau, centralidade, coeficiente de clusterização e valores de eigen gene. Essas métricas foram expressas como cores de nós, que representam o grau de conectividade do gene correspondente, sendo que, quanto mais escura a cor, maior o número de conexões do gene. Este é o princípio para caracterizar os hubs da rede, com parâmetros (número mínimo de conexões) a serem definidos conforme o estudo. Além disso, as cores dos nós também foram utilizadas para demonstrar a expressão dos genes. Quanto mais vermelho, maior o valor de LFC e mais up-regulated aquele gene é em relação a comparação feita do dia em análise com o controle. Quanto mais azul, menor o valor de LFC e mais down-regulated aquele gene é em relação aos dias comparados com o controle. Em relação às medidas de coeficiente de clusterização, é possível identificar a probabilidade de dois vizinhos de um mesmo nó também estarem conectados entre si. Fundamental para identificar módulos funcionais em redes biológicas, já que nós densamente conectados costumam realizar tarefas celulares semelhantes. Por fim, os autovalores (eigenvalues) e autovetores (eigenvectors) são grandezas matemáticas fundamentais usadas para quantificar a influência dos nós, a sincronização e a estabilidade estrutural. Todas essas métricas foram expressas em termos de coloração, das quais as mais escuras representam os maiores valores e as mais claras os menores valores. 
 
 # 6. Análises realizadas + Resultados  :
