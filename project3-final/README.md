@@ -272,28 +272,28 @@ A interpretação biológica dos genes selecionados foi realizada por meio de an
 
 A anotação foi conduzida utilizando os pacotes clusterProfiler, AnnotationDbi e org.Hs.eg.db, permitindo a associação dos genes a termos da Gene Ontology (GO). Foram avaliadas categorias relacionadas aos domínios de Processo Biológico (Biological Process), Função Molecular (Molecular Function) e Componente Celular (Cellular Component), possibilitando a identificação dos principais processos envolvidos na diferenciação dos cardiomiócitos e células polihormonais (Figuras 13, 14 e 15 - Cardiomiócitos; Figuras 16 e 17 - Células Polihormonais) . 
 
-
+> ![Annot 04](assets/images/functional_annotation/assets/images/functional_annotation/GO_Cluster4CM.svg)
 Figura 13: Anotação funcional realizada para os transcritos pertencentes ao cluster 4 do algoritmo Mfuzz para cardiomiócitos, tendo como base o banco de dados Gene Ontology. O tamanho dos pontos indica a quantidade de genes pertencentes ao processo identificado, enquanto a posição em relação a abscissa indica a confiança na predição da via e a coloração a significância estatística do enriquecimento.
 
-
+> ![Annot 01](assets/images/functional_annotation/GO_Cluster1CM.svg)
 Figura 14: Anotação funcional realizada para os transcritos pertencentes ao cluster 1 do algoritmo Mfuzz para cardiomiócitos, tendo como base o banco de dados Gene Ontology. O tamanho dos pontos indica a quantidade de genes pertencentes ao processo identificado, enquanto a posição em relação a abscissa indica a confiança na predição da via e a coloração a significância estatística do enriquecimento.
 
-
+> ![Annot 02](assets/images/functional_annotation/GO_Cluster2CM.svg)
 Figura 15: Anotação funcional realizada para os transcritos pertencentes ao cluster 2 do algoritmo Mfuzz para cardiomiócitos, tendo como base o banco de dados Gene Ontology. O tamanho dos pontos indica a quantidade de genes pertencentes ao processo identificado, enquanto a posição em relação a abscissa indica a confiança na predição da via e a coloração a significância estatística do enriquecimento.
 
-
+> ![Annot 12](assets/images/functional_annotation/GO_Cluster12PH.svg)
 Figura 16: Anotação funcional realizada para os transcritos pertencentes ao cluster 12 do algoritmo Mfuzz para células polihormonais, tendo como base o banco de dados Gene Ontology. O tamanho dos pontos indica a quantidade de genes pertencentes ao processo identificado, enquanto a posição em relação a abscissa indica a confiança na predição da via e a coloração a significância estatística do enriquecimento.
 
-
+> ![Annot 04 PH](assets/images/functional_annotation/GO_Cluster4PH.svg)
 Figura 17: Anotação funcional realizada para os transcritos pertencentes ao cluster 4 do algoritmo Mfuzz para células polihormonais, tendo como base o banco de dados Gene Ontology. O tamanho dos pontos indica a quantidade de genes pertencentes ao processo identificado, enquanto a posição em relação a abscissa indica a confiança na predição da via e a coloração a significância estatística do enriquecimento.
 
 
 Adicionalmente, foram realizadas análises de enriquecimento de vias metabólicas utilizando as bases de dados KEGG e Reactome. Os resultados permitiram identificar rotas biológicas significativamente representadas entre os genes selecionados, fornecendo evidências sobre os mecanismos moleculares associados às alterações observadas nos diferentes estágios da diferenciação (Figura 18 - Cardiomiócitos; Figura 19 - Células Polihormonais).
 
-
+> ![Kegg 04](assets/images/functional_annotation/KEGG_CLUSTER_4_CM.svg)
 Figura 18: Anotação funcional realizada para os transcritos pertencentes ao cluster 4 do algoritmo Mfuzz para cardiomiócitos, tendo como base o banco de dados KEGG. O tamanho dos pontos indica a quantidade de genes pertencentes ao processo identificado, enquanto a posição em relação a abscissa indica a confiança na predição da via e a coloração a significância estatística do enriquecimento.
 
-
+> ![Reac 01](assets/images/functional_annotation/reactome_cluster_1_ph.png)
 Figura 19: Anotação funcional realizada para os transcritos pertencentes ao cluster 1 do algoritmo Mfuzz para células polihormonais, tendo como base o banco de dados Reactome. O tamanho dos pontos indica a quantidade de genes pertencentes ao processo identificado, enquanto a posição em relação a abscissa indica a confiança na predição da via e a coloração a significância estatística do enriquecimento.
 
 A visualização dos enriquecimentos foi realizada com auxílio do pacote enrichplot, permitindo comparar a relevância dos processos biológicos e das vias enriquecidas entre os conjuntos gênicos analisados.
@@ -308,9 +308,11 @@ A correlação entre módulos e fenótipos foi avaliada por meio dos eigengenes 
 Para caracterização das interações gênicas, a rede correspondente ao módulo selecionado foi exportada para o Cytoscape. Foram mantidas apenas interações com peso superior a 0.1, permitindo destacar conexões biologicamente mais relevantes e facilitar a identificação de genes centrais potencialmente envolvidos na regulação dos processos observados (Vídeos 1 e 2).
 
 > https://drive.google.com/file/d/1N09YEjhDVRsfbJDilamfAv2h_d2F7ilN/view?usp=sharing
+
 >Vídeo 1: Rede de coexpressão construída a partir de dados de expressão gênica de células tronco embrionárias humanas quando submetidas ao processo de diferenciação para cardiomiócitos. Os nós indicam genes cuja expressão varia significativamente ao longo do período experimental. A mudança de cor dos nós explicita a dinâmica de expressão dos genes ao passar dos dias. Cores avermelhadas indicam aumento da métrica log2FC, enquanto cores azuis denotam diminuição da métrica.  
 
 >https://drive.google.com/file/d/1zXvSmzExBpdjgjw8QveS-sU9sw-EpjkC/view?usp=sharing
+
 >Vídeo 2: Rede de coexpressão construída a partir de dados de expressão gênica de células tronco embrionárias humanas quando submetidas ao processo de diferenciação para células polihormonais. Os nós indicam genes cuja expressão varia significativamente ao longo do período experimental. A mudança de cor dos nós explicita a dinâmica de expressão dos genes ao passar dos dias. Cores avermelhadas indicam aumento da métrica log2FC, enquanto cores azuis denotam diminuição da métrica.
 
 As redes foram exportadas para o Cytoscape, onde foram avaliadas métricas como grau, centralidade, coeficiente de clusterização e modularidade.
@@ -333,6 +335,7 @@ Figura 20: Rede de coexpressão construída a partir de dados de expressão gên
 Por meio da rede gerada, foram identificados os genes cujas medidas de grau apresentam-se consideravelmente altas, tendo como destaque o conjunto de genes evidenciados pela Figura 20 e pertencentes à sub-rede superior à esquerda. Dessa maneira, tendo em vista as propriedades da sub-rede destacada, a mesma foi selecionada para a averiguação do comportamento da expressão gênica de seus componentes ao longo do tempo (Vídeo 3).
 
 >https://drive.google.com/file/d/13MqhUL1D5DebEIFYol0VGXsO-orqfOui/view?usp=sharing
+
 >Vídeo 3: Análise da variação da expressão gênica dos componentes da sub-rede destacada. A mudança de cor dos nós explicita a dinâmica de expressão dos genes ao passar dos dias. Cores avermelhadas indicam aumento da métrica log2FC, enquanto cores azuis denotam diminuição da métrica. 
 
 De acordo com a análise da rede em questão, ressaltam-se três genes de alto grau e cuja expressão aumenta significativamente a partir do sexto dia: ACTN2, MYH6 e TBX5. No que diz respeito aos genes ACTN2 e MYH6, estes caracterizam-se por codificar proteínas estruturais que compõem os sarcômeros. Em contrapartida, o gene TBX5 caracteriza-se por codificar um fator de transcrição da família T-box, sendo conhecido por sua função no desenvolvimento dos membros superiores e do coração. 
@@ -352,6 +355,7 @@ Figura 21: Comunidades obtidas a partir da aplicação do algoritmo de Leiden à
 Mediante a rede gerada, foi avaliado o comportamento de seus genes constituintes frente à métrica log2FC para os dias analisados (Vídeo 4). 
 
 >https://drive.google.com/file/d/1pr04cexyhapkJIXOc_zq9DDPPk7PiA83/view?usp=sharing
+
 >Vídeo 4: Análise da variação da expressão gênica dos componentes constituintes das comunidades encontradas. A mudança de cor dos nós explicita a dinâmica de expressão dos genes ao passar dos dias. Cores avermelhadas indicam aumento da métrica log2FC, enquanto cores azuis denotam diminuição da métrica. 
 
 Em vista disso, evidencia-se o comportamento do gene NR6A1, pertencente à comunidade rosa (Figura 21), cuja expressão se mantém alta durante os primeiros dias de desenvolvimento embrionário mas que, a partir do terceiro dia, apresenta redução na expressão (Figura 22).
@@ -380,6 +384,7 @@ Figura 23: Rede de coexpressão construída a partir de dados de expressão gên
 Com base na rede obtida, destaca-se a prevalência de nós com alto grau na maior sub-rede em questão, esta selecionada para a análise de expressão diferencial ao longo do tempo (Vídeo 5).
 
 >https://drive.google.com/file/d/1esxFGVM774VA2xvuK3FhfHCIlWwNIxlg/view?usp=sharing
+
 >Vídeo 5: Análise da variação da expressão gênica dos componentes da sub-rede destacada. A mudança de cor dos nós explicita a dinâmica de expressão dos genes ao passar dos dias. Cores avermelhadas indicam aumento da métrica log2FC, enquanto cores azuis denotam diminuição da métrica. 
 
 Tendo em vista a rede gerada, destacam-se os comportamentos de dois genes específicos, estes com alto grau e relativo aumento de expressão após o décimo dia: CRB2 e ADGRG6. Neste caso, ambos os genes codificam proteínas transmembranas, as quais são essenciais para o processo de mecanosinalização. Por meio da ativação de vias específicas, tais proteínas transduzem o sinal proveniente da matriz extracelular em respostas bioquímicas específicas, coordenando a liberação da célula de sua matriz e a migração para regiões específicas (Geusz et al., 2021; Li et al., 2025)​. 
@@ -395,6 +400,7 @@ Figura 24: Comunidades obtidas a partir da aplicação do algoritmo de Leiden à
 Mediante a rede gerada, foi avaliado o comportamento de seus genes constituintes frente à métrica log2FC para os dias analisados (Vídeo 6).
 
 >https://drive.google.com/file/d/1Pe47l6oSFVPMw-pRacbECYPjZsi2MFBd/view?usp=sharing
+
 >Vídeo 6: Análise da variação da expressão gênica dos componentes constituintes das comunidades encontradas. A mudança de cor dos nós explicita a dinâmica de expressão dos genes ao passar dos dias. Cores avermelhadas indicam aumento da métrica log2FC, enquanto cores azuis denotam diminuição da métrica.
 
 Dentre os genes destacados pela rede em questão, ressalta-se o gene HMGCR, codificante para uma enzima de mesmo nome. A enzima HMGCR é constituinte fundamental da via de produção de colesterol, catalisando a conversão da 3-hidroxi-3-metilglutaril-coenzima A em ácido mevalônico ​​(Yang et al., 2025)​. Sua hiperatividade é característica de células cancerígenas, sendo constantemente utilizada como alvo terapêutico na progressão do tumor ​​(Yang et al., 2025)​. Em contrapartida, no que diz respeito à diferenciação das células endócrinas, a HMGCR destaca-se pela participação na formação de células β, principais produtoras de insulina (Takei et al., 2020). À vista disso, nocautes da enzima em células  murinas demonstraram relação direta a malformação de células β, prejudicando, dessa maneira, a produção de insulina e levando à diagnósticos de diabetes recente (Takei et al., 2020). 
@@ -404,6 +410,7 @@ Dentre os genes destacados pela rede em questão, ressalta-se o gene HMGCR, codi
 Em conclusão, por meio da intersecção de ambas as redes construídas (Vídeos 1 e 2), os genes diferencialmente expressos comuns aos dois processos de diferenciação foram identificados, assim como suas respectivas relações aos demais componentes da rede (Vídeo 7).
 
 >https://drive.google.com/file/d/1ZGi0DBOVIKfXi7uV_HSGFmZX2xWty1xS/view?usp=sharing
+
 >Vídeo 7: Rede resultante da intersecção das redes de coexpressão gênica para o processo de diferenciação de células tronco embrionárias humanas em cardiomiócitos e células polihormonais. Neste caso, visualizam-se apenas nós e arestas comuns entre as redes estudadas. O tamanho dos nós reflete o grau dos mesmos. No que diz respeito à coloração dos nós, esta indica a diferença entre a expressão do gene para os dias específicos, comparando-se o processo de diferenciação de cardiomiócitos e células polihormonais. Quanto mais escura a cor do nó, maior a diferença relativa na expressão do gene entre os processos de diferenciação no dia específico.
 
 A análise da rede construída possibilitou a identificação de componentes essenciais aos dois processos de diferenciação, dentre os quais destaca-se o gene GFRA1, presente no maior componente da rede analisada e codificante para um receptor de membrana da família GDNF (Vídeo 7). Sua expressão mostra-se relativamente tardia nos processos analisados, sendo ativado a partir do oitavo dia para os cardiomiócitos e apenas após o décimo dia para as células polihormonais, mas em maior magnitude de expressão.
