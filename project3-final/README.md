@@ -124,7 +124,7 @@ Considerando as duplicatas e ambas as linhagens, o conjunto analisado totaliza a
 
 ## 5.2 Modelo Lógico
 
-> ![Modelo Lógico de Grafos](assets/images/Project1_logic_model_COMBI.png)
+![Modelo Lógico de Grafos](assets/images/Project1_logic_model_COMBI.png)
 
 
 ## 5.3 Integração entre Bases
