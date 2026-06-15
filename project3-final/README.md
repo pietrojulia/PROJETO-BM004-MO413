@@ -16,7 +16,7 @@ Sendo assim, utilizando dados públicos de RNA-seq com resolução temporal, o p
 
 # 2. Slides
 
-[Apresentação da Entrega 03 do Projeto da Disciplina](assets/slides/entrega03.pdf)
+> [Apresentação da Entrega 03 do Projeto da Disciplina](assets/slides/entrega03.pdf)
 
 # 3. Fundamentação Teórica
 - **Campbell et al. (2019)**: Definição de células-tronco como células com alta potencialidade e baixo grau de diferenciação. Classificação das células-tronco quanto à potencialidade (totipotentes, pluripotentes, multipotentes e unipotentes);
@@ -124,7 +124,7 @@ Considerando as duplicatas e ambas as linhagens, o conjunto analisado totaliza a
 
 ## 5.2 Modelo Lógico
 
-![Modelo Lógico de Grafos](assets/images/Project1_logic_model_COMBI.png)
+> ![Modelo Lógico de Grafos](assets/images/Project1_logic_model_COMBI.png)
 
 
 ## 5.3 Integração entre Bases
@@ -159,7 +159,7 @@ A partir dos dados limpos, mapeamos as amostras por HISAT2 com o genoma de refer
 ###  5.5.4 StringTie:
 Com os transcritos indexados e ordenados, contabilizamos os transcritos pelo StringTie, responsável pela reconstrução dos transcritos e estimativa de suas respectivas abundâncias. Os resultados individuais foram integrados em um modelo unificado, utilizado como base para a quantificação comparativa entre as amostras. Ao final, duas matrizes foram geradas, uma com as quantificações de transcritos (ENSEMBL) e outra de genes (RefSeq) para cada amostra. A matriz de transcritos foi usada para apresentação das próximas etapas.
 
-[!Fluxograma da etapa de pré-processamento](assets/images/Fluxograma.png)
+> ![Fluxograma da etapa de pré-processamento](assets/images/Fluxograma.png)
 
 ###  5.5.5  MFuzz:
 O Mfuzz é um método que utiliza a técnica de agrupamento suave (soft clustering), que permite identificar conjuntos de genes com perfis de expressão semelhantes ao longo do tempo. O Mfuzz possibilita que um mesmo gene pertença simultaneamente a diferentes clusters, com distintos graus de pertinência. Essa abordagem é particularmente relevante em sistemas biológicos complexos, uma vez que muitos genes participam de múltiplos processos celulares e podem apresentar padrões de expressão compartilhados entre diferentes grupos funcionais.
@@ -191,10 +191,10 @@ Primeiramente, é necessário submeter os dados de expressão (matrizes de conta
 
 Para a construção das redes, precisamos converter os contadores normalizados e filtrados à uma matriz de similaridade. Ela mede o nível de concordância entre os perfis de expressão dos genes através do coeficiente de correlação de Pearson. Assim, essa matriz de similaridade é convertida à uma matriz de adjacência. Neste ponto, o peso da rede é determinado por um parâmetro chamado soft thresholding power β. Ele corresponde ao valor pelo qual as correlações são elevadas para calcular a matriz de adjacência com topologia de escala livre aproximada. Nós escolhemos o soft thresholding power β de 18 para os cardiomiócitos e 20 para as polihormonais, pois são os valores em que os dados apresentam alta escala de independência e baixa conectividade média (Figuras 1 e 2). 
 
-[!Parâmetro β](project3-final/assets/images/networks/power_cardio.png)
+> ![Parâmetro β](project3-final/assets/images/networks/power_cardio.png)
 Figura 1: Parâmetro β adotado para a construção da rede de correlação dos dados de cardiomiócitos. À esquerda, relação entre o valor de β e a topologia livre de escala da rede construída; à direita, conectividade média em função do valor β escolhido.
 
-[!Parâmetro β](project3-final/assets/images/networks/power_poli.png)
+> ![Parâmetro β](project3-final/assets/images/networks/power_poli.png)
 Figura 2: Parâmetro β adotado para a construção da rede de correlação dos dados de células polihormonais. À esquerda, relação entre o valor de β e a topologia livre de escala da rede construída; à direita, conectividade média em função do valor β escolhido.
 
 A matriz de adjacência construída a partir destes parâmetros permite categorizar a força da relação entre os genes (nós) da rede.
@@ -203,20 +203,20 @@ O WGCNA usa a sobreposição topológica dos valores de dissimilaridade para det
 
 Os módulos detectados podem ser relacionados com os metadados através de cálculos de correlação de Pearson e p-valor entre o eigengene de cada módulo e os metadados (Figuras 3 e 4).
 
-[!Module trait rel](project3-final/assets/images/networks/tree_dendogram_cardio.png)
+> ![Module trait rel](project3-final/assets/images/networks/tree_dendogram_cardio.png)
 Figura 3: Relação observada pelo algoritmo utilizado para os módulos construídos e os metadados de cardiomiócitos, aqui representados pela coloração do parâmetro ‘phase’ (Early - Dias 1,2,3 e 4; Mid - Dias 6, 8 e 10; Late - Dias 12 e 18; Control - Dia 0).
 
-[!Module trait rel](project3-final/assets/images/networks/tree_dendogram_poli.png)
+> ![Module trait rel](project3-final/assets/images/networks/tree_dendogram_poli.png)
 Figura 4: Relação observada pelo algoritmo utilizado para os módulos construídos e os metadados de células polihormonais, aqui representados pela coloração do parâmetro ‘phase’ (Early - Dias 1,2,3 e 4; Mid - Dias 5,6 e 10; Late - Dias 13 e 17; Control - Dia 0).
 
 Eigengene é um vetor que representa um padrão agregado de expressão gênica para os genes dos módulos, calculado por meio da técnica de análise de componentes principais. Ele captura a variabilidade geral dos genes dentro do módulo e fornece uma representação resumida do perfil de expressão desse módulo. Assim, o coeficiente de correlação e o p-valor entre os eigengenes e os metadados foram calculados. 
 
 Dessa forma, como o WGCNA posiciona os genes que não se encaixaram em nenhum perfil de expressão no módulo grey, os módulos turquoise foram selecionados para a construção das redes de co-expressão (Figuras 5 e 6). 
 
-[!Module](project3-final/assets/images/networks/cluster_dendogram_cardio.png)
+> ![Module](project3-final/assets/images/networks/cluster_dendogram_cardio.png)
 Figura 5: Módulos identificados pelo WGCNA para a rede de expressão de cardiomiócitos.
 
-[!Module](project3-final/assets/images/networks/cluster_dendogram_poli.png)
+> ![Module](project3-final/assets/images/networks/cluster_dendogram_poli.png)
 Figura 6: Módulos identificados pelo WGCNA para a rede de expressão de células polihormonais.
 
 Dessa forma, filtramos os genes de cada módulo, mantendo somente aqueles que correspondem aos genes diferencialmente expressos para amostras presentes em cada dia. 
@@ -231,10 +231,10 @@ A análise dos dados foi conduzida por meio de uma abordagem integrada que combi
 ## 6.1  Análise de componentes principais:
 A análise de componentes principais foi utilizada como etapa exploratória para verificar a distribuição global das amostras e a separação entre fases/linhagens. Essa redução de dimensionalidade ajuda a identificar se as amostras se organizam de acordo com a trajetória temporal esperada e se há separação entre o estado controle, fases intermediárias e fases finais (Figuras 7 e 8).
 
-[!PCA Cardio](assets/images/diff_exp/PCA_plot_cardio.png)
+> ![PCA Cardio](assets/images/diff_exp/PCA_plot_cardio.png)
 Figura 7: Análise de componentes principais realizada para os dias de diferenciação de células tronco embrionárias humanas em cardiomiócitos. A categorização dos dias, aqui representada pela cor dos pontos, ocorreu de modo a agrupar dias diferentes em grupos específicos: Control - Dia 0; Early - Dias 1, 2, 3 e 4; Mid - Dias 6, 8 e 10; Late - Dias 10 e 18. 
 
-[!PCA Poli](assets/images/diff_exp/PCA_plot_poli.png)
+> ![PCA Poli](assets/images/diff_exp/PCA_plot_poli.png)
 Figura 8: Análise de componentes principais realizada para os dias de diferenciação de células tronco embrionárias humanas em células polihormonais. A categorização dos dias, aqui representada pela cor dos pontos, ocorreu de modo a agrupar dias diferentes em grupos específicos: Control - Dia 0; Early - Dias 1, 2, 3 e 4; Mid - Dias 5, 6 e 10; Late - Dias 13 e 17. 
 
 ## 6.2 Análise de séries temporais
@@ -242,12 +242,12 @@ A identificação de padrões temporais de expressão gênica foi realizada util
 
 Para as etapas posteriores, foram selecionados os genes pertencentes aos clusters que apresentavam perfis de expressão que descrevem tendências claras, como aumento ou diminuição de expressão em conjunto ao longo do tempo. Diferentes clusters foram selecionados para cada grupo celular.  Para os cardiomiócitos, foram selecionados os clusters 1, 2 e 4 (Figura 9). 
 
-[!MFuzz Cardio](project3-final/assets/images/mfuzz/mfuzz_cardio_12.png)
+> ![MFuzz Cardio](project3-final/assets/images/mfuzz/mfuzz_cardio_12.png)
 Figura 9: Clusters identificados pelo algoritmo Mfuzz para o processo de diferenciação de células tronco embrionárias humanas em cardiomiócitos. Para cada cluster, observa-se no eixo das abscissas o tempo adotado pelo experimento. Neste caso, os mesmos indicam os dias transcorridos ao longo do experimento. Complementarmente, observa-se no eixo das ordenadas a métrica utilizada pelo algoritmo para a representação da mudança de expressão de cada transcrito ao longo do tempo.
 
 Por sua vez, para as células polihormonais, os clusters 1, 4 e 12 foram selecionados (Figura 10). 
 	
-[!MFuzz Poli](project3-final/assets/images/mfuzz/mfuzz_poli_12.png)
+> ![MFuzz Poli](project3-final/assets/images/mfuzz/mfuzz_poli_12.png)
 Figura 10: Clusters identificados pelo algoritmo Mfuzz para o processo de diferenciação de células tronco embrionárias humanas em células polihormonais. Para cada cluster, observa-se no eixo das abscissas o tempo adotado pelo experimento. Neste caso, os mesmos indicam os dias transcorridos ao longo do experimento. Complementarmente, observa-se no eixo das ordenadas a métrica utilizada pelo algoritmo para a representação da mudança de expressão de cada transcrito ao longo do tempo.
 
 Por fim, para cada cluster selecionado, apenas transcritos com grau de pertinência superior a 0.7 foram selecionados. Desse modo, restringimos as análises aos genes que melhor representavam os padrões temporais observados.
