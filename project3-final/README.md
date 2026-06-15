@@ -231,10 +231,10 @@ A análise dos dados foi conduzida por meio de uma abordagem integrada que combi
 ## 6.1  Análise de componentes principais:
 A análise de componentes principais foi utilizada como etapa exploratória para verificar a distribuição global das amostras e a separação entre fases/linhagens. Essa redução de dimensionalidade ajuda a identificar se as amostras se organizam de acordo com a trajetória temporal esperada e se há separação entre o estado controle, fases intermediárias e fases finais (Figuras 7 e 8).
 
-
+[!PCA Cardio](assets/images/diff_exp/PCA_plot_cardio.png)
 Figura 7: Análise de componentes principais realizada para os dias de diferenciação de células tronco embrionárias humanas em cardiomiócitos. A categorização dos dias, aqui representada pela cor dos pontos, ocorreu de modo a agrupar dias diferentes em grupos específicos: Control - Dia 0; Early - Dias 1, 2, 3 e 4; Mid - Dias 6, 8 e 10; Late - Dias 10 e 18. 
 
-
+[!PCA Poli](assets/images/diff_exp/PCA_plot_poli.png)
 Figura 8: Análise de componentes principais realizada para os dias de diferenciação de células tronco embrionárias humanas em células polihormonais. A categorização dos dias, aqui representada pela cor dos pontos, ocorreu de modo a agrupar dias diferentes em grupos específicos: Control - Dia 0; Early - Dias 1, 2, 3 e 4; Mid - Dias 5, 6 e 10; Late - Dias 13 e 17. 
 
 ## 6.2 Análise de séries temporais
@@ -242,12 +242,12 @@ A identificação de padrões temporais de expressão gênica foi realizada util
 
 Para as etapas posteriores, foram selecionados os genes pertencentes aos clusters que apresentavam perfis de expressão que descrevem tendências claras, como aumento ou diminuição de expressão em conjunto ao longo do tempo. Diferentes clusters foram selecionados para cada grupo celular.  Para os cardiomiócitos, foram selecionados os clusters 1, 2 e 4 (Figura 9). 
 
-
+[!MFuzz Cardio](project3-final/assets/images/mfuzz/mfuzz_cardio_12.png)
 Figura 9: Clusters identificados pelo algoritmo Mfuzz para o processo de diferenciação de células tronco embrionárias humanas em cardiomiócitos. Para cada cluster, observa-se no eixo das abscissas o tempo adotado pelo experimento. Neste caso, os mesmos indicam os dias transcorridos ao longo do experimento. Complementarmente, observa-se no eixo das ordenadas a métrica utilizada pelo algoritmo para a representação da mudança de expressão de cada transcrito ao longo do tempo.
 
 Por sua vez, para as células polihormonais, os clusters 1, 4 e 12 foram selecionados (Figura 10). 
-
 	
+[!MFuzz Poli](project3-final/assets/images/mfuzz/mfuzz_poli_12.png)
 Figura 10: Clusters identificados pelo algoritmo Mfuzz para o processo de diferenciação de células tronco embrionárias humanas em células polihormonais. Para cada cluster, observa-se no eixo das abscissas o tempo adotado pelo experimento. Neste caso, os mesmos indicam os dias transcorridos ao longo do experimento. Complementarmente, observa-se no eixo das ordenadas a métrica utilizada pelo algoritmo para a representação da mudança de expressão de cada transcrito ao longo do tempo.
 
 Por fim, para cada cluster selecionado, apenas transcritos com grau de pertinência superior a 0.7 foram selecionados. Desse modo, restringimos as análises aos genes que melhor representavam os padrões temporais observados.
