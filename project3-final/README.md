@@ -261,9 +261,10 @@ Foram considerados diferencialmente expressos os genes que apresentaram valor aj
 
 Além da identificação dos genes diferencialmente expressos, foi construído um mapa de calor utilizando os valores normalizados por Variance Stabilizing Transformation (VST). Os genes foram organizados de acordo com os agrupamentos previamente identificados pelo Mfuzz, possibilitando a visualização integrada dos padrões temporais e das alterações de expressão observadas em cada fase experimental (Figuras 11 e 12).
 
+> ![Heatmap](assets/images/diff_exp/Heatmap_cardio_rep.png)
 Figura 11: Mapa de calor obtido para os transcritos cuja expressão varia significativamente ao longo do processo de diferenciação de células tronco embrionárias humanas em cardiomiócitos. Neste caso, observa-se o agrupamento dos transcritos a partir dos clusters identificados pelo algoritmo Mfuzz (dendograma horizontal) e o agrupamento a partir dos grupos previamente criados (Control, Early, Mid e Late - dendograma vertical). A cor da célula indica o valor de log2FC para o transcrito em questão em relação ao grupo controle.
 
-
+> ![Heatmap](assets/images/diff_exp/Heatmap_poli_rep.png)
 Figura 12: Mapa de calor obtido para os transcritos cuja expressão varia significativamente ao longo do processo de diferenciação de células tronco embrionárias humanas em células polihormonais. Neste caso, observa-se o agrupamento dos transcritos a partir dos clusters identificados pelo algoritmo Mfuzz (dendograma horizontal) e o agrupamento a partir dos grupos previamente criados (Control, Early, Mid e Late - dendograma vertical). A cor da célula indica o valor de log2FC para o transcrito em questão em relação ao grupo controle.
 
 ## 6.4 Anotação funcional e Análise de Enriquecimento de Vias:
@@ -285,6 +286,7 @@ Figura 16: Anotação funcional realizada para os transcritos pertencentes ao cl
 
 
 Figura 17: Anotação funcional realizada para os transcritos pertencentes ao cluster 4 do algoritmo Mfuzz para células polihormonais, tendo como base o banco de dados Gene Ontology. O tamanho dos pontos indica a quantidade de genes pertencentes ao processo identificado, enquanto a posição em relação a abscissa indica a confiança na predição da via e a coloração a significância estatística do enriquecimento.
+
 
 Adicionalmente, foram realizadas análises de enriquecimento de vias metabólicas utilizando as bases de dados KEGG e Reactome. Os resultados permitiram identificar rotas biológicas significativamente representadas entre os genes selecionados, fornecendo evidências sobre os mecanismos moleculares associados às alterações observadas nos diferentes estágios da diferenciação (Figura 18 - Cardiomiócitos; Figura 19 - Células Polihormonais).
 
@@ -327,7 +329,7 @@ Em contrapartida, tratando-se de genes cuja expressão aumenta com o decorrer do
 ### 7.1.2 Rede e Graus:
 Tendo como intuito a identificação de genes centrais para a diferenciação de células tronco embrionárias humanas em cardiomiócitos, diferentes métricas foram aplicadas à rede construída, sendo o grau dos nós escolhido para avaliação (Figura 20).
 
-
+> ![rede cardio](assets/images/networks/all_network_cardio.png)
 Figura 20: Rede de coexpressão construída a partir de dados de expressão gênica de células tronco embrionárias humanas quando submetidas ao processo de diferenciação para cardiomiócitos. Neste caso, observa-se a partir da coloração dos nós seus respectivos graus, de modo que, quanto mais escuro a coloração de um nó, maior o seu grau.
 
 Por meio da rede gerada, foram identificados os genes cujas medidas de grau apresentam-se consideravelmente altas, tendo como destaque o conjunto de genes evidenciados pela Figura 20 e pertencentes à sub-rede superior à esquerda. Dessa maneira, tendo em vista as propriedades da sub-rede destacada, a mesma foi selecionada para a averiguação do comportamento da expressão gênica de seus componentes ao longo do tempo (Vídeo 3).
@@ -347,6 +349,7 @@ Dessa forma, tendo em vista a importância de tais genes na correta formação d
 ### 7.1.3 Módulos:
 Tendo como base a sub-rede previamente analisada (Vídeo 3), foi realizada a aplicação do algoritmo de Leiden para a determinação de comunidades, no intuito de aprofundar o entendimento acerca dos principais genes envolvidos na diferenciação de células tronco embrionárias em cardiomiócitos (Figura 21).
  	
+> ![rede modulos cardio](assets/images/networks/modulos_cardio.png)
 Figura 21: Comunidades obtidas a partir da aplicação do algoritmo de Leiden à sub-rede destacada. Ao todo, 3 comunidades foram encontradas, aqui diferenciadas pela coloração dos nós.
 
 Mediante a rede gerada, foi avaliado o comportamento de seus genes constituintes frente à métrica log2FC para os dias analisados (Vídeo 4). 
@@ -357,6 +360,7 @@ Vídeo 4: Análise da variação da expressão gênica dos componentes constitui
 
 Em vista disso, evidencia-se o comportamento do gene NR6A1, pertencente à comunidade rosa (Figura 21), cuja expressão se mantém alta durante os primeiros dias de desenvolvimento embrionário mas que, a partir do terceiro dia, apresenta redução na expressão (Figura 22).
 
+> ![rede modulos cardio](assets/images/networks/modules_genes_cardio.png)
 Figura 22: Expressão dos genes constituintes da comunidade rosa ao terceiro dia de experimentação.
 
 O gene em questão caracteriza-se pela codificação de um receptor nuclear órfão, ou seja, que não possuí ligante conhecido. Sua atividade no núcleo baseia-se, principalmente, na repressão da transcrição de genes específicos, dentre os quais destaca-se o gene Oct4, responsável pela codificação de um fator de transcrição ativamente envolvido na promoção de pluripotência (REFs). Por conseguinte, torna-se evidente a atividade de repressor por parte do receptor NR6A1 para a regulação fina do fator de transcrição Oct4, garantindo que a célula restrinja sua capacidade de pluripotência apenas aos primeiros estágios da diferenciação celular.
