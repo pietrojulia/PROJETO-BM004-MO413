@@ -307,7 +307,7 @@ A correlação entre módulos e fenótipos foi avaliada por meio dos eigengenes 
 
 Para caracterização das interações gênicas, a rede correspondente ao módulo selecionado foi exportada para o Cytoscape. Foram mantidas apenas interações com peso superior a 0.1, permitindo destacar conexões biologicamente mais relevantes e facilitar a identificação de genes centrais potencialmente envolvidos na regulação dos processos observados (Vídeos 1 e 2).
 
-![](assets/images/networks/video_cardio.mp4)
+> ![Vídeo](assets/images/networks/video_cardio.mp4)
 https://drive.google.com/file/d/1N09YEjhDVRsfbJDilamfAv2h_d2F7ilN/view?usp=sharing
 
 Vídeo 1: Rede de coexpressão construída a partir de dados de expressão gênica de células tronco embrionárias humanas quando submetidas ao processo de diferenciação para cardiomiócitos. Os nós indicam genes cuja expressão varia significativamente ao longo do período experimental. A mudança de cor dos nós explicita a dinâmica de expressão dos genes ao passar dos dias. Cores avermelhadas indicam aumento da métrica log2FC, enquanto cores azuis denotam diminuição da métrica.  
