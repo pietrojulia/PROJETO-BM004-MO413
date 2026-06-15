@@ -1,4 +1,4 @@
-# Segunda Entrega
+# Terceira Entrega
 *2026.1 Ciência e Visualização de Dados em Saúde*
 
 # Projeto `Dinâmica Temporal e Redes de Coexpressão Gênica da Diferenciação de Células-Tronco Embrionárias`
