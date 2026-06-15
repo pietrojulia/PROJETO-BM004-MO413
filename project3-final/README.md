@@ -272,7 +272,7 @@ A interpretação biológica dos genes selecionados foi realizada por meio de an
 
 A anotação foi conduzida utilizando os pacotes clusterProfiler, AnnotationDbi e org.Hs.eg.db, permitindo a associação dos genes a termos da Gene Ontology (GO). Foram avaliadas categorias relacionadas aos domínios de Processo Biológico (Biological Process), Função Molecular (Molecular Function) e Componente Celular (Cellular Component), possibilitando a identificação dos principais processos envolvidos na diferenciação dos cardiomiócitos e células polihormonais (Figuras 13, 14 e 15 - Cardiomiócitos; Figuras 16 e 17 - Células Polihormonais) . 
 
-> ![Annot 04](assets/images/functional_annotation/assets/images/functional_annotation/GO_Cluster4CM.svg)
+> ![Annot 04](assets/images/functional_annotation/GO_Cluster4CM.svg)
 Figura 13: Anotação funcional realizada para os transcritos pertencentes ao cluster 4 do algoritmo Mfuzz para cardiomiócitos, tendo como base o banco de dados Gene Ontology. O tamanho dos pontos indica a quantidade de genes pertencentes ao processo identificado, enquanto a posição em relação a abscissa indica a confiança na predição da via e a coloração a significância estatística do enriquecimento.
 
 > ![Annot 01](assets/images/functional_annotation/GO_Cluster1CM.svg)
