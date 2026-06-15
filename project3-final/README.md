@@ -290,7 +290,7 @@ Figura 17: Anotação funcional realizada para os transcritos pertencentes ao cl
 
 Adicionalmente, foram realizadas análises de enriquecimento de vias metabólicas utilizando as bases de dados KEGG e Reactome. Os resultados permitiram identificar rotas biológicas significativamente representadas entre os genes selecionados, fornecendo evidências sobre os mecanismos moleculares associados às alterações observadas nos diferentes estágios da diferenciação (Figura 18 - Cardiomiócitos; Figura 19 - Células Polihormonais).
 
-> ![Kegg 04](assets/images/functional_annotation/KEGG_CLUSTER_4_CM.svg)
+> ![Kegg 04](assets/images/functional_annotation/KEGG_CLUSTER_4_CM.png)
 Figura 18: Anotação funcional realizada para os transcritos pertencentes ao cluster 4 do algoritmo Mfuzz para cardiomiócitos, tendo como base o banco de dados KEGG. O tamanho dos pontos indica a quantidade de genes pertencentes ao processo identificado, enquanto a posição em relação a abscissa indica a confiança na predição da via e a coloração a significância estatística do enriquecimento.
 
 > ![Reac 01](assets/images/functional_annotation/reactome_cluster_1_ph.png)
