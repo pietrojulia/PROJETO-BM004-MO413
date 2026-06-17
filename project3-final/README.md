@@ -417,7 +417,7 @@ A análise da rede construída possibilitou a identificação de componentes ess
 
 No que concerne à atividade do receptor na formação das células cardíacas, este caracteriza-se pela participação no amadurecimento das válvulas e da aorta, sendo expresso no mesênquima do coxim endocárdico por volta do décimo segundo dia do desenvolvimento embrionário (Hiltunen et al., 2000). Por outro lado, a expressão do receptor no desenvolvimento de células endócrinas relaciona-se diretamente com a inervação parassimpática do pâncreas, de modo a coordenar a migração de células da crista neural para o epitélio pancreático ​​(Ishida et al., 2016)​. Em suma, por meio da avaliação dos componentes comuns aos processos de diferenciação, mecanismos essenciais ao desenvolvimento embrionário podem ser elucidados, bem como suas dinâmicas temporais de expressão. 
 
-# 8. Aplicação Web para Integração e Visualização dos Resultados  : 
+## 8. Aplicação Web para Integração e Visualização dos Resultados  : 
 
 Com o objetivo de integrar e explorar os resultados obtidos ao longo das análises, foi desenvolvida a aplicação web Body Expression Atlas, disponível em ambiente online. A ferramenta foi projetada para reunir, em uma única interface, informações provenientes da análise temporal de expressão gênica, genes diferencialmente expressos, anotação funcional, redes de coexpressão e expressão tecidual de referência obtida a partir da base GTEx.
 
@@ -429,16 +429,16 @@ Para a construção do modelo anatômico tridimensional, foram utilizados aproxi
 
 Além disso, a plataforma incorpora um atlas contendo informações de 60.753 genes distribuídos em 68 tecidos humanos, permitindo relacionar genes diferencialmente expressos com padrões de expressão tecidual conhecidos. Dessa forma, os resultados obtidos por análises de RNA-seq podem ser explorados não apenas em tabelas e gráficos convencionais, mas também por meio de visualizações interativas que integram genes, tecidos, órgãos e sistemas biológicos em um modelo tridimensional do corpo humano.
 
-![Interface de importação e mapeamento dos dados](assets/images/app/apresentacao-importacao-rnaseq.png)
+>![Interface de importação e mapeamento dos dados](assets/images/app/apresentacao-importacao-rnaseq.png)
 Figura 25: Interface de importação e mapeamento dos dados experimentais no Body Expression Atlas. A ferramenta permite que o usuário carregue arquivos contendo resultados de expressão diferencial e associe manualmente as colunas aos respectivos pontos de coleta, valores de logFC e métricas de significância. Essa etapa possibilita a integração de diferentes formatos de saída gerados por pipelines de RNA-seq, permitindo que os dados sejam posteriormente explorados nas visualizações temporais, teciduais e tridimensionais da aplicação.
 
-![Ferramentas de filtragem e seleção de genes](assets/images/aap/filtros-.tolerancia-gene.gif)
+![Ferramentas de filtragem e seleção de genes](assets/images/app/filtros-.tolerancia-gene.gif)
 Figura 26: Ferramentas de filtragem disponíveis no Body Expression Atlas. A aplicação permite filtrar os resultados com base na tolerância de expressão tecidual, exibindo apenas tecidos acima ou abaixo de um percentual definido pelo usuário. Para esse cálculo, o gene com maior expressão no ponto de coleta analisado é considerado como referência (100%), sendo os demais normalizados proporcionalmente. Além disso, é possível selecionar genes específicos ou conjuntos de genes para visualização isolada no modelo tridimensional, bem como aplicar filtros de logFC para exibir genes mais ou menos expressos em relação à condição de controle. Essas funcionalidades permitem explorar diferentes padrões de ativação gênica e sua distribuição nos tecidos e órgãos do corpo humano.
 
-![Controle temporal dos pontos de coleta](assets/images/aap/visualizacao-por-dia-de-coleta.png)
+>![Controle temporal dos pontos de coleta](assets/images/app/visualizacao-por-dia-de-coleta.png)
 Figura 27: Controle temporal dos pontos de coleta no Body Expression Atlas. Após a importação dos resultados experimentais, a interface permite visualizar individualmente cada ponto de coleta ou executar uma animação automática entre os diferentes momentos amostrados, facilitando a observação da dinâmica de ativação gênica ao longo da diferenciação celular. O sistema suporta atualmente até 30 pontos de coleta distintos, permitindo sua aplicação em estudos temporais de diferentes durações.
 
-![Busca individual de genes e expressão tecidual](assets/images/aap/busca-por-gene.png)
+>![Busca individual de genes e expressão tecidual](assets/images/app/busca-por-gene.png)
 Figura 28: Tela de visualização individual de genes desenvolvida no Body Expression Atlas. Essa funcionalidade foi criada para permitir a exploração detalhada de genes específicos por meio da busca utilizando símbolo gênico, identificador ENSG ou transcrito ENST. Ao selecionar um gene, o sistema recupera automaticamente sua expressão tecidual de referência a partir da base GTEx e apresenta os resultados diretamente no modelo tridimensional do corpo humano. Além da visualização anatômica, são exibidas informações resumidas do gene, incluindo identificador, índice de expressão, número de tecidos associados e as regiões com maior expressão relativa. Essa abordagem permite analisar individualmente a distribuição tecidual de genes específicos e complementar as interpretações obtidas a partir das análises temporais e diferenciais realizadas no projeto.
 
 
