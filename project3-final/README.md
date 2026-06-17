@@ -417,19 +417,44 @@ A análise da rede construída possibilitou a identificação de componentes ess
 
 No que concerne à atividade do receptor na formação das células cardíacas, este caracteriza-se pela participação no amadurecimento das válvulas e da aorta, sendo expresso no mesênquima do coxim endocárdico por volta do décimo segundo dia do desenvolvimento embrionário (Hiltunen et al., 2000). Por outro lado, a expressão do receptor no desenvolvimento de células endócrinas relaciona-se diretamente com a inervação parassimpática do pâncreas, de modo a coordenar a migração de células da crista neural para o epitélio pancreático ​​(Ishida et al., 2016)​. Em suma, por meio da avaliação dos componentes comuns aos processos de diferenciação, mecanismos essenciais ao desenvolvimento embrionário podem ser elucidados, bem como suas dinâmicas temporais de expressão. 
 
-# 8. Conclusão:
+# 8. Aplicação Web para Integração e Visualização dos Resultados  : 
+
+Com o objetivo de integrar e explorar os resultados obtidos ao longo das análises, foi desenvolvida a aplicação web Body Expression Atlas, disponível em ambiente online. A ferramenta foi projetada para reunir, em uma única interface, informações provenientes da análise temporal de expressão gênica, genes diferencialmente expressos, anotação funcional, redes de coexpressão e expressão tecidual de referência obtida a partir da base GTEx.
+
+| Endereço na Web | Resumo descritivo |
+| ----- | ----- |
+| [Body Expression Atlas](https://rnaseq.nexusdatascience.com.br/) | Aplicação web desenvolvida para integração e visualização dos resultados do projeto. A ferramenta permite explorar genes diferencialmente expressos ao longo dos pontos de coleta, mapear valores de logFC e significância estatística, relacionar genes a tecidos de referência a partir do GTEx e visualizar a expressão tecidual em um modelo tridimensional do corpo humano composto por aproximadamente 1.700 objetos 3D. O banco integrado contém 60.753 genes e 68 tecidos humanos. |
+
+Para a construção do modelo anatômico tridimensional, foram utilizados aproximadamente 1.700 objetos (OBJ) independentes, permitindo a representação detalhada de órgãos, tecidos e estruturas corporais. Essa abordagem possibilitou o mapeamento entre genes e seus respectivos tecidos de expressão, criando uma camada visual adicional para interpretação dos resultados biológicos.
+
+Além disso, a plataforma incorpora um atlas contendo informações de 60.753 genes distribuídos em 68 tecidos humanos, permitindo relacionar genes diferencialmente expressos com padrões de expressão tecidual conhecidos. Dessa forma, os resultados obtidos por análises de RNA-seq podem ser explorados não apenas em tabelas e gráficos convencionais, mas também por meio de visualizações interativas que integram genes, tecidos, órgãos e sistemas biológicos em um modelo tridimensional do corpo humano.
+
+![Interface de importação e mapeamento dos dados](assets/images/app/apresentacao-importacao-rnaseq.png)
+Figura 25: Interface de importação e mapeamento dos dados experimentais no Body Expression Atlas. A ferramenta permite que o usuário carregue arquivos contendo resultados de expressão diferencial e associe manualmente as colunas aos respectivos pontos de coleta, valores de logFC e métricas de significância. Essa etapa possibilita a integração de diferentes formatos de saída gerados por pipelines de RNA-seq, permitindo que os dados sejam posteriormente explorados nas visualizações temporais, teciduais e tridimensionais da aplicação.
+
+![Ferramentas de filtragem e seleção de genes](assets/images/aap/filtros-.tolerancia-gene.gif)
+Figura 26: Ferramentas de filtragem disponíveis no Body Expression Atlas. A aplicação permite filtrar os resultados com base na tolerância de expressão tecidual, exibindo apenas tecidos acima ou abaixo de um percentual definido pelo usuário. Para esse cálculo, o gene com maior expressão no ponto de coleta analisado é considerado como referência (100%), sendo os demais normalizados proporcionalmente. Além disso, é possível selecionar genes específicos ou conjuntos de genes para visualização isolada no modelo tridimensional, bem como aplicar filtros de logFC para exibir genes mais ou menos expressos em relação à condição de controle. Essas funcionalidades permitem explorar diferentes padrões de ativação gênica e sua distribuição nos tecidos e órgãos do corpo humano.
+
+![Controle temporal dos pontos de coleta](assets/images/aap/visualizacao-por-dia-de-coleta.png)
+Figura 27: Controle temporal dos pontos de coleta no Body Expression Atlas. Após a importação dos resultados experimentais, a interface permite visualizar individualmente cada ponto de coleta ou executar uma animação automática entre os diferentes momentos amostrados, facilitando a observação da dinâmica de ativação gênica ao longo da diferenciação celular. O sistema suporta atualmente até 30 pontos de coleta distintos, permitindo sua aplicação em estudos temporais de diferentes durações.
+
+![Busca individual de genes e expressão tecidual](assets/images/aap/busca-por-gene.png)
+Figura 28: Tela de visualização individual de genes desenvolvida no Body Expression Atlas. Essa funcionalidade foi criada para permitir a exploração detalhada de genes específicos por meio da busca utilizando símbolo gênico, identificador ENSG ou transcrito ENST. Ao selecionar um gene, o sistema recupera automaticamente sua expressão tecidual de referência a partir da base GTEx e apresenta os resultados diretamente no modelo tridimensional do corpo humano. Além da visualização anatômica, são exibidas informações resumidas do gene, incluindo identificador, índice de expressão, número de tecidos associados e as regiões com maior expressão relativa. Essa abordagem permite analisar individualmente a distribuição tecidual de genes específicos e complementar as interpretações obtidas a partir das análises temporais e diferenciais realizadas no projeto.
+
+
+# 9. Conclusão:
 
 As análises indicam que cardiomiócitos e células polihormonais apresentam trajetórias distintas de expressão gênica durante a diferenciação. No geral, foram identificados módulos e genes associados a processos específicos, como contração cardíaca, organização sarcomérica, diferenciação endócrina, processamento hormonal e transições celulares.
 
 Os resultados rejeitam a hipótese nula (H0) e apoiam a hipótese alternativa (H1), indicando que existem módulos gênicos específicos associados a transições críticas da diferenciação de hESCs. Em conjunto, os achados demonstram que a integração entre expressão diferencial, análise temporal e redes de coexpressão permite caracterizar de forma mais robusta os programas regulatórios envolvidos na aquisição de identidades celulares distintas.
 
-# 9. Trabalhos Futuros:
+# 10. Trabalhos Futuros:
 Com mais tempo, seria possível realizar análises de expressão diferencial e construir redes de coexpressão específicas para cada dia de diferenciação. Essa abordagem permitiria acompanhar de forma mais detalhada as mudanças nos perfis de expressão e nas relações de correlação entre os genes ao longo do tempo, identificando reguladores e módulos característicos de cada fase do processo.
 
 Como desdobramento do projeto, o protótipo de visualização poderia ser transformado em uma ferramenta interativa e reprodutível, permitindo o carregamento de dados pelo usuário, aplicação de filtros temporais e exportação de redes. Além disso, a integração com bancos de expressão tecidual e visualizações anatômicas tridimensionais poderia ampliar o potencial da plataforma para geração de hipóteses biológicas e exploração de outros contextos além da diferenciação cardíaca.
 
 
-# 10. Referências Bibliográficas
+# 11. Referências Bibliográficas
 
 [Bakhti et al., 2022] BAKHTI, Mostafa et al. Synaptotagmin-13 orchestrates pancreatic endocrine cell egression and islet morphogenesis. Nature Communications, v. 13, n. 1, p. 4540, 2022.
 
@@ -524,4 +549,16 @@ Como desdobramento do projeto, o protótipo de visualização poderia ser transf
 [Zakrzewski et al., 2019] ZAKRZEWSKI, Wojciech et al. Stem cells: past, present, and future. Stem Cell Research & Therapy, v. 10, n. 1, p. 68, 2019.
 
 [Zeineddine et al., 2014] ZEINEDDINE, Dana et al. The Oct4 protein: more than a magic stemness marker. American Journal of Stem Cells, v. 3, n. 2, p. 74–82, 2014.
+
+[Body Parts 3D/Anatomography, 2026] BODY PARTS 3D/ANATOMOGRAPHY. BodyParts3D/Anatomography: Select parts and Make Embeddable Model of Your Own. Life Science Database Archive. Disponível em: https://lifesciencedb.jp/bp3d/. Acesso em: 17 jun. 2026.
+
+[GeneALaCart, 2026] GENEALACART. GeneALaCart: GeneCards Batch Queries. GeneCards Suite. Disponível em: https://genealacart.genecards.org/. Acesso em: 17 jun. 2026.
+
+[GeneCards, 2026] GENECARDS. HES4 Gene - Hes Family BHLH Transcription Factor 4. GeneCards: The Human Gene Database. Disponível em: https://www.genecards.org/card/HES4#Orthologs. Acesso em: 17 jun. 2026.
+
+[GTEx Consortium, 2026] GTEX CONSORTIUM. GTEx Portal: bulk tissue expression datasets. Disponível em: https://www.gtexportal.org/home/downloads/adult-gtex/bulk_tissue_expression. Acesso em: 17 jun. 2026.
+
+[Mitsuhashi et al., 2009] MITSUHASHI, N. et al. BodyParts3D: 3D structure database for anatomical concepts. Nucleic Acids Research, v. 37, supl. 1, p. D782-D785, 2009.
+
+[PathCards, 2026] PATHCARDS. PathCards: Human Biological Pathway Unification. GeneCards Suite. Disponível em: https://pathcards.genecards.org/. Acesso em: 17 jun. 2026.
 
